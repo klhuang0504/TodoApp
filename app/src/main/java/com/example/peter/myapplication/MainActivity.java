@@ -1,5 +1,6 @@
 package com.example.peter.myapplication;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,7 +18,11 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient client;
     private EditText userNameEt, passWordEt;
     private ItemDAO itemDAO;
+    private TargetDAO targetDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +40,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         processViews();
 
         itemDAO = new ItemDAO(getApplicationContext());
-        if(itemDAO.getCount() == 0){
+        if (itemDAO.getCount() == 0) {
             itemDAO.sample();
+        }
+
+        targetDAO = new TargetDAO(getApplicationContext());
+        if (targetDAO.getCount() == 0) {
+            targetDAO.sample();
         }
     }
 
@@ -100,7 +101,26 @@ public class MainActivity extends AppCompatActivity {
         // Context：通常指定為「this」
         // String或int：設定顯示在訊息框裡面的訊息或文字資源
         // int：設定訊息框停留在畫面的時間
-        Toast.makeText(this, getPassWordEt(), Toast.LENGTH_LONG).show();
+        Item itemResult = new Item();
+        itemResult = itemDAO.getByUserName(getUserNameEt());
+        if (itemResult.getPassWord() == null || itemResult.getPassWord().equals("")) {
+            Toast.makeText(this, "查無使用者", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (itemResult.getPassWord().equals(getPassWordEt())) {
+            Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(this, AddTargetActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("userItem", itemResult);
+//            intent.putExtra("userItem", itemResult);
+            intent.putExtras(bundle);
+
+            // 呼叫「startActivityForResult」，第二個參數「1」表示執行修改
+            startActivityForResult(intent, 0);
+            return;
+        }
+        Toast.makeText(this, "出錯了", Toast.LENGTH_LONG).show();
     }
 
     public void signup(View view) {
@@ -108,8 +128,13 @@ public class MainActivity extends AppCompatActivity {
         // Context：通常指定為「this」
         // String或int：設定顯示在訊息框裡面的訊息或文字資源
         // int：設定訊息框停留在畫面的時間
-        Toast.makeText(this, getPassWordEt(), Toast.LENGTH_LONG).show();
+        Item signupItem = new Item();
+        signupItem.setUserName(getUserNameEt());
+        signupItem.setPassWord(getPassWordEt());
+        itemDAO.insert(signupItem);
+        Toast.makeText(this, "註冊成功", Toast.LENGTH_LONG).show();
     }
+
 
     @Override
     public void onStart() {
