@@ -57,8 +57,8 @@ public class TargetAdapter extends ArrayAdapter<TargetEntity> {
 //        background.setColor(item.getColor().parseColor());
 
         // 設定標題與日期時間
-        targetView.setText(targetEntity.getTargetName());
-        pointView.setText(String.valueOf(targetEntity.getPoint()));
+        targetView.setText("名稱：" + targetEntity.getTargetName());
+        pointView.setText("分數：" + String.valueOf(targetEntity.getPoint()));
 
         // 設定是否已選擇
 //        selectedItem.setVisibility(item.isSelected() ? View.VISIBLE : View.INVISIBLE);
