@@ -53,6 +53,16 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         if (targetDAO.getCount() == 0) {
             targetDAO.sample();
         }
+
+        Intent intent = new Intent(this, AddTargetActivity.class);
+//        Bundle bundle=new Bundle();
+//        bundle.putSerializable("userItem", itemResult);
+//        intent.putExtras(bundle);
+
+        // 呼叫「startActivityForResult」，第二個參數「1」表示執行修改
+        startActivityForResult(intent, 0);
+        return;
+
     }
 
     @Override

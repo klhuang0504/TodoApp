@@ -32,7 +32,7 @@ public class AddTargetActivity extends AppCompatActivity {
         userItem = (Item) getIntent().getSerializableExtra("userItem");
         if(userItem == null){
             Toast.makeText(this, "取得使用者資料失敗", Toast.LENGTH_LONG).show();
-            finish();
+//            finish();
         }else{
             Toast.makeText(this, "歡迎" + userItem.getUserName(), Toast.LENGTH_LONG).show();
         }

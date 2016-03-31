@@ -1,10 +1,12 @@
 package com.example.peter.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,9 @@ public class ProcessGoodTargetActivity extends AppCompatActivity {
     }
 
     public void processGoodTarget(View view) {
-
+        Toast.makeText(this, "執行Target", Toast.LENGTH_LONG).show();
+        startActivityForResult(
+                new Intent(this, TargetActionMenuActivity.class), 0);
     }
 
     public ArrayList<TargetEntity> getGoodTargetList() {
