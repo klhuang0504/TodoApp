@@ -58,7 +58,7 @@ public class TargetAdapter extends ArrayAdapter<TargetEntity> {
 
         // 設定標題與日期時間
         targetView.setText(targetEntity.getTargetName());
-        pointView.setText(targetEntity.getPoint());
+        pointView.setText(String.valueOf(targetEntity.getPoint()));
 
         // 設定是否已選擇
 //        selectedItem.setVisibility(item.isSelected() ? View.VISIBLE : View.INVISIBLE);
@@ -67,16 +67,16 @@ public class TargetAdapter extends ArrayAdapter<TargetEntity> {
     }
 
     // 設定指定編號的記事資料
-//    public void set(int index, TargetEntity TtargetEntity) {
-//        if (index >= 0 && index < targetEntityList.size()) {
-//            targetEntityList.set(index, item);
-//            notifyDataSetChanged();
-//        }
-//    }
+    public void set(int index, TargetEntity targetEntity) {
+        if (index >= 0 && index < targetEntityList.size()) {
+            targetEntityList.set(index, targetEntity);
+            notifyDataSetChanged();
+        }
+    }
 
     // 讀取指定編號的記事資料
-//    public Item get(int index) {
-//        return items.get(index);
-//    }
+    public TargetEntity get(int index) {
+        return targetEntityList.get(index);
+    }
 
 }

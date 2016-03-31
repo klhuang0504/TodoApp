@@ -84,10 +84,10 @@ public class AddTargetActivity extends AppCompatActivity {
 //        }
 //        Toast.makeText(this, "清單查詢成功，共有 " + targetList.size() + " 筆資料", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, ProcessGoodTargetActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("userItem", userItem);
+//        Bundle bundle=new Bundle();
+//        bundle.putSerializable("userItem", userItem);
 //            intent.putExtra("userItem", itemResult);
-        intent.putExtras(bundle);
+//        intent.putExtras(bundle);
 
         // 呼叫「startActivityForResult」，第二個參數「1」表示執行修改
         startActivityForResult(intent, 0);
