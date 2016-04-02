@@ -22,7 +22,7 @@
         <activity android:name=".ProcessGoodTargetActivity"></activity>
         <activity
             android:name=".TargetActionMenuActivity"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@style/TargetActionDialog"></activity>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
