@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,8 @@ public class ProcessGoodTargetActivity extends AppCompatActivity {
     private TargetEntity selectTargetEntity;
     private ItemDAO itemDAO;
     private Item userItem;
+    private BottomBar mBottomBar;
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -46,7 +51,7 @@ public class ProcessGoodTargetActivity extends AppCompatActivity {
         userItem = (Item) getIntent().getSerializableExtra("userItem");
         if(userItem == null){
             Toast.makeText(this, "取得使用者資料失敗", Toast.LENGTH_LONG).show();
-            finish();
+//            finish();
         }
 
         targetDAO = new TargetDAO(getApplicationContext());
@@ -72,6 +77,32 @@ public class ProcessGoodTargetActivity extends AppCompatActivity {
                 selectTargetEntity = (TargetEntity) parent.getItemAtPosition(position);
                 startActivityForResult(
                         new Intent(ProcessGoodTargetActivity.this, TargetActionMenuActivity.class), 0);
+            }
+        });
+
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+
+        //        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                if (menuItemId == R.id.bb_menu_recents) {
+//                    setContentView(R.layout.add_target);
+                    startActivityForResult(new Intent(ProcessGoodTargetActivity.this, MainActivity.class), 0);
+                }
+                if (menuItemId == R.id.bb_menu_favorites) {
+                    startActivityForResult(new Intent(ProcessGoodTargetActivity.this, AddTargetActivity.class), 0);
+                }
+//                if (menuItemId == R.id.bb_menu_nearby) {
+//                    startActivityForResult(new Intent(ProcessGoodTargetActivity.this, ProcessGoodTargetActivity.class), 0);
+//                }
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+//                if (resId == R.id.bottomBarItemOne) {
+//                    // The user reselected item number one, scroll your content to top.
+//                }
             }
         });
     }
@@ -107,6 +138,15 @@ public class ProcessGoodTargetActivity extends AppCompatActivity {
         result.putExtra("userItem", userItem);
         setResult(Activity.RESULT_OK, result);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        mBottomBar.onSaveInstanceState(outState);
     }
 
 

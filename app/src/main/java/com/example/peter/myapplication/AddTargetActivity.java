@@ -3,11 +3,15 @@ package com.example.peter.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,8 @@ public class AddTargetActivity extends AppCompatActivity {
     private Item userItem;
     private TextView rightNowPoint;
     private ItemDAO itemDAO;
+    private BottomBar mBottomBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +43,38 @@ public class AddTargetActivity extends AppCompatActivity {
         userItem = (Item) getIntent().getSerializableExtra("userItem");
         if (userItem == null) {
             Toast.makeText(this, "取得使用者資料失敗", Toast.LENGTH_LONG).show();
-            finish();
+//            finish();
         } else {
             Toast.makeText(this, "歡迎" + userItem.getUserName(), Toast.LENGTH_LONG).show();
             rightNowPoint.setText(String.valueOf(userItem.getUserPoint()));
 
         }
+
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+
+        //        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                if (menuItemId == R.id.bb_menu_recents) {
+//                    setContentView(R.layout.add_target);
+                    startActivityForResult(new Intent(AddTargetActivity.this, MainActivity.class), 0);
+                }
+//                if (menuItemId == R.id.bb_menu_favorites) {
+//                    startActivityForResult(new Intent(AddTargetActivity.this, AddTargetActivity.class), 0);
+//                }
+                if (menuItemId == R.id.bb_menu_nearby) {
+                    startActivityForResult(new Intent(AddTargetActivity.this, ProcessGoodTargetActivity.class), 0);
+                }
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+//                if (resId == R.id.bottomBarItemOne) {
+//                    // The user reselected item number one, scroll your content to top.
+//                }
+            }
+        });
 
     }
 
@@ -114,7 +146,6 @@ public class AddTargetActivity extends AppCompatActivity {
 //            Toast.makeText(this, "執行Target : " + selectTargetEntity.getTargetName(), Toast.LENGTH_LONG).show();
             userItem = (Item) data.getExtras().getSerializable("userItem");
             rightNowPoint.setText(String.valueOf(userItem.getUserPoint()));
-
         }
     }
 
@@ -124,5 +155,14 @@ public class AddTargetActivity extends AppCompatActivity {
 
     public int getPointEt() {
         return Integer.parseInt(pointEt.getText().toString());
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        mBottomBar.onSaveInstanceState(outState);
     }
 }

@@ -3,24 +3,22 @@ package com.example.peter.myapplication;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
@@ -32,10 +30,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private EditText userNameEt, passWordEt;
     private ItemDAO itemDAO;
     private TargetDAO targetDAO;
+    private BottomBar mBottomBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        startActivityForResult(new Intent(this, BottomBarActivity.class), 0);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,6 +64,33 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         // 呼叫「startActivityForResult」，第二個參數「1」表示執行修改
 //        startActivityForResult(intent, 0);
 //        return;
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+
+        //        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+//                if (menuItemId == R.id.bb_menu_recents) {
+//                    setContentView(R.layout.activity_main);
+//                    startActivityForResult(new Intent(MainActivity.this, MainActivity.class), 0);
+//                }
+                if (menuItemId == R.id.bb_menu_favorites) {
+                    setContentView(R.layout.add_target);
+                }
+                if (menuItemId == R.id.bb_menu_nearby) {
+                    setContentView(R.layout.process_good_target);
+
+//                    startActivityForResult(new Intent(MainActivity.this, ProcessGoodTargetActivity.class), 0);
+                }
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+//                if (resId == R.id.bottomBarItemOne) {
+//                    // The user reselected item number one, scroll your content to top.
+//                }
+            }
+        });
 
     }
 
@@ -184,5 +213,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        mBottomBar.onSaveInstanceState(outState);
     }
 }
