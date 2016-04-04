@@ -90,12 +90,12 @@
                     android:layout_alignParentStart="true"
                     android:onClick="addReward"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="清單"
-                    android:id="@+id/button6"
-                    android:onClick="showTargetList"/>
+                <!--<Button-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="清單"-->
+                    <!--android:id="@+id/button6"-->
+                    <!--android:onClick="showTargetList"/>-->
             </LinearLayout>
 
             <LinearLayout

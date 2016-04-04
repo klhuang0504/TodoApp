@@ -17,8 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/execute"
-            android:id="@+id/execute_button"
-            android:onClick="processGoodTarget"/>
+            android:id="@+id/execute_button"/>
+            <!--android:onClick="processGoodTarget"/>-->
 
         <Button
             android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:id="@+id/cancel_button"
-            android:onClick="cancel"/>
+            android:id="@+id/cancel_button"/>
+            <!--android:onClick="cancel"/>-->
     </LinearLayout>
 
 </HorizontalScrollView>

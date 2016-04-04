@@ -43,15 +43,14 @@ public class AddTargetActivity extends Fragment {
 
 //        processViews();
 
-//        userItem = (Item) getIntent().getSerializableExtra("userItem");
-//        if (userItem == null) {
-//            Toast.makeText(getActivity(), "取得使用者資料失敗", Toast.LENGTH_LONG).show();
-////            finish();
-//        } else {
-//            Toast.makeText(getActivity(), "歡迎" + userItem.getUserName(), Toast.LENGTH_LONG).show();
-//            rightNowPoint.setText(String.valueOf(userItem.getUserPoint()));
-//
-//        }
+        Bundle bundle = getArguments();
+        userItem = (Item) bundle.getSerializable("userItem");
+        if (userItem == null) {
+            Toast.makeText(getActivity(), "取得使用者資料失敗", Toast.LENGTH_LONG).show();
+//            finish();
+        } else {
+            Toast.makeText(getActivity(), "歡迎" + userItem.getUserName(), Toast.LENGTH_LONG).show();
+        }
     }
 
 //    private void processViews() {
@@ -135,6 +134,7 @@ public class AddTargetActivity extends Fragment {
         targetNameEt = (EditText) view.findViewById(R.id.targetNameEt);
         pointEt = (EditText) view.findViewById(R.id.pointEt);
         rightNowPoint = (TextView) view.findViewById(R.id.rightNowPoint);
+        rightNowPoint.setText(String.valueOf(userItem.getUserPoint()));
         return view;
     }
 }

@@ -15,78 +15,55 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 public class MainActivity extends Activity {
 
     private BottomBar mBottomBar;
+    private ItemDAO itemDAO;
+    Item userItem = new Item();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        Button button1 = (Button) this.findViewById(R.id.btn_fragment1);
-//        Button button2 = (Button) this.findViewById(R.id.btn_fragment2);
-
-//        button1.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onButtonClick(view.getId());
-//            }
-//        });
-//
-//        button2.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onButtonClick(view.getId());
-//            }
-//        });
-
+        itemDAO = new ItemDAO(getApplicationContext());
+        userItem = itemDAO.getByUserName("aaa");
         mBottomBar = BottomBar.attach(this, savedInstanceState);
-
-
-        //        mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 onButtonClick(menuItemId);
-//                if (menuItemId == R.id.bb_menu_recents) {
-//                    onButtonClick(R.id.btn_fragment1);
-//                }
-//                if (menuItemId == R.id.bb_menu_favorites) {
-//                    onButtonClick(R.id.btn_fragment1);
-//                }
-//                if (menuItemId == R.id.bb_menu_nearby) {
-//                    onButtonClick(R.id.btn_fragment2);
-//                }
             }
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-//                if (resId == R.id.bottomBarItemOne) {
-//                    // The user reselected item number one, scroll your content to top.
-//                }
             }
         });
+
     }
 
     private void onButtonClick(int id) {
         FragmentManager fm = getFragmentManager();
-
         Fragment fragment = fm.findFragmentById(R.id.layout_container);
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("userItem", userItem);
+
         if (fragment == null) {
-            if (id == R.id.bb_menu_recents)
+            if (id == R.id.bb_menu_recents) {
                 fragment = new AddTargetActivity();
-            else
+
+            } else {
                 fragment = new ProcessGoodTargetActivity();
-            replaceFragment(fragment);
+            }
+            replaceFragment(fragment, bundle);
         } else if (id == R.id.bb_menu_recents) {
-            replaceFragment(new AddTargetActivity());
+            replaceFragment(new AddTargetActivity(), bundle);
         } else if (id == R.id.bb_menu_favorites) {
-            replaceFragment(new ProcessGoodTargetActivity());
+            replaceFragment(new ProcessGoodTargetActivity(), bundle);
         }
 
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, Bundle bundle) {
+        fragment.setArguments(bundle);
         this.getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in,

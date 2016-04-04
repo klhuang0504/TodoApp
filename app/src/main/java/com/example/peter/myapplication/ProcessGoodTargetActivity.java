@@ -1,6 +1,7 @@
 package com.example.peter.myapplication;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -61,6 +62,8 @@ public class ProcessGoodTargetActivity extends Fragment {
         targetDAO = new TargetDAO(getActivity());
         itemDAO = new ItemDAO(getActivity());
 
+        Bundle bundle = getArguments();
+        userItem = (Item) bundle.getSerializable("userItem");
 
 //        processViews();
 
@@ -78,6 +81,16 @@ public class ProcessGoodTargetActivity extends Fragment {
 //
 //    }
 
+
+    public void processGoodTarget(View view) {
+//        startActivityForResult(
+//                new Intent(this, TargetActionMenuActivity.class), 0);
+//        setResult(Activity.RESULT_OK);
+//        finish();
+        userItem.setUserPoint(userItem.getUserPoint() + selectTargetEntity.getPoint());
+        itemDAO.update(userItem);
+    }
+
     public void clickGoodTarget(View view) {
 //        Toast.makeText(this, "執行Target", Toast.LENGTH_LONG).show();
 //        startActivityForResult(
@@ -86,12 +99,14 @@ public class ProcessGoodTargetActivity extends Fragment {
 //        FragmentManager fm = getFragmentManager();
 
 //        Fragment fragment = fm.findFragmentById(R.id.layout_container);
-        this.getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(android.R.animator.fade_in,
-                        android.R.animator.fade_out)
-                .replace(R.id.layout_container, new TargetActionMenuActivity()).addToBackStack(null)
-                .commit();
+
+
+//        this.getFragmentManager()
+//                .beginTransaction()
+//                .setCustomAnimations(android.R.animator.fade_in,
+//                        android.R.animator.fade_out)
+//                .replace(R.id.layout_container, new TargetActionMenuActivity()).addToBackStack(null)
+//                .commit();
 
     }
 
@@ -117,56 +132,6 @@ public class ProcessGoodTargetActivity extends Fragment {
 //        finish();
     }
 
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//
-//        // Necessary to restore the BottomBar's state, otherwise we would
-//        // lose the current tab on orientation change.
-//        mBottomBar.onSaveInstanceState(outState);
-//    }
-
-
-    //    @Override
-//    public void onStart() {
-//        super.onStart();
-//
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client.connect();
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "ProcessGoodTarget Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app deep link URI is correct.
-//                Uri.parse("android-app://com.example.peter.myapplication/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.start(client, viewAction);
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "ProcessGoodTarget Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app deep link URI is correct.
-//                Uri.parse("android-app://com.example.peter.myapplication/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.end(client, viewAction);
-//        client.disconnect();
-//    }
-//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -182,10 +147,19 @@ public class ProcessGoodTargetActivity extends Fragment {
 //                ListView listView = (ListView) parent;
 //                Toast.makeText(
 //                        ProcessGoodTargetActivity.this, "ClickItem", Toast.LENGTH_LONG).show();
-                //                selectTargetEntity = (TargetEntity) parent.getAdapter().getItem(position);
-                selectTargetEntity = (TargetEntity) parent.getItemAtPosition(position);
-                startActivityForResult(
-                        new Intent(ProcessGoodTargetActivity.this.getActivity(), TargetActionMenuActivity.class), 0);
+                selectTargetEntity = (TargetEntity) parent.getAdapter().getItem(position);
+
+                DialogFragment targetActionMenuActivity = new TargetActionMenuActivity();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userItem", userItem);
+                bundle.putSerializable("targetEntity", selectTargetEntity);
+
+                targetActionMenuActivity.setArguments(bundle);
+                targetActionMenuActivity.show(getActivity().getFragmentManager(), "targetActionMenuActivity");
+
+//                selectTargetEntity = (TargetEntity) parent.getItemAtPosition(position);
+//                startActivityForResult(
+//                        new Intent(ProcessGoodTargetActivity.this.getActivity(), TargetActionMenuActivity.class), 0);
             }
         });
         return view;
