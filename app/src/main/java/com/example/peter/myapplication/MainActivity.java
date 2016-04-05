@@ -47,16 +47,15 @@ public class MainActivity extends Activity {
         bundle.putSerializable("userItem", userItem);
 
         if (fragment == null) {
-            if (id == R.id.bb_menu_recents) {
+            if (id == R.id.bb_menu_frontPage) {
                 fragment = new AddTargetActivity();
-
             } else {
                 fragment = new ProcessGoodTargetActivity();
             }
             replaceFragment(fragment, bundle);
-        } else if (id == R.id.bb_menu_recents) {
+        } else if (id == R.id.bb_menu_frontPage) {
             replaceFragment(new AddTargetActivity(), bundle);
-        } else if (id == R.id.bb_menu_favorites) {
+        } else if (id == R.id.bb_menu_targetList) {
             replaceFragment(new ProcessGoodTargetActivity(), bundle);
         }
 

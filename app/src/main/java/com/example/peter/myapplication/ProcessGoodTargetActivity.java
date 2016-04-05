@@ -51,29 +51,14 @@ public class ProcessGoodTargetActivity extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.process_good_target);
-
-//        userItem = (Item) getIntent().getSerializableExtra("userItem");
-//        if(userItem == null){
-//            Toast.makeText(this, "取得使用者資料失敗", Toast.LENGTH_LONG).show();
-////            finish();
-//        }
-
         targetDAO = new TargetDAO(getActivity());
         itemDAO = new ItemDAO(getActivity());
 
         Bundle bundle = getArguments();
         userItem = (Item) bundle.getSerializable("userItem");
-
-//        processViews();
-
         goodTargetList = getGoodTargetList();
-
-//        int layoutId = android.R.layout.simple_list_item_1;
         int layoutId = R.layout.single_target;
         targetAdapter = new TargetAdapter(getActivity(), layoutId, goodTargetList);
-
-
     }
 //
 //    private void processViews() {
@@ -156,10 +141,6 @@ public class ProcessGoodTargetActivity extends Fragment {
 
                 targetActionMenuActivity.setArguments(bundle);
                 targetActionMenuActivity.show(getActivity().getFragmentManager(), "targetActionMenuActivity");
-
-//                selectTargetEntity = (TargetEntity) parent.getItemAtPosition(position);
-//                startActivityForResult(
-//                        new Intent(ProcessGoodTargetActivity.this.getActivity(), TargetActionMenuActivity.class), 0);
             }
         });
         return view;
