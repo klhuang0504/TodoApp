@@ -20,7 +20,7 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.io.Serializable;
 
-public class MainActivity_copy extends AppCompatActivity implements Serializable {
+public class MainActivity_version_1 extends AppCompatActivity implements Serializable {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
