@@ -26,5 +26,6 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.roughike:bottom-bar:1.2.7'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
 
 }

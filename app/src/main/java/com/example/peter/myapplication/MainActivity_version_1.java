@@ -20,7 +20,7 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.io.Serializable;
 
-public class MainActivity_copy extends AppCompatActivity implements Serializable {
+public class MainActivity_version_1 extends AppCompatActivity implements Serializable {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -75,10 +75,10 @@ public class MainActivity_copy extends AppCompatActivity implements Serializable
 //                    setContentView(R.layout.activity_main);
 //                    startActivityForResult(new Intent(MainActivity.this, MainActivity.class), 0);
 //                }
-                if (menuItemId == R.id.bb_menu_favorites) {
+                if (menuItemId == R.id.bb_menu_frontPage) {
 //                    setContentView(R.layout.add_target);
                 }
-                if (menuItemId == R.id.bb_menu_nearby) {
+                if (menuItemId == R.id.bb_menu_targetList) {
 //                    setContentView(R.layout.process_good_target);
 
 //                    startActivityForResult(new Intent(MainActivity.this, ProcessGoodTargetActivity.class), 0);

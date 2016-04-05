@@ -1,17 +1,14 @@
 package com.example.peter.myapplication;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
 import android.app.Activity;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+public class MainActivity_version_2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,18 +47,6 @@ public class MainActivity extends Activity {
 //        button.setIcon(R.drawable.ic_fab_star);
 //        button.setStrokeVisible(false);
 
-//        if (fragment == null) {
-//            if (id == R.id.bb_menu_frontPage) {
-//                fragment = new AddTargetActivity();
-//            } else {
-//                fragment = new ProcessGoodTargetActivity();
-//            }
-//            replaceFragment(fragment, bundle);
-//        } else if (id == R.id.bb_menu_frontPage) {
-//            replaceFragment(new AddTargetActivity(), bundle);
-//        } else if (id == R.id.bb_menu_targetList) {
-//            replaceFragment(new ProcessGoodTargetActivity(), bundle);
-//        }
 
 //        FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
 //        actionC.setTitle("Hide/Show Action above");
