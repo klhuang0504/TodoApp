@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/semi_transparent_background"
+    android:orientation="vertical">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="1">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="名稱"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/targetNameEt"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="可輸入想養成或戒掉的習慣 ex:跑步、看書、賴床、消夜....."/>-->
+        <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="@color/white"-->
+        <!--android:weightSum="1">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="點數"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/pointEt"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:ems="10"-->
+            <!--android:inputType="number"-->
+            <!--android:numeric="integer" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:onClick="addGoodTarget"-->
+            <!--android:text="新增好習慣" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/button3"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:onClick="addBadTarget"-->
+            <!--android:text="新增壞習慣" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignTop="@+id/button3"-->
+            <!--android:onClick="addReward"-->
+            <!--android:text="新增獎勵" />-->
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>

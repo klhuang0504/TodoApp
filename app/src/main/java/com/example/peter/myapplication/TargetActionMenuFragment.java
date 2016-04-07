@@ -1,60 +1,37 @@
 package com.example.peter.myapplication;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * Created by peter on 2016/3/31.
  */
-public class TargetActionMenuActivity extends DialogFragment {
+public class TargetActionMenuFragment extends DialogFragment {
 
-//    private LinearLayout target_action_menu;
-//    private TargetDAO targetDAO;
-    private ItemDAO itemDAO;
-    private Item userItem;
+    private UserDAO userDAO;
+    private UserEntity userEntity;
     private TargetEntity targetEntity;
     private Button executeButton, cancelButton;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.target_action_menu);
-
-//        targetDAO = new TargetDAO(getActivity());
-        itemDAO = new ItemDAO(getActivity());
+        userDAO = new UserDAO(getActivity());
 
         Bundle bundle = getArguments();
-        userItem = (Item) bundle.getSerializable("userItem");
+        userEntity = (UserEntity) bundle.getSerializable("userEntity");
         targetEntity = (TargetEntity) bundle.getSerializable("targetEntity");
 
     }
 
-//    private void processViews() {
-//        target_action_menu = (LinearLayout) findViewById(R.id.targetActionMenu);
-//    }
-
     public void processGoodTarget() {
-//        startActivityForResult(
-//                new Intent(this, TargetActionMenuActivity.class), 0);
-//        setResult(Activity.RESULT_OK);
-//        finish();
-        userItem.setUserPoint(userItem.getUserPoint() + targetEntity.getPoint());
-        itemDAO.update(userItem);
+        userEntity.setUserPoint(userEntity.getUserPoint() + targetEntity.getPoint());
+        userDAO.update(userEntity);
         dismiss();
     }
 

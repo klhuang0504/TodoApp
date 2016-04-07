@@ -9,11 +9,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 // 資料功能類別
-public class ItemDAO {
+public class UserDAO {
     // 表格名稱
     public static final String TABLE_NAME = "item";
 
@@ -38,7 +37,7 @@ public class ItemDAO {
     private SQLiteDatabase db;
 
     // 建構子，一般的應用都不需要修改
-    public ItemDAO(Context context) {
+    public UserDAO(Context context) {
         db = MyDBHelper.getDatabase(context);
     }
 
@@ -48,15 +47,15 @@ public class ItemDAO {
     }
 
     // 新增參數指定的物件
-    public Item insert(Item item) {
+    public UserEntity insert(UserEntity userEntity) {
         // 建立準備新增資料的ContentValues物件
         ContentValues cv = new ContentValues();
 
         // 加入ContentValues物件包裝的新增資料
         // 第一個參數是欄位名稱， 第二個參數是欄位的資料
-        cv.put(USER_NAME, item.getUserName());
-        cv.put(PASS_WORD, item.getPassWord());
-        cv.put(USER_POINT, item.getUserPoint());
+        cv.put(USER_NAME, userEntity.getUserName());
+        cv.put(PASS_WORD, userEntity.getPassWord());
+        cv.put(USER_POINT, userEntity.getUserPoint());
 
 
         // 新增一筆資料並取得編號
@@ -66,13 +65,13 @@ public class ItemDAO {
         long id = db.insert(TABLE_NAME, null, cv);
 
         // 設定編號
-        item.setId(id);
+        userEntity.setId(id);
         // 回傳結果
-        return item;
+        return userEntity;
     }
 
     // 修改參數指定的物件
-    public boolean update(Item item) {
+    public boolean update(UserEntity item) {
         // 建立準備修改資料的ContentValues物件
         ContentValues cv = new ContentValues();
 
@@ -100,8 +99,8 @@ public class ItemDAO {
     }
 
     // 讀取所有記事資料
-    public List<Item> getAll() {
-        List<Item> result = new ArrayList<>();
+    public List<UserEntity> getAll() {
+        List<UserEntity> result = new ArrayList<>();
         Cursor cursor = db.query(
                 TABLE_NAME, null, null, null, null, null, null, null);
 
@@ -114,9 +113,9 @@ public class ItemDAO {
     }
 
     // 取得指定編號的資料物件
-    public Item get(long id) {
+    public UserEntity get(long id) {
         // 準備回傳結果用的物件
-        Item item = null;
+        UserEntity userEntity = null;
         // 使用編號為查詢條件
         String where = KEY_ID + "=" + id;
         // 執行查詢
@@ -126,19 +125,19 @@ public class ItemDAO {
         // 如果有查詢結果
         if (result.moveToFirst()) {
             // 讀取包裝一筆資料的物件
-            item = getRecord(result);
+            userEntity = getRecord(result);
         }
 
         // 關閉Cursor物件
         result.close();
         // 回傳結果
-        return item;
+        return userEntity;
     }
 
     // 取得指定編號的資料物件
-    public Item getByUserName(String userName) {
+    public UserEntity getByUserName(String userName) {
         // 準備回傳結果用的物件
-        Item item = null;
+        UserEntity userEntity = null;
         // 使用編號為查詢條件
         String where = USER_NAME + " = '" + userName + "'";
         // 執行查詢
@@ -148,19 +147,19 @@ public class ItemDAO {
         // 如果有查詢結果
         if (result.moveToFirst()) {
             // 讀取包裝一筆資料的物件
-            item = getRecord(result);
+            userEntity = getRecord(result);
         }
 
         // 關閉Cursor物件
         result.close();
         // 回傳結果
-        return item;
+        return userEntity;
     }
 
     // 把Cursor目前的資料包裝為物件
-    public Item getRecord(Cursor cursor) {
+    public UserEntity getRecord(Cursor cursor) {
         // 準備回傳結果用的物件
-        Item result = new Item();
+        UserEntity result = new UserEntity();
 
         result.setId(cursor.getLong(0));
         result.setUserName(cursor.getString(1));
@@ -186,15 +185,15 @@ public class ItemDAO {
 
     // 建立範例資料
     public void sample() {
-        Item item = new Item(0, "aaa", "111", 0);
-        Item item2 = new Item(0, "bbb", "222", 0);
-        Item item3 = new Item(0, "ccc", "333", 0);
-        Item item4 = new Item(0, "ddd", "444", 0);
+        UserEntity userEntity1 = new UserEntity(0, "aaa", "111", 0);
+        UserEntity userEntity2 = new UserEntity(0, "bbb", "222", 0);
+        UserEntity userEntity3 = new UserEntity(0, "ccc", "333", 0);
+        UserEntity userEntity4 = new UserEntity(0, "ddd", "444", 0);
 
-        insert(item);
-        insert(item2);
-        insert(item3);
-        insert(item4);
+        insert(userEntity1);
+        insert(userEntity2);
+        insert(userEntity3);
+        insert(userEntity4);
     }
 
 }

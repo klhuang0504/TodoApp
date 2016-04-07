@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.lang.annotation.Target;
-
 /**
  * Created by peter on 2016/3/24.
  */
@@ -37,13 +35,13 @@ public class MyDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TargetDAO.CREATE_TABLE);
-        db.execSQL(ItemDAO.CREATE_TABLE);
+        db.execSQL(UserDAO.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TargetDAO.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + ItemDAO.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + UserDAO.TABLE_NAME);
         onCreate(db);
     }
 }

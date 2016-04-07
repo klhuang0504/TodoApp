@@ -3,17 +3,17 @@ package com.example.peter.myapplication;
 /**
  * Created by peter on 2016/3/24.
  */
-public class Item implements java.io.Serializable {
+public class UserEntity implements java.io.Serializable {
     private long id;
     private String userName;
     private String passWord;
     private int userPoint;
 
 
-    public Item() {
+    public UserEntity() {
     }
 
-    public Item(long id, String userName, String passWord, int userPoint) {
+    public UserEntity(long id, String userName, String passWord, int userPoint) {
         this.id = id;
         this.userName = userName;
         this.passWord = passWord;
