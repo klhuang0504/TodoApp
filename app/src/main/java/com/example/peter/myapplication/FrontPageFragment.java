@@ -7,7 +7,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,9 +31,11 @@ public class FrontPageFragment extends Fragment {
     private UserDAO userDAO;
     private UserEntity userEntity;
     private LinearLayout addTodoTaskLayout, addTargetLayout;
-    private EditText addTodoTaskEditText, targetNameEditText;
+    private EditText addTodoTaskEditText, targetNameEditText, pointEditText;
     private RelativeLayout floatingActionsMenuLayout;
-
+    private Button addGoodTargetButton, addBadTargetButton, addRewardButton;
+    private InputMethodManager inputMethodManager;
+    private TextView userPointTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,35 @@ public class FrontPageFragment extends Fragment {
 
         Bundle bundle = getArguments();
         userEntity = (UserEntity) bundle.getSerializable("userEntity");
+        inputMethodManager = (InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE);
     }
+
+    private void addTargetReward(int attributes) {
+        if (targetNameEditText == null || targetNameEditText.getText() == null || targetNameEditText.getText().toString().trim().equals("")) {
+            return;
+        }
+        if (pointEditText == null || pointEditText.getText() == null || pointEditText.getText().toString().trim().equals("")) {
+            return;
+        }
+        TargetEntity targetEntity = new TargetEntity();
+        targetEntity.setTargetName(targetNameEditText.getText().toString());
+        targetEntity.setPoint(Integer.parseInt(pointEditText.getText().toString()));
+        targetEntity.setAttributes(attributes);
+        targetDAO.insert(targetEntity);
+        addTargetLayout.setVisibility(View.INVISIBLE);
+        targetNameEditText.setText("");
+        pointEditText.setText("");
+        closeKeyBoard(pointEditText);
+    }
+
+    private void closeKeyBoard(EditText editText) {
+        inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    private void openKeyBoard() {
+        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,21 +86,51 @@ public class FrontPageFragment extends Fragment {
 
         addTodoTaskEditText = (EditText) view.findViewById(R.id.addTodoTaskEditText);
         targetNameEditText = (EditText) view.findViewById(R.id.targetNameEt);
+        pointEditText = (EditText) view.findViewById(R.id.pointEt);
 
-        floatingActionsMenuLayout = (RelativeLayout)view.findViewById(R.id.floatingActionsMenuLayout);
+        userPointTextView = (TextView) view.findViewById(R.id.userPointTextView);
+        userPointTextView.setText(String.valueOf(userEntity.getUserPoint()));
+
+        addGoodTargetButton = (Button) view.findViewById(R.id.addGoodTargetButton);
+        addBadTargetButton = (Button) view.findViewById(R.id.addBadTargetButton);
+        addRewardButton = (Button) view.findViewById(R.id.addRewardButton);
+
+        addGoodTargetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTargetReward(0);
+            }
+        });
+
+        addBadTargetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTargetReward(1);
+            }
+        });
+
+        addRewardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTargetReward(2);
+            }
+        });
+
+
+        floatingActionsMenuLayout = (RelativeLayout) view.findViewById(R.id.floatingActionsMenuLayout);
 
         final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) view.findViewById(R.id.multiple_actions);
         menuMultipleActions.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 255, 255, 255));
-                floatingActionsMenuLayout.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.semi_transparent_background));
+                floatingActionsMenuLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.semi_transparent_background));
             }
 
             @Override
             public void onMenuCollapsed() {
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(0, 0, 255, 0));
-                floatingActionsMenuLayout.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.transparent_background));
+                floatingActionsMenuLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.transparent_background));
 
             }
         });
@@ -83,15 +145,24 @@ public class FrontPageFragment extends Fragment {
                 addTargetLayout.setVisibility(View.VISIBLE);
                 targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                targetNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        addTargetLayout.setVisibility(View.INVISIBLE);
-                        targetNameEditText.setText("");
-                        Toast.makeText(FrontPageFragment.this.getActivity(), targetNameEditText.getText(), Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                });
+//                targetNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//                    @Override
+//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                        addTargetLayout.setVisibility(View.INVISIBLE);
+//                        targetNameEditText.setText("");
+//                        Toast.makeText(FrontPageFragment.this.getActivity(), targetNameEditText.getText(), Toast.LENGTH_SHORT).show();
+//                        return false;
+//                    }
+//                });
+//                pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//                    @Override
+//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                        addTargetLayout.setVisibility(View.INVISIBLE);
+//                        pointEditText.setText("");
+//                        Toast.makeText(FrontPageFragment.this.getActivity(), targetNameEditText.getText(), Toast.LENGTH_SHORT).show();
+//                        return false;
+//                    }
+//                });
             }
         });
 
@@ -113,6 +184,36 @@ public class FrontPageFragment extends Fragment {
                         return false;
                     }
                 });
+            }
+        });
+
+        addTodoTaskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                //当EditText失去焦点时，隐藏软键盘
+                if (!hasFocus) {
+                    closeKeyBoard(addTodoTaskEditText);
+                }
+            }
+        });
+
+        targetNameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                //当EditText失去焦点时，隐藏软键盘
+                if (!hasFocus) {
+                    closeKeyBoard(targetNameEditText);
+                }
+            }
+        });
+
+        pointEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                //当EditText失去焦点时，隐藏软键盘
+                if (!hasFocus) {
+                    closeKeyBoard(pointEditText);
+                }
             }
         });
 

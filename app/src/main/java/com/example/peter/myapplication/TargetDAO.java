@@ -199,8 +199,8 @@ public class TargetDAO {
         return resultList;
     }
 
-    public List<TargetEntity> getBadTargetList() {
-        List<TargetEntity> resultList = new ArrayList<TargetEntity>();
+    public ArrayList<TargetEntity> getBadTargetList() {
+        ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
         String where = ATTRIBUTES + " = 1 ";
         // 執行查詢
         Cursor cursor = db.query(
@@ -217,8 +217,8 @@ public class TargetDAO {
         return resultList;
     }
 
-    public List<TargetEntity> getRewardList() {
-        List<TargetEntity> resultList = new ArrayList<TargetEntity>();
+    public ArrayList<TargetEntity> getRewardList() {
+        ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
         String where = ATTRIBUTES + " = 2 ";
         // 執行查詢
         Cursor cursor = db.query(

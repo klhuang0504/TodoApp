@@ -2,15 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bb_menu_targetList"
-        android:icon="@drawable/ic_recents"
-        android:title="@string/targetList" />
-    <item
         android:id="@+id/bb_menu_frontPage"
         android:icon="@drawable/ic_friends"
         android:title="@string/frontPage" />
     <item
-        android:id="@+id/bb_menu_log"
+        android:id="@+id/bb_menu_targetList"
+        android:icon="@drawable/ic_nearby"
+        android:title="@string/targetList" />
+    <item
+        android:id="@+id/bb_menu_badTargetList"
+        android:icon="@drawable/ic_restaurants"
+        android:title="@string/badtargetList" />
+    <item
+        android:id="@+id/bb_menu_reward"
         android:icon="@drawable/ic_favorites"
+        android:title="@string/reward" />
+    <item
+        android:id="@+id/bb_menu_log"
+        android:icon="@drawable/ic_recents"
         android:title="@string/log" />
 </menu>

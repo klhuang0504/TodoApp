@@ -18,15 +18,37 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView6"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="目前分數：100分"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="30dp" />
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:text="目前分數："
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="30dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/userPointTextView"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="30dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 分"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="30dp" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/textView7"
@@ -117,6 +139,7 @@
                     android:layout_marginTop="5dp"
                     android:text="獎勵三"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+
             </LinearLayout>
 
         </RelativeLayout>
@@ -160,121 +183,130 @@
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
         </RelativeLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/add_todo_task_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/semi_transparent_background"
-            android:orientation="vertical"
-            android:visibility="invisible">
+        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:id="@+id/add_todo_task_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/semi_transparent_background"-->
+            <!--android:orientation="vertical"-->
+            <!--android:visibility="invisible">-->
 
-            <EditText
-                android:id="@+id/addTodoTaskEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:hint="請輸入代辦事項....."
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:singleLine="true"
-                android:focusable="true" />
-        </LinearLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/addTodoTaskEditText"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:hint="請輸入代辦事項....."-->
+                <!--android:imeOptions="actionDone"-->
+                <!--android:inputType="text"-->
+                <!--android:singleLine="true"-->
+                <!--android:focusable="true" />-->
+        <!--</LinearLayout>-->
+        <include layout="@layout/add_todo_task_layout" />
+        <include layout="@layout/add_target_layout" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/semi_transparent_background"
-            android:orientation="vertical"
-            android:id="@+id/add_target_layout"
-            android:visibility="invisible">
+        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/semi_transparent_background"-->
+            <!--android:orientation="vertical"-->
+            <!--android:id="@+id/add_target_layout"-->
+            <!--android:visibility="invisible">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:weightSum="1">-->
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="名稱"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--<TextView-->
+                    <!--android:id="@+id/textView4"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="名稱"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:nextFocusDown="@+id/pointEt" />-->
 
-                <EditText
-                    android:id="@+id/targetNameEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="可輸入想養成或戒掉的習慣 ex:跑步、看書、賴床、消夜....."
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:focusable="true" />
-                />
-            </LinearLayout>
+                <!--<EditText-->
+                    <!--android:id="@+id/targetNameEt"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="可輸入想養成或戒掉的習慣 ex:跑步、看書、賴床、消夜....."-->
+                    <!--android:imeOptions="actionNext"-->
+                    <!--android:inputType="text"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:focusable="true" />-->
+                <!--/>-->
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/white"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:background="@color/white"-->
+                <!--android:weightSum="1">-->
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="點數"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--<TextView-->
+                    <!--android:id="@+id/pointTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="點數"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
 
-                <EditText
-                    android:id="@+id/pointEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:numeric="integer" />
+                <!--<EditText-->
+                    <!--android:id="@+id/pointEt"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="number"-->
+                    <!--android:numeric="integer"-->
+                    <!--android:imeOptions="actionDone"/>-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="horizontal">-->
 
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="addGoodTarget"
-                    android:text="新增好習慣" />
+                <!--<Button-->
+                    <!--android:id="@+id/addGoodTargetButton"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="新增好習慣" />-->
+                    <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/button3"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:onClick="addBadTarget"
-                    android:text="新增壞習慣" />
+                    <!--&lt;!&ndash;android:onClick="addGoodTarget"&ndash;&gt;-->
 
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignTop="@+id/button3"
-                    android:onClick="addReward"
-                    android:text="新增獎勵" />
 
-            </LinearLayout>
+                <!--<Button-->
+                    <!--android:id="@+id/addBadTargetButton"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="新增壞習慣" />-->
+                    <!--&lt;!&ndash;android:layout_alignBottom="@+id/addGoodTargetButton"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentEnd="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
 
-        </LinearLayout>
+                    <!--&lt;!&ndash;android:onClick="addBadTarget"&ndash;&gt;-->
+
+
+                <!--<Button-->
+                    <!--android:id="@+id/addRewardButton"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="新增獎勵" />-->
+                    <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignParentStart="true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_alignTop="@+id/button3"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:onClick="addReward"&ndash;&gt;-->
+
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
 
     </FrameLayout>
 

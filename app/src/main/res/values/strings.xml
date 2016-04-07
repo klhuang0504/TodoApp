@@ -9,8 +9,10 @@
     <string name="right_now_point">目前分數</string>
 
     <string name="done">完成</string>
-    <string name="targetList">清單</string>
+    <string name="targetList">好習慣</string>
     <string name="frontPage">首頁</string>
+    <string name="badtargetList">壞習慣</string>
+    <string name="reward">獎勵</string>
     <string name="log">記錄</string>
 
     <string name="add_target">新增習慣/獎勵</string>

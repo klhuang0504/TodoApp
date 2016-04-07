@@ -29,13 +29,19 @@ public class TargetActionMenuFragment extends DialogFragment {
 
     }
 
-    public void processGoodTarget() {
-        userEntity.setUserPoint(userEntity.getUserPoint() + targetEntity.getPoint());
+    private void processGoodTarget() {
+        if(targetEntity.getAttributes() == 0){
+            userEntity.setUserPoint(userEntity.getUserPoint() + targetEntity.getPoint());
+            userDAO.update(userEntity);
+            dismiss();
+            return;
+        }
+        userEntity.setUserPoint(userEntity.getUserPoint() - targetEntity.getPoint());
         userDAO.update(userEntity);
         dismiss();
     }
 
-    public void cancel(View view){
+    private void cancel(View view){
         dismiss();
     }
 
@@ -47,14 +53,12 @@ public class TargetActionMenuFragment extends DialogFragment {
                 false);
 //        target_action_menu = (LinearLayout) view.findViewById(R.id.targetActionMenu);
         executeButton = (Button) view.findViewById(R.id.execute_button);
-                executeButton.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        processGoodTarget();
-                    }
-                });
+        executeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processGoodTarget();
+            }
+        });
 
 
         cancelButton = (Button) view.findViewById(R.id.cancel_button);

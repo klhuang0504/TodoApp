@@ -29,7 +29,10 @@ public class MainActivity extends Activity {
 
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
-        mBottomBar.setDefaultTabPosition(1);
+        mBottomBar.setDefaultTabPosition(0);
+        mBottomBar.noResizeGoodness();
+//        mBottomBar.noNavBarGoodness();
+//        mBottomBar.noTabletGoodness();
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
@@ -60,6 +63,10 @@ public class MainActivity extends Activity {
             replaceFragment(new FrontPageFragment(), bundle);
         } else if (id == R.id.bb_menu_targetList) {
             replaceFragment(new ProcessGoodTargetFragment(), bundle);
+        } else if (id == R.id.bb_menu_badTargetList) {
+            replaceFragment(new BadTargetListFragment(), bundle);
+        } else if (id == R.id.bb_menu_reward) {
+            replaceFragment(new RewardListFragment(), bundle);
         } else if (id == R.id.bb_menu_log) {
             replaceFragment(new AddTargetActivity(), bundle);
         }
