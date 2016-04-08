@@ -32,8 +32,8 @@ public class RewardListFragment extends Fragment {
         targetDAO = new TargetDAO(getActivity());
         userDAO = new UserDAO(getActivity());
 
-        Bundle bundle = getArguments();
-        userEntity = (UserEntity) bundle.getSerializable("userEntity");
+//        Bundle bundle = getArguments();
+//        userEntity = (UserEntity) bundle.getSerializable("userEntity");
         RewardList = getRewardList();
         int layoutId = R.layout.single_target;
         targetAdapter = new TargetAdapter(getActivity(), layoutId, RewardList);

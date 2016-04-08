@@ -33,7 +33,7 @@ public class ProcessGoodTargetFragment extends Fragment {
         userDAO = new UserDAO(getActivity());
 
         Bundle bundle = getArguments();
-        userEntity = (UserEntity) bundle.getSerializable("userEntity");
+//        userEntity = (UserEntity) bundle.getSerializable("userEntity");
         goodTargetList = getGoodTargetList();
         int layoutId = R.layout.single_target;
         targetAdapter = new TargetAdapter(getActivity(), layoutId, goodTargetList);
