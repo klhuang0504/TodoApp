@@ -52,7 +52,7 @@ public class BadTargetListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.process_good_target, container,
+        View view = inflater.inflate(R.layout.target_list_layout, container,
                 false);
         goodTargetlistView = (ListView) view.findViewById(R.id.goodTargetListView);
 

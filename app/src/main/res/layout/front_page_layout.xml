@@ -164,7 +164,8 @@
                 fab:fab_addButtonColorNormal="@color/white"
                 fab:fab_addButtonColorPressed="@color/white_pressed"
                 fab:fab_addButtonPlusIconColor="@color/half_black"
-                fab:fab_labelStyle="@style/menu_labels_style">
+                fab:fab_labelStyle="@style/menu_labels_style"
+                android:background="@color/transparent">
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/add_target"
