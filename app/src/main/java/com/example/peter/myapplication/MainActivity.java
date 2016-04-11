@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import com.roughike.bottombar.BottomBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 
 public class MainActivity extends MaterialNavigationDrawer {
@@ -46,23 +49,47 @@ public class MainActivity extends MaterialNavigationDrawer {
 //        setFirstAccountPhoto(getResources().getDrawable(R.drawable.photo));
 
         // create sections
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userEntity", user);
+
+        Bundle frontPageFragmentBundle = new Bundle();
+        frontPageFragmentBundle.putSerializable("userEntity", user);
         FrontPageFragment frontPageFragment = new FrontPageFragment();
-        frontPageFragment.setArguments(bundle);
-        ProcessGoodTargetFragment processGoodTargetFragment = new ProcessGoodTargetFragment();
-        processGoodTargetFragment.setArguments(bundle);
-        BadTargetListFragment badTargetListFragment = new BadTargetListFragment();
-        badTargetListFragment.setArguments(bundle);
-        RewardListFragment rewardListFragment = new RewardListFragment();
-        rewardListFragment.setArguments(bundle);
+        frontPageFragment.setArguments(frontPageFragmentBundle);
         this.addSection(newSection("首頁", frontPageFragment));
         this.addDivisor();
-        this.addSection(newSection("好習慣", processGoodTargetFragment));
+        TargetListFragment goodTargetListFragment = new TargetListFragment();
+        Bundle goodTargetListFragmentBundle = new Bundle();
+        goodTargetListFragmentBundle.putSerializable("userEntity", user);
+        goodTargetListFragmentBundle.putInt("targetAttributes", 0);
+        goodTargetListFragment.setArguments(goodTargetListFragmentBundle);
+        this.addSection(newSection("好習慣", goodTargetListFragment));
+        TargetListFragment badTargetListFragment = new TargetListFragment();
+        Bundle badTargetListFragmentBundle = new Bundle();
+        goodTargetListFragmentBundle.putSerializable("userEntity", user);
+        badTargetListFragmentBundle.putInt("targetAttributes", 1);
+        badTargetListFragment.setArguments(badTargetListFragmentBundle);
         this.addSection(newSection("壞習慣", badTargetListFragment));
         this.addDivisor();
+        TargetListFragment rewardListFragment = new TargetListFragment();
+        Bundle RewardListFragmentBundle = new Bundle();
+        RewardListFragmentBundle.putSerializable("userEntity", user);
+        RewardListFragmentBundle.putInt("targetAttributes", 2);
+        rewardListFragment.setArguments(RewardListFragmentBundle);
         this.addSection(newSection("兌換獎勵", rewardListFragment));
         this.addDivisor();
+        LogFragment logFragment = new LogFragment();
+        Bundle logFragmentBundle = new Bundle();
+        logFragmentBundle.putSerializable("userEntity", user);
+        logFragment.setArguments(logFragmentBundle);
+        this.addSection(newSection("兌換獎勵", logFragment));
+
+        closeOptionsMenu();
+//        ProcessGoodTargetFragment processGoodTargetFragment = new ProcessGoodTargetFragment();
+//        processGoodTargetFragment.setArguments(bundle);
+//        BadTargetListFragment badTargetListFragment = new BadTargetListFragment();
+//        badTargetListFragment.setArguments(bundle);
+//        RewardListFragment rewardListFragment = new RewardListFragment();
+//        rewardListFragment.setArguments(bundle);
+
 
 //        this.addDivisor();
 

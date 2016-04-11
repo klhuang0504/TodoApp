@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    app:clickToClose="true">
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66ddff00"
+        android:tag="Bottom1"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/archive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/red"
+            android:clickable="true"
+            android:gravity="left|center_vertical"
+            android:text="  Done"
+            android:textColor="#fff"
+            android:textSize="30dp" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/delete"-->
+        <!--android:text="Delete"-->
+        <!--android:background="#C7C7CC"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper_2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:tag="Bottom4">
+
+        <ImageView
+            android:id="@+id/magnifier2"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="#f7e79c"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/magnifier" />
+
+        <ImageView
+            android:id="@+id/star2"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="#4cd964"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/trash2"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/red"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/trash" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/starbott"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="Bottom3">
+
+        <RelativeLayout
+            android:id="@+id/bottom_wrapper_child1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/dark_gray"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/star" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/logTextLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:tag="Bottom3"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/logNameText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/white"
+            android:text="動作"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/logPointText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white"
+            android:text="分數"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:gravity="center"  />
+
+        <TextView
+            android:id="@+id/logDateText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/white"
+            android:text="時間"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:gravity="center"  />
+    </LinearLayout>
+
+    <!--<TextView-->
+    <!--android:padding="10dp"-->
+    <!--android:background="@drawable/white"-->
+    <!--android:tag="Hover"-->
+    <!--android:id="@+id/SwipeItemTextView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:textColor="@android:color/black" />-->
+
+</com.daimajia.swipe.SwipeLayout>

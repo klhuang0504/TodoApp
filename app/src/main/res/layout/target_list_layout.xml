@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <!--<ListView-->
         <!--android:layout_width="match_parent"-->
@@ -12,19 +12,39 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ListView
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/goodTargetListView"
+                android:layout_weight="1" />
+
+
+
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/done"-->
+                <!--android:id="@+id/doneButton"-->
+                <!--android:onClick="done"/>-->
+        </LinearLayout>
+
+        <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/goodTargetListView"
-            android:layout_weight="1" />
+            android:background="@android:color/black"/>
 
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/done"-->
-            <!--android:id="@+id/doneButton"-->
-            <!--android:onClick="done"/>-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:id="@+id/blankLinearLayout">></LinearLayout>
     </LinearLayout>
 </LinearLayout>

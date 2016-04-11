@@ -237,12 +237,12 @@ public class TargetDAO {
 
     // 建立範例資料
     public void sample() {
-        TargetEntity targetEntity = new TargetEntity(0, "aaa", 1, 0);
-        TargetEntity targetEntity2 = new TargetEntity(0, "bbb", 2, 1);
-        TargetEntity targetEntity3 = new TargetEntity(0, "ccc", 3, 2);
-        TargetEntity targetEntity4 = new TargetEntity(0, "ddd", 4, 0);
-        TargetEntity targetEntity5 = new TargetEntity(0, "eee", 1, 1);
-        TargetEntity targetEntity6 = new TargetEntity(0, "fff", 2, 2);
+        TargetEntity targetEntity = new TargetEntity(0, "健身", 1, 0);
+        TargetEntity targetEntity2 = new TargetEntity(0, "打電玩", 2, 1);
+        TargetEntity targetEntity3 = new TargetEntity(0, "出國玩", 3, 2);
+        TargetEntity targetEntity4 = new TargetEntity(0, "唸書", 4, 0);
+        TargetEntity targetEntity5 = new TargetEntity(0, "吃垃圾食物", 1, 1);
+        TargetEntity targetEntity6 = new TargetEntity(0, "買新手機", 2, 2);
 
         insert(targetEntity);
         insert(targetEntity2);

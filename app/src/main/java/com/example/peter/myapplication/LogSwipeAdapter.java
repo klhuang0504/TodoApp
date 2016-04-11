@@ -1,7 +1,6 @@
 package com.example.peter.myapplication;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,27 +15,26 @@ import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import java.util.List;
 
 
-public class TargetSwipeAdapter extends BaseSwipeAdapter {
+public class LogSwipeAdapter extends BaseSwipeAdapter {
 
     private Context mContext;
-    private TargetEntity selectTargetEntity;
-    private List<TargetEntity> targetEntityList;
+    private LogEntity selectLogEntity;
+    private List<LogEntity> logEntityList;
     private TargetDAO targetDAO;
     private AdapterCallback mAdapterCallback;
-    private LinearLayout blankLinearLayout;
 
-    public TargetSwipeAdapter(Context mContext) {
+    public LogSwipeAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public TargetSwipeAdapter(Context mContext, List<TargetEntity> targetEntityList) {
+    public LogSwipeAdapter(Context mContext, List<LogEntity> logEntityList) {
         this.mContext = mContext;
-        this.targetEntityList = targetEntityList;
+        this.logEntityList = logEntityList;
     }
 
-    public TargetSwipeAdapter(Context mContext, List<TargetEntity> targetEntityList, AdapterCallback callback) {
+    public LogSwipeAdapter(Context mContext, List<LogEntity> logEntityList, AdapterCallback callback) {
         this.mContext = mContext;
-        this.targetEntityList = targetEntityList;
+        this.logEntityList = logEntityList;
         this.mAdapterCallback = callback;
     }
 
@@ -49,7 +47,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
     @Override
     public View generateView(final int position, ViewGroup parent) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.swipe_layout, null);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.single_log_swipe_layout, null);
         final SwipeLayout swipeLayout = (SwipeLayout) v.findViewById(getSwipeLayoutResourceId(position));
         swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 
@@ -70,19 +68,13 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                if (!smallOpen) {
-                    layout.close();
-                }
+//                if (!smallOpen) {
+//                    layout.close();
+//                }
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
-//                Toast.makeText(mContext, "Click on onOpen", Toast.LENGTH_SHORT).show();
-//                layout.close();
-                selectTargetEntity = targetEntityList.get(position);
-                mAdapterCallback.onMethodCallback(selectTargetEntity);
-//                Toast.makeText(mContext, selectTargetEntity.getTargetName(), Toast.LENGTH_SHORT).show();
-//                Log.i("",selectTargetEntity.getTargetName());
             }
 
             @Override
@@ -103,12 +95,12 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-                if (xvel < (layout.getWidth() / 10 * 8)) {
-                    smallOpen = false;
-                    layout.close();
-                } else {
-                    smallOpen = true;
-                }
+//                if (xvel < (layout.getWidth() / 10 * 8)) {
+//                    smallOpen = false;
+//                    layout.close();
+//                } else {
+//                    smallOpen = true;
+//                }
             }
         });
 
@@ -177,39 +169,33 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 //                Toast.makeText(mContext, "click delete", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        View listView = LayoutInflater.from(mContext).inflate(R.layout.target_list_layout, null);
-
-        blankLinearLayout = (LinearLayout)listView.findViewById(R.id.blankLinearLayout);
-        blankLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                swipeLayout.close();
-            }
-        });
         return v;
     }
 
     @Override
     public void fillValues(int position, View convertView) {
-        TargetEntity targetEntity = targetEntityList.get(position);
-        TextView swipeItemTextView = (TextView) convertView.findViewById(R.id.SwipeItemTextView);
-//        t.setText((position + 1) + ".");
-        swipeItemTextView.setText("名稱：" + targetEntity.getTargetName() + " - 點數：" + String.valueOf(targetEntity.getPoint()));
+        LogEntity logEntity = logEntityList.get(position);
+        TextView logNameTextView = (TextView) convertView.findViewById(R.id.logNameText);
+        logNameTextView.setText("Log名稱");
+        TextView logPointTextView = (TextView) convertView.findViewById(R.id.logPointText);
+        logPointTextView.setText("Log點數");
+        TextView logDateTextView = (TextView) convertView.findViewById(R.id.logDateText);
+        logDateTextView.setText(logEntity.getDate().toString());
     }
 
     @Override
     public int getCount() {
-        return targetEntityList.size();
+        return logEntityList.size();
     }
 
     @Override
-    public TargetEntity getItem(int position) {
-        return targetEntityList.get(position);
+    public LogEntity getItem(int position) {
+        return logEntityList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        TargetEntity targetEntity = targetEntityList.get(position);
-        return targetEntity.getId();
+        LogEntity logEntity = logEntityList.get(position);
+        return logEntity.getId();
     }
 }
