@@ -188,7 +188,7 @@ public class UserDAO {
         UserEntity userEntity1 = new UserEntity(0, "aaa", "111", 0);
         UserEntity userEntity2 = new UserEntity(0, "bbb", "222", 0);
         UserEntity userEntity3 = new UserEntity(0, "ccc", "333", 0);
-        UserEntity userEntity4 = new UserEntity(0, "ddd", "444", 0);
+        UserEntity userEntity4 = new UserEntity(0, "peter", "1234", 0);
 
         insert(userEntity1);
         insert(userEntity2);

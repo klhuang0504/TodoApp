@@ -16,6 +16,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +32,8 @@ public class TargetListFragment extends Fragment implements AdapterCallback {
     private TargetEntity selectTargetEntity;
     private UserDAO userDAO;
     private UserEntity userEntity;
+    private LogDAO logDAO;
+
     private int targetAttributes;
 
 
@@ -39,6 +42,7 @@ public class TargetListFragment extends Fragment implements AdapterCallback {
         super.onCreate(savedInstanceState);
         targetDAO = new TargetDAO(getActivity());
         userDAO = new UserDAO(getActivity());
+        logDAO = new LogDAO(getActivity());
 
         Bundle bundle = getArguments();
         userEntity = (UserEntity) bundle.getSerializable("userEntity");
@@ -132,6 +136,10 @@ public class TargetListFragment extends Fragment implements AdapterCallback {
             userEntity.setUserPoint(userEntity.getUserPoint()+targetEntity.getPoint());
         }
         userDAO.update(userEntity);
+        LogEntity logEntity = new LogEntity();
+        logEntity.setEntityId(targetEntity.getId());
+        logEntity.setDate(new Date());
+        logDAO.insert(logEntity);
 //        Toast.makeText(getActivity(), "onMethodCallback - " + targetEntity.getTargetName(), Toast.LENGTH_SHORT).show();
     }
 }

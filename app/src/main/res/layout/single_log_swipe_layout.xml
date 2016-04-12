@@ -4,38 +4,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="50dp"
     app:clickToClose="true">
 
-    <LinearLayout
-        android:id="@+id/bottom_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#66ddff00"
-        android:tag="Bottom1"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/archive"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/red"
-            android:clickable="true"
-            android:gravity="left|center_vertical"
-            android:text="  Done"
-            android:textColor="#fff"
-            android:textSize="30dp" />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/bottom_wrapper"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#66ddff00"-->
+        <!--android:tag="Bottom1"-->
+        <!--android:weightSum="1">-->
 
         <!--<TextView-->
-        <!--android:id="@+id/delete"-->
-        <!--android:text="Delete"-->
-        <!--android:background="#C7C7CC"-->
-        <!--android:gravity="center"-->
-        <!--android:layout_weight="0.5"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent" />-->
-    </LinearLayout>
+            <!--android:id="@+id/archive"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/red"-->
+            <!--android:clickable="true"-->
+            <!--android:gravity="left|center_vertical"-->
+            <!--android:text="  Done"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="30dp" />-->
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/delete"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:text="Delete"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="#C7C7CC"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="0.5"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent" />&ndash;&gt;-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/bottom_wrapper_2"
@@ -117,7 +117,7 @@
         <TextView
             android:id="@+id/logPointText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/white"
             android:text="分數"
             android:layout_weight="1"

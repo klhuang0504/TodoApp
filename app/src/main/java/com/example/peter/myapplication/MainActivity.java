@@ -16,6 +16,8 @@ public class MainActivity extends MaterialNavigationDrawer {
     private BottomBar mBottomBar;
     private UserDAO userDAO;
     private UserEntity user;
+    private LogDAO logDAO;
+    private TargetDAO targetDAO;
 
     @Override
     public void init(Bundle savedInstanceState) {
@@ -26,6 +28,18 @@ public class MainActivity extends MaterialNavigationDrawer {
         }
 
         user = userDAO.getByUserName("aaa");
+
+        targetDAO = new TargetDAO(getApplicationContext());
+        if (targetDAO.getCount() == 0) {
+            targetDAO.sample();
+        }
+
+        logDAO = new LogDAO(getApplicationContext());
+        if (logDAO.getCount() == 0) {
+            logDAO.sample();
+        }
+
+
 
 
 //        mBottomBar = BottomBar.attach(this, savedInstanceState);
@@ -80,9 +94,8 @@ public class MainActivity extends MaterialNavigationDrawer {
         Bundle logFragmentBundle = new Bundle();
         logFragmentBundle.putSerializable("userEntity", user);
         logFragment.setArguments(logFragmentBundle);
-        this.addSection(newSection("兌換獎勵", logFragment));
+        this.addSection(newSection("活動紀錄", logFragment));
 
-        closeOptionsMenu();
 //        ProcessGoodTargetFragment processGoodTargetFragment = new ProcessGoodTargetFragment();
 //        processGoodTargetFragment.setArguments(bundle);
 //        BadTargetListFragment badTargetListFragment = new BadTargetListFragment();

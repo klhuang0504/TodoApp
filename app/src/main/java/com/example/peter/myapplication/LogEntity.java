@@ -7,20 +7,22 @@ import java.util.Date;
  */
 public class LogEntity implements java.io.Serializable {
     private long id;
-//    private String targetName;
-//    private int point;
-    private int logId;
+    private String targetName;
+    private int point;
+    private long entityId;
     //    private int attributes;
     private Date date;
+
+
 
 
     public LogEntity() {
     }
 
-    public LogEntity(long id, String targetName, int logId, Date date) {
+    public LogEntity(long id, int entityId, Date date) {
         this.id = id;
 //        this.targetName = targetName;
-        this.logId = logId;
+        this.entityId = entityId;
         this.date = date;
     }
 
@@ -40,12 +42,12 @@ public class LogEntity implements java.io.Serializable {
 //        this.targetName = targetName;
 //    }
 
-    public int getLogId() {
-        return logId;
+    public long getEntityId() {
+        return entityId;
     }
 
-    public void setLogId(int logId) {
-        this.logId = logId;
+    public void setEntityId(long entityId) {
+        this.entityId = entityId;
     }
 
 
@@ -57,5 +59,19 @@ public class LogEntity implements java.io.Serializable {
         this.date = date;
     }
 
+    public String getTargetName() {
+        return targetName;
+    }
 
+    public void setTargetName(String targetName) {
+        this.targetName = targetName;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
 }

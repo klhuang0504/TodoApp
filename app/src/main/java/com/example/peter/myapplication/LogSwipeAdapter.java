@@ -12,30 +12,47 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class LogSwipeAdapter extends BaseSwipeAdapter {
 
     private Context mContext;
     private LogEntity selectLogEntity;
-    private List<LogEntity> logEntityList;
+    private ArrayList<LogEntity> logEntityList;
+    private ArrayList<TargetEntity> targetEntityList;
+
     private TargetDAO targetDAO;
     private AdapterCallback mAdapterCallback;
+
+    private Map<Long, TargetEntity> targetEntityMap;
 
     public LogSwipeAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public LogSwipeAdapter(Context mContext, List<LogEntity> logEntityList) {
+
+
+    public LogSwipeAdapter(Context mContext, ArrayList<LogEntity> logEntityList, ArrayList<TargetEntity> targetEntityList) {
         this.mContext = mContext;
         this.logEntityList = logEntityList;
+        this.targetEntityList = targetEntityList;
     }
 
-    public LogSwipeAdapter(Context mContext, List<LogEntity> logEntityList, AdapterCallback callback) {
+    public LogSwipeAdapter(Context mContext, ArrayList<LogEntity> logEntityList, ArrayList<TargetEntity> targetEntityList, AdapterCallback callback) {
         this.mContext = mContext;
         this.logEntityList = logEntityList;
         this.mAdapterCallback = callback;
+        this.targetEntityList = targetEntityList;
+        targetEntityMap = new HashMap<Long, TargetEntity>();
+        for (TargetEntity targetEntity : targetEntityList) {
+            targetEntityMap.put(targetEntity.getId(), targetEntity);
+        }
+
     }
 
 
@@ -174,13 +191,15 @@ public class LogSwipeAdapter extends BaseSwipeAdapter {
 
     @Override
     public void fillValues(int position, View convertView) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         LogEntity logEntity = logEntityList.get(position);
         TextView logNameTextView = (TextView) convertView.findViewById(R.id.logNameText);
-        logNameTextView.setText("Log名稱");
+        logNameTextView.setText(targetEntityMap.get(logEntity.getEntityId()).getTargetName());
         TextView logPointTextView = (TextView) convertView.findViewById(R.id.logPointText);
-        logPointTextView.setText("Log點數");
+        logPointTextView.setText(String.valueOf(targetEntityMap.get(logEntity.getEntityId()).getPoint()));
         TextView logDateTextView = (TextView) convertView.findViewById(R.id.logDateText);
-        logDateTextView.setText(logEntity.getDate().toString());
+        logDateTextView.setText(dateFormat.format(logEntity.getDate()));
     }
 
     @Override

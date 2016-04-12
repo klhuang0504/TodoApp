@@ -35,11 +35,6 @@
                 <!--android:onClick="done"/>-->
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"/>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
