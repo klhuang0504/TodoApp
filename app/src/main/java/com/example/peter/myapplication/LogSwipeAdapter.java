@@ -68,7 +68,7 @@ public class LogSwipeAdapter extends BaseSwipeAdapter {
         final SwipeLayout swipeLayout = (SwipeLayout) v.findViewById(getSwipeLayoutResourceId(position));
         swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 
-        swipeLayout.addDrag(SwipeLayout.DragEdge.Left, swipeLayout.findViewById(R.id.bottom_wrapper));
+//        swipeLayout.addDrag(SwipeLayout.DragEdge.Left, swipeLayout.findViewById(R.id.bottom_wrapper));
         swipeLayout.addDrag(SwipeLayout.DragEdge.Right, swipeLayout.findViewById(R.id.bottom_wrapper_2));
 //        swipeLayout.addDrag(SwipeLayout.DragEdge.Top, starBottView);
 //        swipeLayout.addDrag(SwipeLayout.DragEdge.Bottom, starBottView);
@@ -124,24 +124,24 @@ public class LogSwipeAdapter extends BaseSwipeAdapter {
         swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Click on surface", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "Click on surface", Toast.LENGTH_SHORT).show();
 //                Log.d(MyActivity.class.getName(), "click on surface");
             }
         });
         swipeLayout.getSurfaceView().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(mContext, "longClick on surface", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "longClick on surface", Toast.LENGTH_SHORT).show();
 //                Log.d(MyActivity.class.getName(), "longClick on surface");
                 return true;
             }
         });
-        swipeLayout.findViewById(R.id.star2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        swipeLayout.findViewById(R.id.star2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         swipeLayout.findViewById(R.id.trash2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,35 +150,35 @@ public class LogSwipeAdapter extends BaseSwipeAdapter {
             }
         });
 
-        swipeLayout.findViewById(R.id.magnifier2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Magnifier", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        swipeLayout.findViewById(R.id.magnifier2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, "Magnifier", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-        swipeLayout.addRevealListener(R.id.starbott, new SwipeLayout.OnRevealListener() {
-            @Override
-            public void onReveal(View child, SwipeLayout.DragEdge edge, float fraction, int distance) {
-                View star = child.findViewById(R.id.star);
-                float d = child.getHeight() / 2 - star.getHeight() / 2;
-//                ViewHelper.setTranslationY(star, d * fraction);
-//                ViewHelper.setScaleX(star, fraction + 0.6f);
-//                ViewHelper.setScaleY(star, fraction + 0.6f);
-            }
-        });
-        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
-            @Override
-            public void onOpen(SwipeLayout layout) {
-//                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
-            }
-        });
-        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-            @Override
-            public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        swipeLayout.addRevealListener(R.id.starbott, new SwipeLayout.OnRevealListener() {
+//            @Override
+//            public void onReveal(View child, SwipeLayout.DragEdge edge, float fraction, int distance) {
+//                View star = child.findViewById(R.id.star);
+//                float d = child.getHeight() / 2 - star.getHeight() / 2;
+////                ViewHelper.setTranslationY(star, d * fraction);
+////                ViewHelper.setScaleX(star, fraction + 0.6f);
+////                ViewHelper.setScaleY(star, fraction + 0.6f);
+//            }
+//        });
+//        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+//            @Override
+//            public void onOpen(SwipeLayout layout) {
+////                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+//            }
+//        });
+//        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
+//            @Override
+//            public void onDoubleClick(SwipeLayout layout, boolean surface) {
+//                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -10,23 +10,38 @@
 
     <LinearLayout
         android:tag="Bottom1"
-        android:background="#66ddff00"
+        android:background="@drawable/red"
         android:id="@+id/bottom_wrapper"
         android:layout_width="match_parent"
         android:weightSum="1"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/archive"
-            android:textColor="#fff"
-            android:text="  Done"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:clickable="true"
+        <ImageView
+            android:src="@drawable/check"
+            android:layout_width="70dp"
             android:background="@drawable/red"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="30dp" />
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@drawable/plus_one"
+            android:layout_width="70dp"
+            android:background="@color/dark_gray"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_height="match_parent" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/archive"-->
+            <!--android:textColor="#fff"-->
+            <!--android:text="  Done"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="left|center_vertical"-->
+            <!--android:clickable="true"-->
+            <!--android:background="@drawable/red"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:textSize="30dp" />-->
 
         <!--<TextView-->
             <!--android:id="@+id/delete"-->
@@ -72,27 +87,27 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <LinearLayout
-        android:tag="Bottom3"
-        android:id="@+id/starbott"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:id="@+id/bottom_wrapper_child1"
-            android:background="@drawable/dark_gray"
-            android:clickable="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/star"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/star"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+    <!--<LinearLayout-->
+        <!--android:tag="Bottom3"-->
+        <!--android:id="@+id/starbott"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/bottom_wrapper_child1"-->
+            <!--android:background="@drawable/dark_gray"-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/star"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:src="@drawable/star"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp" />-->
 
-        </RelativeLayout>
-    </LinearLayout>
+        <!--</RelativeLayout>-->
+    <!--</LinearLayout>-->
 
     <TextView
         android:padding="10dp"
@@ -102,5 +117,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@android:color/black" />
+
 
 </com.daimajia.swipe.SwipeLayout>

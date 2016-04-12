@@ -147,29 +147,29 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
                 Toast.makeText(mContext, "Magnifier", Toast.LENGTH_SHORT).show();
             }
         });
-
-        swipeLayout.addRevealListener(R.id.starbott, new SwipeLayout.OnRevealListener() {
-            @Override
-            public void onReveal(View child, SwipeLayout.DragEdge edge, float fraction, int distance) {
-                View star = child.findViewById(R.id.star);
-                float d = child.getHeight() / 2 - star.getHeight() / 2;
-//                ViewHelper.setTranslationY(star, d * fraction);
-//                ViewHelper.setScaleX(star, fraction + 0.6f);
-//                ViewHelper.setScaleY(star, fraction + 0.6f);
-            }
-        });
-        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
-            @Override
-            public void onOpen(SwipeLayout layout) {
-//                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
-            }
-        });
-        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-            @Override
-            public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
-            }
-        });
+//
+//        swipeLayout.addRevealListener(R.id.starbott, new SwipeLayout.OnRevealListener() {
+//            @Override
+//            public void onReveal(View child, SwipeLayout.DragEdge edge, float fraction, int distance) {
+//                View star = child.findViewById(R.id.star);
+//                float d = child.getHeight() / 2 - star.getHeight() / 2;
+////                ViewHelper.setTranslationY(star, d * fraction);
+////                ViewHelper.setScaleX(star, fraction + 0.6f);
+////                ViewHelper.setScaleY(star, fraction + 0.6f);
+//            }
+//        });
+//        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+//            @Override
+//            public void onOpen(SwipeLayout layout) {
+////                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+//            }
+//        });
+//        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
+//            @Override
+//            public void onDoubleClick(SwipeLayout layout, boolean surface) {
+//                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
 //            @Override

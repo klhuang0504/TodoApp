@@ -43,23 +43,23 @@
         android:layout_height="match_parent"
         android:tag="Bottom4">
 
-        <ImageView
-            android:id="@+id/magnifier2"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:background="#f7e79c"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:src="@drawable/magnifier" />
+        <!--<ImageView-->
+            <!--android:id="@+id/magnifier2"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#f7e79c"-->
+            <!--android:paddingLeft="25dp"-->
+            <!--android:paddingRight="25dp"-->
+            <!--android:src="@drawable/magnifier" />-->
 
-        <ImageView
-            android:id="@+id/star2"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:background="#4cd964"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:src="@drawable/star" />
+        <!--<ImageView-->
+            <!--android:id="@+id/star2"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#4cd964"-->
+            <!--android:paddingLeft="25dp"-->
+            <!--android:paddingRight="25dp"-->
+            <!--android:src="@drawable/star" />-->
 
         <ImageView
             android:id="@+id/trash2"
@@ -71,29 +71,29 @@
             android:src="@drawable/trash" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/starbott"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:tag="Bottom3">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/starbott"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:tag="Bottom3">-->
 
-        <RelativeLayout
-            android:id="@+id/bottom_wrapper_child1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/dark_gray"
-            android:clickable="true">
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/bottom_wrapper_child1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/dark_gray"-->
+            <!--android:clickable="true">-->
 
-            <ImageView
-                android:id="@+id/star"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/star" />
+            <!--<ImageView-->
+                <!--android:id="@+id/star"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:src="@drawable/star" />-->
 
-        </RelativeLayout>
-    </LinearLayout>
+        <!--</RelativeLayout>-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/logTextLinearLayout"
