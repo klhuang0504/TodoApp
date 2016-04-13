@@ -194,7 +194,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         TargetEntity targetEntity = targetEntityList.get(position);
         TextView swipeItemTextView = (TextView) convertView.findViewById(R.id.SwipeItemTextView);
 //        t.setText((position + 1) + ".");
-        swipeItemTextView.setText("名稱：" + targetEntity.getTargetName() + " - 點數：" + String.valueOf(targetEntity.getPoint()));
+        swipeItemTextView.setText(targetEntity.getTargetName() + "  (" + String.valueOf(targetEntity.getPoint()) + "分)");
     }
 
     @Override

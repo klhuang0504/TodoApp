@@ -1,122 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.daimajia.swipe.SwipeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    app:clickToClose="true"
-    android:id="@+id/swipe" >
+    android:layout_height="40dp"
+    app:clickToClose="true">
 
     <LinearLayout
-        android:tag="Bottom1"
-        android:background="@drawable/red"
         android:id="@+id/bottom_wrapper"
         android:layout_width="match_parent"
-        android:weightSum="1"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:tag="Bottom1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/buleLight">
+
+            <ImageView
+                android:id="@+id/target_done"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="30dp"
+                android:src="@drawable/ic_check_white_48dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Done"
+                android:paddingRight="50dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
         <ImageView
-            android:src="@drawable/check"
-            android:layout_width="70dp"
-            android:background="@drawable/red"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/buletobluedark"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:layout_height="match_parent" />
+            android:src="@drawable/ic_exposure_plus_1_white_48dp"
+            android:longClickable="true"
+            android:focusable="true"
+            android:clickable="true"/>
+
         <ImageView
-            android:src="@drawable/plus_one"
-            android:layout_width="70dp"
-            android:background="@color/dark_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@drawable/buledarktobluedarker"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:layout_height="match_parent" />
+            android:src="@drawable/ic_undo_white_48dp"
+            android:longClickable="true"
+            android:focusable="true"
+            android:clickable="true"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/archive"-->
-            <!--android:textColor="#fff"-->
-            <!--android:text="  Done"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="left|center_vertical"-->
-            <!--android:clickable="true"-->
-            <!--android:background="@drawable/red"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:textSize="30dp" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/delete"-->
-            <!--android:text="Delete"-->
-            <!--android:background="#C7C7CC"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_weight="0.5"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent" />-->
     </LinearLayout>
 
     <LinearLayout
-        android:tag="Bottom4"
         android:id="@+id/bottom_wrapper_2"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:tag="Bottom4">
 
         <ImageView
             android:id="@+id/magnifier2"
-            android:src="@drawable/magnifier"
             android:layout_width="70dp"
+            android:layout_height="match_parent"
             android:background="#f7e79c"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:layout_height="match_parent" />
+            android:src="@drawable/magnifier" />
 
         <ImageView
             android:id="@+id/star2"
-            android:src="@drawable/star"
             android:layout_width="70dp"
+            android:layout_height="match_parent"
             android:background="#4cd964"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:layout_height="match_parent" />
+            android:src="@drawable/star" />
 
         <ImageView
             android:id="@+id/trash2"
-            android:src="@drawable/trash"
             android:layout_width="70dp"
+            android:layout_height="match_parent"
             android:background="@drawable/red"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:layout_height="match_parent" />
+            android:src="@drawable/trash" />
     </LinearLayout>
 
     <!--<LinearLayout-->
-        <!--android:tag="Bottom3"-->
-        <!--android:id="@+id/starbott"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/bottom_wrapper_child1"-->
-            <!--android:background="@drawable/dark_gray"-->
-            <!--android:clickable="true"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-            <!--<ImageView-->
-                <!--android:id="@+id/star"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:src="@drawable/star"-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp" />-->
+    <!--android:tag="Bottom3"-->
+    <!--android:id="@+id/starbott"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/bottom_wrapper_child1"-->
+    <!--android:background="@drawable/dark_gray"-->
+    <!--android:clickable="true"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<ImageView-->
+    <!--android:id="@+id/star"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:src="@drawable/star"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp" />-->
 
-        <!--</RelativeLayout>-->
+    <!--</RelativeLayout>-->
     <!--</LinearLayout>-->
 
     <TextView
-        android:padding="10dp"
-        android:background="@drawable/white"
-        android:tag="Hover"
         android:id="@+id/SwipeItemTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@android:color/black" />
+        android:background="@drawable/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:tag="Hover"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
 
 
 </com.daimajia.swipe.SwipeLayout>
