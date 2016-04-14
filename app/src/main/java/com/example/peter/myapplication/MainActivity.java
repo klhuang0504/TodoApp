@@ -1,13 +1,15 @@
 package com.example.peter.myapplication;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 
+import com.example.peter.myapplication.data.LogDAO;
+import com.example.peter.myapplication.data.TargetDAO;
+import com.example.peter.myapplication.data.UserDAO;
+import com.example.peter.myapplication.data.UserEntity;
+import com.example.peter.myapplication.frontpage.FrontPageFragment;
+import com.example.peter.myapplication.log.LogFragment;
 import com.roughike.bottombar.BottomBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 
@@ -96,11 +98,8 @@ public class MainActivity extends MaterialNavigationDrawer {
         logFragment.setArguments(logFragmentBundle);
         this.addSection(newSection("活動紀錄", logFragment));
 
-//        ProcessGoodTargetFragment processGoodTargetFragment = new ProcessGoodTargetFragment();
 //        processGoodTargetFragment.setArguments(bundle);
-//        BadTargetListFragment badTargetListFragment = new BadTargetListFragment();
 //        badTargetListFragment.setArguments(bundle);
-//        RewardListFragment rewardListFragment = new RewardListFragment();
 //        rewardListFragment.setArguments(bundle);
 
 
@@ -126,33 +125,6 @@ public class MainActivity extends MaterialNavigationDrawer {
 //
 //    }
 
-    private void onButtonClick(int id) {
-        FragmentManager fm = getFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.layout_container);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userEntity", user);
-
-        if (fragment == null) {
-//            if (id == R.id.bb_menu_frontPage)
-//                fragment = new AddTargetActivity();
-//            else
-//                fragment = new ProcessGoodTargetFragment();
-            fragment = new FrontPageFragment();
-            replaceFragment(fragment, bundle);
-        } else if (id == R.id.bb_menu_frontPage) {
-            replaceFragment(new FrontPageFragment(), bundle);
-        } else if (id == R.id.bb_menu_targetList) {
-            replaceFragment(new ProcessGoodTargetFragment(), bundle);
-        } else if (id == R.id.bb_menu_badTargetList) {
-            replaceFragment(new BadTargetListFragment(), bundle);
-        } else if (id == R.id.bb_menu_reward) {
-            replaceFragment(new RewardListFragment(), bundle);
-        } else if (id == R.id.bb_menu_log) {
-            replaceFragment(new AddTargetActivity(), bundle);
-        }
-
-    }
 
     private void replaceFragment(Fragment fragment, Bundle bundle) {
         fragment.setArguments(bundle);

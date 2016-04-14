@@ -1,4 +1,4 @@
-package com.example.peter.myapplication;
+package com.example.peter.myapplication.log;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,14 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
+import com.example.peter.myapplication.AdapterCallback;
+import com.example.peter.myapplication.R;
+import com.example.peter.myapplication.data.LogDAO;
+import com.example.peter.myapplication.data.LogEntity;
+import com.example.peter.myapplication.data.TargetDAO;
+import com.example.peter.myapplication.data.TargetEntity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,7 +93,7 @@ public class LogFragment extends Fragment implements AdapterCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.log_layout, container,
+        View view = inflater.inflate(R.layout.log_list_layout, container,
                 false);
         logListView = (ListView) view.findViewById(R.id.logListView);
         logSwipeAdapter.setMode(Attributes.Mode.Single);

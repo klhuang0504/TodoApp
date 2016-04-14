@@ -1,7 +1,6 @@
 package com.example.peter.myapplication;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.example.peter.myapplication.data.TargetDAO;
+import com.example.peter.myapplication.data.TargetEntity;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
     @Override
     public View generateView(final int position, ViewGroup parent) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.swipe_layout, null);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.single_target_swipe_layout, null);
         final SwipeLayout swipeLayout = (SwipeLayout) v.findViewById(getSwipeLayoutResourceId(position));
         swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 

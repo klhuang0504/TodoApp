@@ -1,5 +1,7 @@
 package com.example.peter.myapplication;
 
+import com.example.peter.myapplication.data.TargetEntity;
+
 /**
  * Created by peter on 2016/4/11.
  */
