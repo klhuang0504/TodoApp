@@ -41,4 +41,11 @@
     <color name="buleDark">#006494</color>
     <color name="buleDarkDark">#13293D</color>
 
+    <color name="later">#605F5E</color>
+    <color name="later_dark">#514A4C</color>
+
+    <color name="edit">#FB3640</color>
+    <color name="edit_dark">#EA252F</color>
+
+
 </resources>

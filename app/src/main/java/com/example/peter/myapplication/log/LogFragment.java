@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
 import com.example.peter.myapplication.AdapterCallback;
 import com.example.peter.myapplication.R;
@@ -103,6 +104,26 @@ public class LogFragment extends Fragment implements AdapterCallback {
 
     @Override
     public void onMethodCallback(TargetEntity targetEntity) {
+
+    }
+
+    @Override
+    public void onSwipeLayoutStartOpenCallback(SwipeLayout swipeLayout) {
+
+    }
+
+    @Override
+    public void onSwipeLayoutOpenCallback(SwipeLayout swipeLayout) {
+
+    }
+
+    @Override
+    public void onSwipeLayoutCloseCallback(SwipeLayout swipeLayout) {
+
+    }
+
+    @Override
+    public void onSwipeLayoutStartCloseCallback(SwipeLayout swipeLayout) {
 
     }
 }

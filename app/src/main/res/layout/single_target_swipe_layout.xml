@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="80dp"
     app:clickToClose="true">
 
     <LinearLayout
@@ -18,15 +18,20 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/buleLight">
+            android:background="@color/buleLight"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:id="@+id/target_done"
+                android:id="@+id/target_done_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="30dp"
-                android:src="@drawable/ic_check_white_48dp"/>
+                android:src="@drawable/ic_check_white_48dp"
+                android:clickable="true"
+                android:focusable="true"/>
             <TextView
+                android:id="@+id/target_done_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Done"
@@ -34,10 +39,13 @@
                 android:textSize="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:clickable="true"
+                android:focusable="true"/>
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/plusOneImageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/buletobluedark"
@@ -49,6 +57,7 @@
             android:clickable="true"/>
 
         <ImageView
+            android:id="@+id/undoImageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
@@ -69,54 +78,32 @@
         android:tag="Bottom4">
 
         <ImageView
-            android:id="@+id/magnifier2"
+            android:id="@+id/laterImageView"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="#f7e79c"
+            android:background="@drawable/later_button"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:src="@drawable/magnifier" />
+            android:src="@drawable/ic_schedule_white_48dp" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/star2"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#4cd964"-->
+            <!--android:paddingLeft="25dp"-->
+            <!--android:paddingRight="25dp"-->
+            <!--android:src="@drawable/ic_mode_edit_white_48dp" />-->
 
         <ImageView
-            android:id="@+id/star2"
+            android:id="@+id/editImageView"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="#4cd964"
+            android:background="@drawable/edit_button"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:id="@+id/trash2"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/red"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:src="@drawable/trash" />
+            android:src="@drawable/ic_mode_edit_white_48dp" />
     </LinearLayout>
-
-    <!--<LinearLayout-->
-    <!--android:tag="Bottom3"-->
-    <!--android:id="@+id/starbott"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/bottom_wrapper_child1"-->
-    <!--android:background="@drawable/dark_gray"-->
-    <!--android:clickable="true"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-    <!--<ImageView-->
-    <!--android:id="@+id/star"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:src="@drawable/star"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="20dp" />-->
-
-    <!--</RelativeLayout>-->
-    <!--</LinearLayout>-->
 
     <TextView
         android:id="@+id/SwipeItemTextView"

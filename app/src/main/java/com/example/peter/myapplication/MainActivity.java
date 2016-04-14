@@ -9,6 +9,7 @@ import com.example.peter.myapplication.data.UserDAO;
 import com.example.peter.myapplication.data.UserEntity;
 import com.example.peter.myapplication.frontpage.FrontPageFragment;
 import com.example.peter.myapplication.log.LogFragment;
+import com.example.peter.myapplication.target.TargetListFragment;
 import com.roughike.bottombar.BottomBar;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
