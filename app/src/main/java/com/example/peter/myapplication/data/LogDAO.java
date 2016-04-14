@@ -1,4 +1,4 @@
-package com.example.peter.myapplication;
+package com.example.peter.myapplication.data;
 
 /**
  * Created by peter on 2016/3/24.
@@ -14,7 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 // 資料功能類別
 public class LogDAO {

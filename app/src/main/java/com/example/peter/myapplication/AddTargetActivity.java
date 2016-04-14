@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.peter.myapplication.data.TargetDAO;
+import com.example.peter.myapplication.data.TargetEntity;
+import com.example.peter.myapplication.data.UserDAO;
+import com.example.peter.myapplication.data.UserEntity;
 import com.roughike.bottombar.BottomBar;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.peter.myapplication;
+package com.example.peter.myapplication.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

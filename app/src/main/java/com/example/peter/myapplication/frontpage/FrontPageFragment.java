@@ -1,4 +1,4 @@
-package com.example.peter.myapplication;
+package com.example.peter.myapplication.frontpage;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.peter.myapplication.R;
+import com.example.peter.myapplication.data.TargetDAO;
+import com.example.peter.myapplication.data.TargetEntity;
+import com.example.peter.myapplication.data.UserDAO;
+import com.example.peter.myapplication.data.UserEntity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 

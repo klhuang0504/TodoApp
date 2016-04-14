@@ -1,21 +1,23 @@
-package com.example.peter.myapplication;
+package com.example.peter.myapplication.log;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.example.peter.myapplication.AdapterCallback;
+import com.example.peter.myapplication.R;
+import com.example.peter.myapplication.data.LogEntity;
+import com.example.peter.myapplication.data.TargetDAO;
+import com.example.peter.myapplication.data.TargetEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

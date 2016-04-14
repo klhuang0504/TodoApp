@@ -1,4 +1,4 @@
-package com.example.peter.myapplication;
+package com.example.peter.myapplication.data;
 
 /**
  * Created by peter on 2016/3/24.
