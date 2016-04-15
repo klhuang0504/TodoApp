@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class FrontPageFragment extends Fragment {
     private Button addGoodTargetButton, addBadTargetButton, addRewardButton;
     private InputMethodManager inputMethodManager;
     private TextView userPointTextView;
+    private LinearLayout addTargetPointLinearLayout,addTargetButtonLinearLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,10 +89,13 @@ public class FrontPageFragment extends Fragment {
 
         addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
         addTargetLayout = (LinearLayout) view.findViewById(R.id.add_target_layout);
+        addTargetPointLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetPointLinearLayout);
+        addTargetButtonLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonLinearLayout);
+
 
         addTodoTaskEditText = (EditText) view.findViewById(R.id.addTodoTaskEditText);
-        targetNameEditText = (EditText) view.findViewById(R.id.targetNameEt);
-        pointEditText = (EditText) view.findViewById(R.id.pointEt);
+        targetNameEditText = (EditText) view.findViewById(R.id.targetNameEditText);
+        pointEditText = (EditText) view.findViewById(R.id.pointEditText);
 
         userPointTextView = (TextView) view.findViewById(R.id.userPointTextView);
         userPointTextView.setText(String.valueOf(userEntity.getUserPoint()));
@@ -190,6 +195,32 @@ public class FrontPageFragment extends Fragment {
                 });
             }
         });
+
+//        final View addTodoTaskButton = view.findViewById(R.id.add_todo_task);
+//        addTodoTaskButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                menuMultipleActions.collapse();
+////                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 0, 255, 0));
+//                addTargetLayout.setVisibility(View.VISIBLE);
+//
+//                targetNameEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+//                targetNameEditText.setHint("");
+//                addTargetPointLinearLayout.setVisibility(View.INVISIBLE);
+//                addTargetButtonLinearLayout.setVisibility(View.INVISIBLE);
+//                targetNameEditText.requestFocus();
+//                ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//                addTodoTaskEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//                    @Override
+//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                        addTodoTaskLayout.setVisibility(View.INVISIBLE);
+//                        addTodoTaskEditText.setText("");
+//                        Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();
+//                        return false;
+//                    }
+//                });
+//            }
+//        });
 
         addTodoTaskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

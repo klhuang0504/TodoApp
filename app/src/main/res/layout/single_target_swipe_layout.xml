@@ -4,14 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    app:clickToClose="true">
+    android:layout_height="80dp">
 
     <LinearLayout
         android:id="@+id/bottom_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="Bottom1"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -26,7 +24,7 @@
                 android:id="@+id/target_done_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="30dp"
+                android:paddingLeft="40dp"
                 android:src="@drawable/ic_check_white_48dp"
                 android:clickable="true"
                 android:focusable="true"/>
@@ -35,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Done"
-                android:paddingRight="50dp"
+                android:paddingRight="40dp"
                 android:textSize="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -74,8 +72,7 @@
     <LinearLayout
         android:id="@+id/bottom_wrapper_2"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:tag="Bottom4">
+        android:layout_height="80dp">
 
         <ImageView
             android:id="@+id/laterImageView"
@@ -85,15 +82,6 @@
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:src="@drawable/ic_schedule_white_48dp" />
-
-        <!--<ImageView-->
-            <!--android:id="@+id/star2"-->
-            <!--android:layout_width="70dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#4cd964"-->
-            <!--android:paddingLeft="25dp"-->
-            <!--android:paddingRight="25dp"-->
-            <!--android:src="@drawable/ic_mode_edit_white_48dp" />-->
 
         <ImageView
             android:id="@+id/editImageView"

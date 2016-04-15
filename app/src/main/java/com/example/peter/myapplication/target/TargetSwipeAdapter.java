@@ -1,18 +1,15 @@
 package com.example.peter.myapplication.target;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
-import com.example.peter.myapplication.AdapterCallback;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.TargetDAO;
 import com.example.peter.myapplication.data.TargetEntity;
@@ -26,7 +23,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
     private TargetEntity selectTargetEntity;
     private List<TargetEntity> targetEntityList;
     private TargetDAO targetDAO;
-    private AdapterCallback mAdapterCallback;
+    private TargetSwipeAdapterCallback mTargetSwipeAdapterCallback;
     private LinearLayout blankLinearLayout;
 
     private ImageView targetDoneImageView;
@@ -41,10 +38,10 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         this.targetEntityList = targetEntityList;
     }
 
-    public TargetSwipeAdapter(Context mContext, List<TargetEntity> targetEntityList, AdapterCallback callback) {
+    public TargetSwipeAdapter(Context mContext, List<TargetEntity> targetEntityList, TargetSwipeAdapterCallback callback) {
         this.mContext = mContext;
         this.targetEntityList = targetEntityList;
-        this.mAdapterCallback = callback;
+        this.mTargetSwipeAdapterCallback = callback;
     }
 
 
@@ -83,7 +80,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
                 if (!smallOpen) {
                     layout.close();
                 }
-                mAdapterCallback.onSwipeLayoutStartOpenCallback(layout);
+                mTargetSwipeAdapterCallback.onSwipeLayoutStartOpenCallback(layout);
 
 
             }
@@ -93,9 +90,9 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 //                Toast.makeText(mContext, "Click on onOpen", Toast.LENGTH_SHORT).show();
 //                layout.close();
                 selectTargetEntity = targetEntityList.get(position);
-                mAdapterCallback.onMethodCallback(selectTargetEntity);
+                mTargetSwipeAdapterCallback.onMethodCallback(selectTargetEntity);
 
-                mAdapterCallback.onSwipeLayoutOpenCallback(layout);
+                mTargetSwipeAdapterCallback.onSwipeLayoutOpenCallback(layout);
 
 //                Toast.makeText(mContext, selectTargetEntity.getTargetName(), Toast.LENGTH_SHORT).show();
 //                Log.i("",selectTargetEntity.getTargetName());
@@ -103,13 +100,13 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onStartClose(SwipeLayout layout) {
-                mAdapterCallback.onSwipeLayoutStartCloseCallback(layout);
+                mTargetSwipeAdapterCallback.onSwipeLayoutStartCloseCallback(layout);
 
             }
 
             @Override
             public void onClose(SwipeLayout layout) {
-                mAdapterCallback.onSwipeLayoutCloseCallback(layout);
+                mTargetSwipeAdapterCallback.onSwipeLayoutCloseCallback(layout);
             }
 
             @Override
@@ -148,7 +145,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
             @Override
             public void onClick(View v) {
                 selectTargetEntity = targetEntityList.get(position);
-                mAdapterCallback.onMethodCallback(selectTargetEntity);
+                mTargetSwipeAdapterCallback.onMethodCallback(selectTargetEntity);
 //                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
             }
         });
@@ -162,9 +159,11 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         swipeLayout.findViewById(R.id.laterImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                selectTargetEntity = targetEntityList.get(position);
+//                targetEntityList.remove(selectTargetEntity);
                 selectTargetEntity = targetEntityList.get(position);
-                targetEntityList.remove(selectTargetEntity);
-                mAdapterCallback.onSwipeLayoutStartCloseCallback(swipeLayout);
+                mTargetSwipeAdapterCallback.removeItemOnMethodCallback(selectTargetEntity);
+//                mTargetSwipeAdapterCallback.onSwipeLayoutStartCloseCallback(swipeLayout);
 //                Toast.makeText(mContext, "Star"-0, Toast.LENGTH_SHORT).show();
             }
         });

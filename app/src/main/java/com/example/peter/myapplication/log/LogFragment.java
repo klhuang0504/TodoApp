@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
-import com.example.peter.myapplication.AdapterCallback;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.LogEntity;
@@ -23,7 +22,7 @@ import java.util.Map;
 /**
  * Created by peter on 2016/3/29.
  */
-public class LogFragment extends Fragment implements AdapterCallback {
+public class LogFragment extends Fragment implements LogSwipeAdapterCallback {
 
     private ListView logListView;
     private TargetDAO targetDAO;
@@ -104,6 +103,11 @@ public class LogFragment extends Fragment implements AdapterCallback {
 
     @Override
     public void onMethodCallback(TargetEntity targetEntity) {
+
+    }
+
+    @Override
+    public void removeItemOnMethodCallback(TargetEntity targetEntity) {
 
     }
 

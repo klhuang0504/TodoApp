@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
-import com.example.peter.myapplication.AdapterCallback;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.LogEntity;
 import com.example.peter.myapplication.data.TargetDAO;
@@ -29,7 +28,7 @@ public class LogSwipeAdapter extends BaseSwipeAdapter {
     private ArrayList<TargetEntity> targetEntityList;
 
     private TargetDAO targetDAO;
-    private AdapterCallback mAdapterCallback;
+    private LogSwipeAdapterCallback mAdapterCallback;
 
     private Map<Long, TargetEntity> targetEntityMap;
 
@@ -45,7 +44,7 @@ public class LogSwipeAdapter extends BaseSwipeAdapter {
         this.targetEntityList = targetEntityList;
     }
 
-    public LogSwipeAdapter(Context mContext, ArrayList<LogEntity> logEntityList, ArrayList<TargetEntity> targetEntityList, AdapterCallback callback) {
+    public LogSwipeAdapter(Context mContext, ArrayList<LogEntity> logEntityList, ArrayList<TargetEntity> targetEntityList, LogSwipeAdapterCallback callback) {
         this.mContext = mContext;
         this.logEntityList = logEntityList;
         this.mAdapterCallback = callback;

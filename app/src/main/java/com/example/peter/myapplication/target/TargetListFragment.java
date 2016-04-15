@@ -1,23 +1,17 @@
 package com.example.peter.myapplication.target;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
-import com.example.peter.myapplication.AdapterCallback;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.LogEntity;
@@ -30,13 +24,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
 /**
  * Created by peter on 2016/3/29.
  */
-public class TargetListFragment extends Fragment implements AdapterCallback {
+public class TargetListFragment extends Fragment implements TargetSwipeAdapterCallback {
 
     private ListView targetlistView;
     private TargetDAO targetDAO;
@@ -162,7 +155,15 @@ public class TargetListFragment extends Fragment implements AdapterCallback {
     }
 
     @Override
+    public void removeItemOnMethodCallback(TargetEntity targetEntity) {
+        targetEntityList.remove(targetEntity);
+        targetSwipeAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
     public void onSwipeLayoutStartOpenCallback(SwipeLayout swipeLayout) {
+
 //        targetDoneImageView = (ImageView) swipeLayout.findViewById(R.id.target_done_image);
 //        targetDoneTextView = (TextView) swipeLayout.findViewById(R.id.target_done_textView);
 ////        targetDoneImageView.setImageResource(R.drawable.ic_done_black_48dp);
@@ -216,7 +217,10 @@ public class TargetListFragment extends Fragment implements AdapterCallback {
 
     @Override
     public void onSwipeLayoutStartCloseCallback(SwipeLayout swipeLayout) {
-        targetlistView.
+
+        targetSwipeAdapter.removeShownLayouts(swipeLayout);
+        targetSwipeAdapter.notifyDataSetChanged();
+//        targetSwipeAdapter.notify();
 //        targetDoneImageView = (ImageView) swipeLayout.findViewById(R.id.target_done_image);
 //        targetDoneTextView = (TextView) swipeLayout.findViewById(R.id.target_done_textView);
 //        targetDoneImageView.setImageResource(R.drawable.ic_done_black_48dp);
