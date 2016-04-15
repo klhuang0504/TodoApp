@@ -14,13 +14,15 @@ import com.roughike.bottombar.BottomBar;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 
-public class MainActivity extends MaterialNavigationDrawer {
+public class MainActivity extends MaterialNavigationDrawer implements BackHandledFragment.BackHandlerInterface, FrontPageFragment.CallbackInterface {
 
     private BottomBar mBottomBar;
     private UserDAO userDAO;
     private UserEntity user;
     private LogDAO logDAO;
     private TargetDAO targetDAO;
+    private BackHandledFragment selectedFragment;
+
 
     @Override
     public void init(Bundle savedInstanceState) {
@@ -135,5 +137,33 @@ public class MainActivity extends MaterialNavigationDrawer {
                         android.R.animator.fade_out)
                 .replace(R.id.layout_container, fragment).addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if(selectedFragment == null || selectedFragment.onBackPressedFlag())//check if the onBackPressedFlag is true or false to manage fragments' backPressed
+        {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void setSelectedFragment(BackHandledFragment backHandledFragment) {
+        this.selectedFragment = backHandledFragment;
+
+    }
+
+    @Override
+    public void updateContentView_By_Fragment01(FrontPageFragment status) {
+        if(status == FrontPageFragment.Action01)
+        {
+            switchFragment(new Fragment02());
+        }
+        else if((status == ViewStatus_Fragment01.Action02))
+        {
+            switchFragment(new Fragment03());
+        }
+
     }
 }

@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.peter.myapplication.BackHandledFragment;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.TargetDAO;
 import com.example.peter.myapplication.data.TargetEntity;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * Created by peter on 2016/3/29.
  */
-public class FrontPageFragment extends Fragment {
+public class FrontPageFragment extends BackHandledFragment {
 
     private TargetDAO targetDAO;
     private List<TargetEntity> goodTargetList;
@@ -43,6 +44,27 @@ public class FrontPageFragment extends Fragment {
     private TextView userPointTextView;
     private LinearLayout addTargetPointLinearLayout,addTargetButtonLinearLayout;
 
+    public enum ViewStatus_FrontPageFragment
+    {
+        Action01, Action02;
+    }
+
+    private CallbackInterface mCallback;
+    public interface CallbackInterface
+    {
+        public void updateContentView_By_Fragment01(FrontPageFragment status);
+    };
+
+    @Override
+    public String getTagText() {
+        return (String) this.getTag();
+    }
+
+    @Override
+    public boolean onBackPressedFlag() {
+        return false;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +75,8 @@ public class FrontPageFragment extends Fragment {
         userEntity = (UserEntity) bundle.getSerializable("userEntity");
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE);
     }
+
+
 
     private void addTargetReward(int attributes) {
         if (targetNameEditText == null || targetNameEditText.getText() == null || targetNameEditText.getText().toString().trim().equals("")) {
@@ -251,6 +275,8 @@ public class FrontPageFragment extends Fragment {
                 }
             }
         });
+
+
 
         return view;
     }
