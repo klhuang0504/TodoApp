@@ -1,13 +1,11 @@
 package com.example.peter.myapplication.frontpage;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,24 +42,16 @@ public class FrontPageFragment extends BackHandledFragment {
     private TextView userPointTextView;
     private LinearLayout addTargetPointLinearLayout,addTargetButtonLinearLayout;
 
-    public enum ViewStatus_FrontPageFragment
-    {
-        Action01, Action02;
-    }
 
-    private CallbackInterface mCallback;
-    public interface CallbackInterface
-    {
-        public void updateContentView_By_Fragment01(FrontPageFragment status);
-    };
+    private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisVisible;
 
     @Override
     public String getTagText() {
-        return (String) this.getTag();
+        return null;
     }
 
     @Override
-    public boolean onBackPressedFlag() {
+    public boolean onBackPressed() {
         return false;
     }
 
@@ -206,12 +196,14 @@ public class FrontPageFragment extends BackHandledFragment {
                 menuMultipleActions.collapse();
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 0, 255, 0));
                 addTodoTaskLayout.setVisibility(View.VISIBLE);
+                addTodoTaskLayoutIsVisVisible = true;
                 addTodoTaskEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 addTodoTaskEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         addTodoTaskLayout.setVisibility(View.INVISIBLE);
+                        addTodoTaskLayoutIsVisVisible = false;
                         addTodoTaskEditText.setText("");
                         Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();
                         return false;
@@ -280,4 +272,20 @@ public class FrontPageFragment extends BackHandledFragment {
 
         return view;
     }
+
+    public boolean addTodoTaskLayoutIsShow(){
+        return addTodoTaskLayoutIsVisVisible;
+    }
+
+    public void setAddTodoTaskLayoutVisVisible(boolean addTodoTaskLayoutIsVisVisible) {
+        if(addTodoTaskLayoutIsVisVisible){
+            addTodoTaskLayout.setVisibility(View.VISIBLE);
+
+        }else{
+            addTodoTaskLayout.setVisibility(View.INVISIBLE);
+            addTodoTaskEditText.setText("");
+        }
+        this.addTodoTaskLayoutIsVisVisible = addTodoTaskLayoutIsVisVisible;
+    }
+
 }
