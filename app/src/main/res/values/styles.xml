@@ -40,9 +40,9 @@
 
     <!-- Mocked Account -->
     <style name="MockedAccountLight" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
-        <item name="colorPrimary">#8bc34a</item>
-        <item name="colorPrimaryDark">#558b2f</item>
-        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="singleAccount">true</item><!-- Remove the change account button -->
     </style>
 
