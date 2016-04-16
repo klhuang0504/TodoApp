@@ -288,4 +288,6 @@ public class FrontPageFragment extends BackHandledFragment {
         this.addTodoTaskLayoutIsVisVisible = addTodoTaskLayoutIsVisVisible;
     }
 
-}
+
+
+    }

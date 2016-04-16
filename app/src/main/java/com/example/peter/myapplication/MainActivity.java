@@ -2,6 +2,7 @@ package com.example.peter.myapplication;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.TargetDAO;
@@ -10,13 +11,14 @@ import com.example.peter.myapplication.data.UserEntity;
 import com.example.peter.myapplication.frontpage.FrontPageFragment;
 import com.example.peter.myapplication.log.LogFragment;
 import com.example.peter.myapplication.target.TargetListFragment;
-import com.roughike.bottombar.BottomBar;
+//import com.roughike.bottombar.BottomBar;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
+import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 
 public class MainActivity extends MaterialNavigationDrawer implements BackHandledFragment.BackHandlerInterface {
 
-    private BottomBar mBottomBar;
+//    private BottomBar mBottomBar;
     private UserDAO userDAO;
     private UserEntity user;
     private LogDAO logDAO;
@@ -24,12 +26,14 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
     private FrontPageFragment frontPageFragment;
     private TargetListFragment goodTargetListFragment, badTargetListFragment, rewardListFragment;
     private LogFragment logFragment;
+    MaterialSection frontPageMaterialSection;
 
     private BackHandledFragment selectedFragment;
 
     @Override
     public void init(Bundle savedInstanceState) {
-
+        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_CUSTOM);
+        this.disableLearningPattern();
         userDAO = new UserDAO(getApplicationContext());
         if (userDAO.getCount() == 0) {
             userDAO.sample();
@@ -53,7 +57,8 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         frontPageFragmentBundle.putSerializable("userEntity", user);
         frontPageFragment = new FrontPageFragment();
         frontPageFragment.setArguments(frontPageFragmentBundle);
-        this.addSection(newSection("首頁", frontPageFragment));
+        frontPageMaterialSection = newSection("首頁", frontPageFragment);
+        this.addSection(frontPageMaterialSection);
         this.addDivisor();
         goodTargetListFragment = new TargetListFragment();
         Bundle goodTargetListFragmentBundle = new Bundle();
@@ -93,28 +98,52 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
                 .commit();
     }
 
+
     @Override
-    public void onBackPressed() {
-        if(selectedFragment.equals(frontPageFragment) && frontPageFragment.addTodoTaskLayoutIsShow()) {
+    protected MaterialSection backToSection(MaterialSection currentSection) {
+        // example of use:
+        if(currentSection == frontPageMaterialSection && frontPageFragment.addTodoTaskLayoutIsShow()) {
             frontPageFragment.setAddTodoTaskLayoutVisVisible(false);
-//        } else if(selectedFragment.equals(fragmentA) && fragmentA.isShowingLoginView()) {
-//            fragmentA.hideLoginView();
-//        } else if(selectedFragment.equals(fragmentA)) {
-//            popBackStack();
-//        } else if(selectedFragment.equals(fragmentB) && fragmentB.hasCondition1()) {
-//            fragmentB.reverseCondition1();
-//        } else if(selectedFragment.equals(fragmentB) && fragmentB.hasCondition2()) {
-//            fragmentB.reverseCondition2();
-//        } else if(selectedFragment.equals(fragmentB)) {
-//            popBackStack();
-        } else {
-            // handle by activity
-            super.onBackPressed();
+            return super.backToSection(currentSection);
         }
+
+//        if(currentSection == last) {
+//            return section1;
+//        }
+        return super.backToSection(currentSection);
     }
 
     @Override
-    public void setSelectedFragment(BackHandledFragment backHandledFragment) {
+    public void onBackPressed() {
+        if(selectedFragment == null || !selectedFragment.onBackPressed()){
+            super.onBackPressed();
+        }else if(selectedFragment.equals(frontPageFragment) && frontPageFragment.addTodoTaskLayoutIsShow()) {
+            frontPageFragment.setAddTodoTaskLayoutVisVisible(false);
+        }else{
+            super.onBackPressed();
+        }
+
+
+//        super.onBackPressed();
+//            frontPageFragment.setAddTodoTaskLayoutVisVisible(false);
+////        } else if(selectedFragment.equals(fragmentA) && fragmentA.isShowingLoginView()) {
+////            fragmentA.hideLoginView();
+////        } else if(selectedFragment.equals(fragmentA)) {
+////            popBackStack();
+////        } else if(selectedFragment.equals(fragmentB) && fragmentB.hasCondition1()) {
+////            fragmentB.reverseCondition1();
+////        } else if(selectedFragment.equals(fragmentB) && fragmentB.hasCondition2()) {
+////            fragmentB.reverseCondition2();
+////        } else if(selectedFragment.equals(fragmentB)) {
+////            popBackStack();
+//        } else {
+//            // handle by activity
+//            super.onBackPressed();
+//        }
+    }
+
+    @Override
+    public void setSelectedFragment(BackHandledFragment selectedFragment) {
         this.selectedFragment = selectedFragment;
     }
 
