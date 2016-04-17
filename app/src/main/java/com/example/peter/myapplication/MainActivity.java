@@ -2,7 +2,6 @@ package com.example.peter.myapplication;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.TargetDAO;
@@ -18,7 +17,7 @@ import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 
 public class MainActivity extends MaterialNavigationDrawer implements BackHandledFragment.BackHandlerInterface {
 
-//    private BottomBar mBottomBar;
+    //    private BottomBar mBottomBar;
     private UserDAO userDAO;
     private UserEntity user;
     private LogDAO logDAO;
@@ -26,13 +25,15 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
     private FrontPageFragment frontPageFragment;
     private TargetListFragment goodTargetListFragment, badTargetListFragment, rewardListFragment;
     private LogFragment logFragment;
-    MaterialSection frontPageMaterialSection;
+    MaterialSection frontPageMaterialSection, goodTargetListSection, badTargetListSection, rewardListSection;
 
     private BackHandledFragment selectedFragment;
 
     @Override
     public void init(Bundle savedInstanceState) {
-        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_CUSTOM);
+//        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_CUSTOM);
+        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
+
         this.disableLearningPattern();
         userDAO = new UserDAO(getApplicationContext());
         if (userDAO.getCount() == 0) {
@@ -65,13 +66,15 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         goodTargetListFragmentBundle.putSerializable("userEntity", user);
         goodTargetListFragmentBundle.putInt("targetAttributes", 0);
         goodTargetListFragment.setArguments(goodTargetListFragmentBundle);
-        this.addSection(newSection("好習慣", goodTargetListFragment));
+        goodTargetListSection = newSection("好習慣", goodTargetListFragment);
+        this.addSection(goodTargetListSection);
         badTargetListFragment = new TargetListFragment();
         Bundle badTargetListFragmentBundle = new Bundle();
         goodTargetListFragmentBundle.putSerializable("userEntity", user);
         badTargetListFragmentBundle.putInt("targetAttributes", 1);
         badTargetListFragment.setArguments(badTargetListFragmentBundle);
-        this.addSection(newSection("壞習慣", badTargetListFragment));
+        badTargetListSection = newSection("壞習慣", badTargetListFragment);
+        this.addSection(badTargetListSection);
         this.addDivisor();
         rewardListFragment = new TargetListFragment();
         Bundle RewardListFragmentBundle = new Bundle();
@@ -98,48 +101,19 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
                 .commit();
     }
 
-
-    @Override
-    protected MaterialSection backToSection(MaterialSection currentSection) {
-        // example of use:
-        if(currentSection == frontPageMaterialSection && frontPageFragment.addTodoTaskLayoutIsShow()) {
-            frontPageFragment.setAddTodoTaskLayoutVisVisible(false);
-            return super.backToSection(currentSection);
-        }
-
-//        if(currentSection == last) {
-//            return section1;
-//        }
-        return super.backToSection(currentSection);
-    }
-
     @Override
     public void onBackPressed() {
-        if(selectedFragment == null || !selectedFragment.onBackPressed()){
+        if (selectedFragment == null || !selectedFragment.onBackPressed()) {
             super.onBackPressed();
-        }else if(selectedFragment.equals(frontPageFragment) && frontPageFragment.addTodoTaskLayoutIsShow()) {
-            frontPageFragment.setAddTodoTaskLayoutVisVisible(false);
-        }else{
+        } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isFloatingActionsMenuOpen()) {
+            frontPageFragment.setFloatingActionsMenuOpen(false);
+        } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isAddTodoTaskLayoutisVisible()) {
+            frontPageFragment.setAddTodoTaskLayoutVisible(false);
+        } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isAddTargetLayoutIsVisible()) {
+            frontPageFragment.setAddTargetLayoutVisible(false);
+        } else {
             super.onBackPressed();
         }
-
-
-//        super.onBackPressed();
-//            frontPageFragment.setAddTodoTaskLayoutVisVisible(false);
-////        } else if(selectedFragment.equals(fragmentA) && fragmentA.isShowingLoginView()) {
-////            fragmentA.hideLoginView();
-////        } else if(selectedFragment.equals(fragmentA)) {
-////            popBackStack();
-////        } else if(selectedFragment.equals(fragmentB) && fragmentB.hasCondition1()) {
-////            fragmentB.reverseCondition1();
-////        } else if(selectedFragment.equals(fragmentB) && fragmentB.hasCondition2()) {
-////            fragmentB.reverseCondition2();
-////        } else if(selectedFragment.equals(fragmentB)) {
-////            popBackStack();
-//        } else {
-//            // handle by activity
-//            super.onBackPressed();
-//        }
     }
 
     @Override

@@ -40,10 +40,11 @@ public class FrontPageFragment extends BackHandledFragment {
     private Button addGoodTargetButton, addBadTargetButton, addRewardButton;
     private InputMethodManager inputMethodManager;
     private TextView userPointTextView;
-    private LinearLayout addTargetPointLinearLayout,addTargetButtonLinearLayout;
+    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout;
+    private FloatingActionsMenu menuMultipleActions;
 
 
-    private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisVisible;
+    private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisible, floatingActionsMenuIsOpen;
 
     @Override
     public String getTagText() {
@@ -52,7 +53,7 @@ public class FrontPageFragment extends BackHandledFragment {
 
     @Override
     public boolean onBackPressed() {
-        return false;
+        return true;
     }
 
     @Override
@@ -61,11 +62,15 @@ public class FrontPageFragment extends BackHandledFragment {
         targetDAO = new TargetDAO(getActivity());
         userDAO = new UserDAO(getActivity());
 
+        addTodoTaskLayoutIsVisVisible = false;
+        addTargetLayoutIsVisible = false;
+        floatingActionsMenuIsOpen = false;
+
+
         Bundle bundle = getArguments();
         userEntity = (UserEntity) bundle.getSerializable("userEntity");
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE);
     }
-
 
 
     private void addTargetReward(int attributes) {
@@ -122,6 +127,7 @@ public class FrontPageFragment extends BackHandledFragment {
             @Override
             public void onClick(View v) {
                 addTargetReward(0);
+                setAddTargetLayoutVisible(false);
             }
         });
 
@@ -129,6 +135,7 @@ public class FrontPageFragment extends BackHandledFragment {
             @Override
             public void onClick(View v) {
                 addTargetReward(1);
+                setAddTargetLayoutVisible(false);
             }
         });
 
@@ -136,24 +143,27 @@ public class FrontPageFragment extends BackHandledFragment {
             @Override
             public void onClick(View v) {
                 addTargetReward(2);
+                setAddTargetLayoutVisible(false);
             }
         });
 
 
         floatingActionsMenuLayout = (RelativeLayout) view.findViewById(R.id.floatingActionsMenuLayout);
 
-        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) view.findViewById(R.id.multiple_actions);
+        menuMultipleActions = (FloatingActionsMenu) view.findViewById(R.id.multiple_actions);
         menuMultipleActions.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 255, 255, 255));
                 floatingActionsMenuLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.semi_transparent_background));
+                floatingActionsMenuIsOpen = true;
             }
 
             @Override
             public void onMenuCollapsed() {
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(0, 0, 255, 0));
                 floatingActionsMenuLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.transparent_background));
+                floatingActionsMenuIsOpen = false;
 
             }
         });
@@ -166,6 +176,7 @@ public class FrontPageFragment extends BackHandledFragment {
                 menuMultipleActions.collapse();
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 0, 255, 0));
                 addTargetLayout.setVisibility(View.VISIBLE);
+                addTargetLayoutIsVisible = true;
                 targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 //                targetNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -202,9 +213,10 @@ public class FrontPageFragment extends BackHandledFragment {
                 addTodoTaskEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        addTodoTaskLayout.setVisibility(View.INVISIBLE);
-                        addTodoTaskLayoutIsVisVisible = false;
-                        addTodoTaskEditText.setText("");
+                        setAddTodoTaskLayoutVisible(false);
+//                        addTodoTaskLayout.setVisibility(View.INVISIBLE);
+//                        addTodoTaskLayoutIsVisVisible = false;
+//                        addTodoTaskEditText.setText("");
                         Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -269,25 +281,52 @@ public class FrontPageFragment extends BackHandledFragment {
         });
 
 
-
         return view;
     }
 
-    public boolean addTodoTaskLayoutIsShow(){
+    public boolean isAddTodoTaskLayoutisVisible() {
         return addTodoTaskLayoutIsVisVisible;
     }
 
-    public void setAddTodoTaskLayoutVisVisible(boolean addTodoTaskLayoutIsVisVisible) {
-        if(addTodoTaskLayoutIsVisVisible){
+    public boolean isAddTargetLayoutIsVisible() {
+        return addTargetLayoutIsVisible;
+    }
+
+    public boolean isFloatingActionsMenuOpen() {
+        return floatingActionsMenuIsOpen;
+    }
+
+    public void setAddTodoTaskLayoutVisible(boolean visible) {
+        if (visible) {
             addTodoTaskLayout.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
             addTodoTaskLayout.setVisibility(View.INVISIBLE);
             addTodoTaskEditText.setText("");
         }
-        this.addTodoTaskLayoutIsVisVisible = addTodoTaskLayoutIsVisVisible;
+        this.addTodoTaskLayoutIsVisVisible = visible;
+    }
+
+    public void setAddTargetLayoutVisible(boolean visible) {
+        if (visible) {
+            addTargetLayout.setVisibility(View.VISIBLE);
+
+        } else {
+            addTargetLayout.setVisibility(View.INVISIBLE);
+            targetNameEditText.setText("");
+            pointEditText.setText("");
+        }
+        addTargetLayoutIsVisible = visible;
+    }
+
+    public void setFloatingActionsMenuOpen(boolean open){
+        if(open){
+
+        }else{
+            menuMultipleActions.collapse();
+
+        }
     }
 
 
-
-    }
+}
