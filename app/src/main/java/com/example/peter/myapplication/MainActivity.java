@@ -11,6 +11,7 @@ import com.example.peter.myapplication.frontpage.FrontPageFragment;
 import com.example.peter.myapplication.log.LogFragment;
 import com.example.peter.myapplication.target.TargetListFragment;
 //import com.roughike.bottombar.BottomBar;
+import com.facebook.FacebookSdk;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
@@ -33,6 +34,8 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
     public void init(Bundle savedInstanceState) {
 //        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_CUSTOM);
         this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
 
         this.disableLearningPattern();
         userDAO = new UserDAO(getApplicationContext());
