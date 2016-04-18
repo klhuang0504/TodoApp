@@ -2,6 +2,7 @@ package com.example.peter.myapplication.frontpage;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.example.peter.myapplication.data.UserEntity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -43,7 +46,6 @@ public class FrontPageFragment extends BackHandledFragment {
     private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout;
     private FloatingActionsMenu menuMultipleActions;
 
-
     private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisible, floatingActionsMenuIsOpen;
 
     @Override
@@ -59,6 +61,8 @@ public class FrontPageFragment extends BackHandledFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         targetDAO = new TargetDAO(getActivity());
         userDAO = new UserDAO(getActivity());
 
@@ -279,6 +283,7 @@ public class FrontPageFragment extends BackHandledFragment {
                 }
             }
         });
+
 
 
         return view;
