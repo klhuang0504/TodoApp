@@ -3,6 +3,8 @@ package com.example.peter.myapplication;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import org.json.JSONObject;
+
 /**
  * Created by peter on 2016/4/16.
  */
@@ -31,5 +33,7 @@ public abstract class BackHandledFragment extends Fragment {
 
     public interface BackHandlerInterface {
         public void setSelectedFragment(BackHandledFragment backHandledFragment);
+//        public void onFacebookLoginSuccess(JSONObject object);
+
     }
 }

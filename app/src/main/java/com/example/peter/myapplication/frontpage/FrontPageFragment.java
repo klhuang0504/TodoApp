@@ -326,7 +326,7 @@ public class FrontPageFragment extends BackHandledFragment {
 
     public void setFloatingActionsMenuOpen(boolean open){
         if(open){
-
+            menuMultipleActions.expand();
         }else{
             menuMultipleActions.collapse();
 
