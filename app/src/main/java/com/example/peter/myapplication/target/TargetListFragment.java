@@ -1,17 +1,25 @@
 package com.example.peter.myapplication.target;
 
+import android.Manifest;
 import android.app.Fragment;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
+import com.example.peter.myapplication.FileUtil;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.LogEntity;
@@ -20,11 +28,13 @@ import com.example.peter.myapplication.data.TargetEntity;
 import com.example.peter.myapplication.data.UserDAO;
 import com.example.peter.myapplication.data.UserEntity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static android.graphics.Color.WHITE;
+import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 /**
  * Created by peter on 2016/3/29.
@@ -44,6 +54,8 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     private LogDAO logDAO;
 
     private int targetAttributes;
+
+
 
 
     @Override
@@ -89,6 +101,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         targetlistView = (ListView) view.findViewById(R.id.goodTargetListView);
         targetSwipeAdapter.setMode(Attributes.Mode.Single);
         targetlistView.setAdapter(targetSwipeAdapter);
+        // 取得顯示照片的ImageView元件
 
 //        targetlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -255,4 +268,6 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
 //        colorAnimation.setDuration(3000); //設定速度
 //        colorAnimation.start();
     }
+
+
 }

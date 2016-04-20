@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_target_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/semi_transparent_background"
     android:orientation="vertical"
-    android:id="@+id/add_target_layout"
     android:visibility="invisible">
 
     <LinearLayout
@@ -18,21 +18,21 @@
             android:id="@+id/targetTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/pointEditText"
             android:text="名稱"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:nextFocusDown="@+id/pointEditText" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/targetNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
             android:hint="可輸入想養成或戒掉的習慣 ex:跑步、看書、賴床、消夜....."
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:singleLine="true"
-            android:focusable="true"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:singleLine="true" />
         />
     </LinearLayout>
 
@@ -40,8 +40,8 @@
         android:id="@+id/addTargetPointLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/white"
+        android:orientation="horizontal"
         android:weightSum="1">
 
         <TextView
@@ -56,39 +56,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
             android:imeOptions="actionDone"
+            android:inputType="number"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
 
     </LinearLayout>
 
     <!--<LinearLayout-->
-        <!--android:id="@+id/addTargetButtonLinearLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/white"-->
-        <!--android:orientation="horizontal">-->
+    <!--android:id="@+id/addTargetButtonLinearLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/white"-->
+    <!--android:orientation="horizontal">-->
 
-        <!--<Button-->
-            <!--android:id="@+id/addGoodTargetButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="新增好習慣" />-->
-
-
-        <!--<Button-->
-            <!--android:id="@+id/addBadTargetButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="新增壞習慣" />-->
+    <!--<Button-->
+    <!--android:id="@+id/addGoodTargetButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="新增好習慣" />-->
 
 
-        <!--<Button-->
-            <!--android:id="@+id/addRewardButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="新增獎勵" />-->
+    <!--<Button-->
+    <!--android:id="@+id/addBadTargetButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="新增壞習慣" />-->
+
+
+    <!--<Button-->
+    <!--android:id="@+id/addRewardButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="新增獎勵" />-->
     <!--</LinearLayout>-->
+
+    <Button
+        android:id="@+id/tackPictureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拍照" />
+
+    <Button
+        android:id="@+id/selectPictureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="選擇照片" />
+
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
 
 </LinearLayout>
