@@ -62,10 +62,10 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         targetSwipeAdapter = new TargetSwipeAdapter(getActivity(), targetEntityList, this);
     }
 
-    public void processGoodTarget(View view) {
-        userEntity.setUserPoint(userEntity.getUserPoint() + selectTargetEntity.getPoint());
-        userDAO.update(userEntity);
-    }
+//    public void processGoodTarget(View view) {
+//        userEntity.setUserPoint(userEntity.getUserPoint() + selectTargetEntity.getPoint());
+//        userDAO.update(userEntity);
+//    }
 
 
     public ArrayList<TargetEntity> getTargetEntityList(int targetAttributes) {

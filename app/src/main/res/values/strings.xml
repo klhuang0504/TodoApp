@@ -15,7 +15,10 @@
     <string name="reward">獎勵</string>
     <string name="log">記錄</string>
 
-    <string name="add_target">新增習慣/獎勵</string>
+    <string name="add_goodTarget">新增好習慣</string>
+    <string name="add_badTarget">新增壞習慣</string>
+    <string name="add_reward">新增獎勵</string>
+
     <string name="add_todo_task">新增待辦事項</string>
 
     <string name="drawer_open">Open navigation drawer</string>

@@ -113,7 +113,7 @@ public class FrontPageFragment extends BackHandledFragment {
         addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
         addTargetLayout = (LinearLayout) view.findViewById(R.id.add_target_layout);
         addTargetPointLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetPointLinearLayout);
-        addTargetButtonLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonLinearLayout);
+//        addTargetButtonLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonLinearLayout);
 
 
         addTodoTaskEditText = (EditText) view.findViewById(R.id.addTodoTaskEditText);
@@ -123,33 +123,33 @@ public class FrontPageFragment extends BackHandledFragment {
         userPointTextView = (TextView) view.findViewById(R.id.userPointTextView);
         userPointTextView.setText(String.valueOf(userEntity.getUserPoint()));
 
-        addGoodTargetButton = (Button) view.findViewById(R.id.addGoodTargetButton);
-        addBadTargetButton = (Button) view.findViewById(R.id.addBadTargetButton);
-        addRewardButton = (Button) view.findViewById(R.id.addRewardButton);
+//        addGoodTargetButton = (Button) view.findViewById(R.id.addGoodTargetButton);
+//        addBadTargetButton = (Button) view.findViewById(R.id.addBadTargetButton);
+//        addRewardButton = (Button) view.findViewById(R.id.addRewardButton);
 
-        addGoodTargetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addTargetReward(0);
-                setAddTargetLayoutVisible(false);
-            }
-        });
-
-        addBadTargetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addTargetReward(1);
-                setAddTargetLayoutVisible(false);
-            }
-        });
-
-        addRewardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addTargetReward(2);
-                setAddTargetLayoutVisible(false);
-            }
-        });
+//        addGoodTargetButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                addTargetReward(0);
+//                setAddTargetLayoutVisible(false);
+//            }
+//        });
+//
+//        addBadTargetButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                addTargetReward(1);
+//                setAddTargetLayoutVisible(false);
+//            }
+//        });
+//
+//        addRewardButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                addTargetReward(2);
+//                setAddTargetLayoutVisible(false);
+//            }
+//        });
 
 
         floatingActionsMenuLayout = (RelativeLayout) view.findViewById(R.id.floatingActionsMenuLayout);
@@ -172,11 +172,11 @@ public class FrontPageFragment extends BackHandledFragment {
             }
         });
 
-        final FloatingActionButton addTargetButton = (FloatingActionButton) view.findViewById(R.id.add_target);
-        addTargetButton.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionButton addGoodTargetButton = (FloatingActionButton) view.findViewById(R.id.add_goodTarget);
+        addGoodTargetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                addTargetButton.setTitle("Action A clicked");
+//                addGoodTargetButton.setTitle("Action A clicked");
                 menuMultipleActions.collapse();
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 0, 255, 0));
                 addTargetLayout.setVisibility(View.VISIBLE);
@@ -201,6 +201,54 @@ public class FrontPageFragment extends BackHandledFragment {
 //                        return false;
 //                    }
 //                });
+                pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        addTargetReward(0);
+                        setAddTargetLayoutVisible(false);
+                        return false;
+                    }
+                });
+            }
+        });
+
+        final FloatingActionButton addBadTargetButton = (FloatingActionButton) view.findViewById(R.id.add_badTarget);
+        addBadTargetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuMultipleActions.collapse();
+                addTargetLayout.setVisibility(View.VISIBLE);
+                addTargetLayoutIsVisible = true;
+                targetNameEditText.requestFocus();
+                ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        addTargetReward(1);
+                        setAddTargetLayoutVisible(false);
+                        return false;
+                    }
+                });
+            }
+        });
+
+        final FloatingActionButton addRewardButton = (FloatingActionButton) view.findViewById(R.id.add_reward);
+        addRewardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuMultipleActions.collapse();
+                addTargetLayout.setVisibility(View.VISIBLE);
+                addTargetLayoutIsVisible = true;
+                targetNameEditText.requestFocus();
+                ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        addTargetReward(2);
+                        setAddTargetLayoutVisible(false);
+                        return false;
+                    }
+                });
             }
         });
 
@@ -218,15 +266,14 @@ public class FrontPageFragment extends BackHandledFragment {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         setAddTodoTaskLayoutVisible(false);
-//                        addTodoTaskLayout.setVisibility(View.INVISIBLE);
-//                        addTodoTaskLayoutIsVisVisible = false;
-//                        addTodoTaskEditText.setText("");
                         Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 });
             }
         });
+
+
 
 //        final View addTodoTaskButton = view.findViewById(R.id.add_todo_task);
 //        addTodoTaskButton.setOnClickListener(new View.OnClickListener() {

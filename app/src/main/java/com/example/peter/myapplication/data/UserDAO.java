@@ -21,6 +21,8 @@ public class UserDAO {
 
     // 其它表格欄位名稱
     public static final String USER_NAME = "userName";
+    public static final String USER_EMAIL = "userEmail";
+    public static final String USER_FBID = "userFbId";
     public static final String PASS_WORD = "passWord";
     public static final String USER_POINT = "userPoint";
 
@@ -30,6 +32,8 @@ public class UserDAO {
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     USER_NAME + " TEXT NOT NULL, " +
+                    USER_EMAIL + " TEXT NOT NULL, " +
+                    USER_FBID + " TEXT, " +
                     PASS_WORD + " TEXT NOT NULL, " +
                     USER_POINT + " INTEGER NOT NULL) " ;
 
@@ -54,6 +58,8 @@ public class UserDAO {
         // 加入ContentValues物件包裝的新增資料
         // 第一個參數是欄位名稱， 第二個參數是欄位的資料
         cv.put(USER_NAME, userEntity.getUserName());
+        cv.put(USER_EMAIL, userEntity.getUserEmail());
+        cv.put(USER_FBID, userEntity.getUserFbId());
         cv.put(PASS_WORD, userEntity.getPassWord());
         cv.put(USER_POINT, userEntity.getUserPoint());
 
@@ -78,6 +84,8 @@ public class UserDAO {
         // 加入ContentValues物件包裝的修改資料
         // 第一個參數是欄位名稱， 第二個參數是欄位的資料
         cv.put(USER_NAME, item.getUserName());
+        cv.put(USER_EMAIL, item.getUserEmail());
+        cv.put(USER_FBID, item.getUserFbId());
         cv.put(PASS_WORD, item.getPassWord());
         cv.put(USER_POINT, item.getUserPoint());
 
@@ -163,8 +171,10 @@ public class UserDAO {
 
         result.setId(cursor.getLong(0));
         result.setUserName(cursor.getString(1));
-        result.setPassWord(cursor.getString(2));
-        result.setUserPoint(cursor.getInt(3));
+        result.setUserEmail(cursor.getString(2));
+        result.setUserFbId(cursor.getString(3));
+        result.setPassWord(cursor.getString(4));
+        result.setUserPoint(cursor.getInt(5));
 
 
         // 回傳結果
@@ -185,10 +195,10 @@ public class UserDAO {
 
     // 建立範例資料
     public void sample() {
-        UserEntity userEntity1 = new UserEntity(0, "aaa", "111", 0);
-        UserEntity userEntity2 = new UserEntity(0, "bbb", "222", 0);
-        UserEntity userEntity3 = new UserEntity(0, "ccc", "333", 0);
-        UserEntity userEntity4 = new UserEntity(0, "peter", "1234", 0);
+        UserEntity userEntity1 = new UserEntity(0, "aaa","aaa@gmail.com",null, "111", 0);
+        UserEntity userEntity2 = new UserEntity(0, "bbb","bbb@gmail.com",null, "222", 0);
+        UserEntity userEntity3 = new UserEntity(0, "ccc","ccc@gmail.com",null, "333", 0);
+        UserEntity userEntity4 = new UserEntity(0, "peter","ddd@gmail.com",null, "1234", 0);
 
         insert(userEntity1);
         insert(userEntity2);

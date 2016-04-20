@@ -6,6 +6,8 @@ package com.example.peter.myapplication.data;
 public class UserEntity implements java.io.Serializable {
     private long id;
     private String userName;
+    private String userEmail;
+    private String userFbId;
     private String passWord;
     private int userPoint;
 
@@ -13,12 +15,13 @@ public class UserEntity implements java.io.Serializable {
     public UserEntity() {
     }
 
-    public UserEntity(long id, String userName, String passWord, int userPoint) {
+    public UserEntity(long id, String userName, String userEmail, String userFbId, String passWord, int userPoint) {
         this.id = id;
         this.userName = userName;
+        this.userEmail = userEmail;
+        this.userFbId = userFbId;
         this.passWord = passWord;
         this.userPoint = userPoint;
-
     }
 
     public long getId() {
@@ -52,5 +55,22 @@ public class UserEntity implements java.io.Serializable {
 
     public void setUserPoint(int userPoint) {
         this.userPoint = userPoint;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+
+    public String getUserFbId() {
+        return userFbId;
+    }
+
+    public void setUserFbId(String userFbId) {
+        this.userFbId = userFbId;
     }
 }

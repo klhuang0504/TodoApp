@@ -168,12 +168,28 @@
                 android:background="@color/transparent">
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/add_target"
+                    android:id="@+id/add_goodTarget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     fab:fab_colorNormal="@color/white"
                     fab:fab_colorPressed="@color/white_pressed"
-                    fab:fab_title="@string/add_target" />
+                    fab:fab_title="@string/add_goodTarget" />
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_badTarget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/white"
+                    fab:fab_colorPressed="@color/white_pressed"
+                    fab:fab_title="@string/add_badTarget" />
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_reward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/white"
+                    fab:fab_colorPressed="@color/white_pressed"
+                    fab:fab_title="@string/add_reward" />
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/add_todo_task"

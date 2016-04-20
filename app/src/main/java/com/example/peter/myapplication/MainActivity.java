@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.TargetDAO;
@@ -45,10 +46,10 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
     private TargetListFragment goodTargetListFragment, badTargetListFragment, rewardListFragment;
     private LogFragment logFragment;
     private MaterialSection frontPageMaterialSection, goodTargetListSection, badTargetListSection, rewardListSection;
-    private String fbProfilePhotoUrl;
+    private String fbProfilePhotoUrl, fbCoverPhotoUrl;
 
     private BackHandledFragment selectedFragment;
-    private Bitmap fbProfilePhoto;
+    private Bitmap fbProfilePhoto, fbCoverPhoto;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -78,12 +79,12 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
             logDAO.sample();
         }
 
-        MaterialAccount account = new MaterialAccount(this.getResources(), "test", "test@gmail.com", null, null);
+        MaterialAccount account = new MaterialAccount(this.getResources(), user.getUserName(), user.getUserEmail(), null, null);
         this.addAccount(account);
 //        setUsername("");
 //        setUserEmail("peter760504@gmail.com");
 
-        this.addSection(newSection("登入", new LoginFragment()));
+//        this.addSection(newSection("登入", new LoginFragment()));
         Bundle frontPageFragmentBundle = new Bundle();
         frontPageFragmentBundle.putSerializable("userEntity", user);
         frontPageFragment = new FrontPageFragment();
@@ -100,7 +101,7 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         this.addSection(goodTargetListSection);
         badTargetListFragment = new TargetListFragment();
         Bundle badTargetListFragmentBundle = new Bundle();
-        goodTargetListFragmentBundle.putSerializable("userEntity", user);
+        badTargetListFragmentBundle.putSerializable("userEntity", user);
         badTargetListFragmentBundle.putInt("targetAttributes", 1);
         badTargetListFragment.setArguments(badTargetListFragmentBundle);
         badTargetListSection = newSection("壞習慣", badTargetListFragment);
@@ -156,11 +157,15 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         try {
 
             fbProfilePhotoUrl = "https://graph.facebook.com/" + object.getString("id") + "/picture?type=large";
+            fbCoverPhotoUrl = object.getJSONObject("cover").getString("source");
             new Thread(runnable).start();
             this.getCurrentAccount().setTitle(object.getString("name"));
 //            setUsername(object.getString("name"));
             this.getCurrentAccount().setSubTitle(object.getString("email"));
+
+//            String fb_picture_url  = object.getJSONObject("picture").getJSONObject("data").getString("url");
 //            setFirstAccountPhoto();
+//            Log.e("FB", object.getString("source"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -173,6 +178,8 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
             try {
                 fbProfilePhoto = BitmapFactory.decodeStream((InputStream) new URL(fbProfilePhotoUrl).getContent());
                 MainActivity.this.getCurrentAccount().setPhoto(fbProfilePhoto);
+                fbCoverPhoto = BitmapFactory.decodeStream((InputStream) new URL(fbCoverPhotoUrl).getContent());
+                MainActivity.this.getCurrentAccount().setBackground(fbCoverPhoto);
             } catch (IOException e) {
                 e.printStackTrace();
             }

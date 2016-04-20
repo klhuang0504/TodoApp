@@ -18,6 +18,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -84,7 +85,7 @@ public class LoginFragment extends BackHandledFragment {
         View view = inflater.inflate(R.layout.log_in_layout, container, false);
 
         facebookLoginButton = (LoginButton) view.findViewById(R.id.login_button);
-        facebookLoginButton.setReadPermissions(Arrays.asList("email","user_photos","public_profile"));
+        facebookLoginButton.setReadPermissions(Arrays.asList("email", "user_photos", "public_profile"));
         facebookLoginButton.setFragment(this);
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -92,21 +93,33 @@ public class LoginFragment extends BackHandledFragment {
                 AccessToken accessToken = loginResult.getAccessToken();
                 Profile profile = Profile.getCurrentProfile();
 
-                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
+                GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
 //                                try {
-                                    mCallBack.onFacebookLoginSuccess(object);
+                        mCallBack.onFacebookLoginSuccess(object);
 //                                    Toast.makeText(LoginFragment.this.getActivity(), object.getString("name"), Toast.LENGTH_LONG).show();
 //                                } catch (JSONException e) {
 //                                    e.printStackTrace();
 //                                }
-                            }
-                        });
+                    }
+                });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id, name, email, gender, birthday");
+                parameters.putString("fields", "id, name, email, gender, birthday, cover");
                 request.setParameters(parameters);
                 request.executeAsync();
+
+//                new GraphRequest(
+//                        AccessToken.getCurrentAccessToken(),
+//                        "...?fields={fieldname_of_type_CoverPhoto}",
+//                        null,
+//                        HttpMethod.GET,
+//                        new GraphRequest.Callback() {
+//                            public void onCompleted(GraphResponse response) {
+//            /* handle the result */
+//                            }
+//                        }
+//                ).executeAsync();
             }
 
             @Override

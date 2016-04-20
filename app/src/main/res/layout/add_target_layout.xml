@@ -63,32 +63,32 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/addTargetButtonLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/addTargetButtonLinearLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/addGoodTargetButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="新增好習慣" />
-
-
-        <Button
-            android:id="@+id/addBadTargetButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="新增壞習慣" />
+        <!--<Button-->
+            <!--android:id="@+id/addGoodTargetButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="新增好習慣" />-->
 
 
-        <Button
-            android:id="@+id/addRewardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="新增獎勵" />
-    </LinearLayout>
+        <!--<Button-->
+            <!--android:id="@+id/addBadTargetButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="新增壞習慣" />-->
+
+
+        <!--<Button-->
+            <!--android:id="@+id/addRewardButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="新增獎勵" />-->
+    <!--</LinearLayout>-->
 
 </LinearLayout>
