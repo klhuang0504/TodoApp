@@ -21,6 +21,14 @@ public class TargetEntity implements java.io.Serializable {
         this.attributes = attributes;
     }
 
+    public TargetEntity(long id, String targetName, int point, int attributes, String photoFileName) {
+        this.id = id;
+        this.targetName = targetName;
+        this.point = point;
+        this.attributes = attributes;
+        this.photoFileName = photoFileName;
+    }
+
     public long getId() {
         return id;
     }

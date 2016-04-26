@@ -91,23 +91,37 @@
     <!--android:text="新增獎勵" />-->
     <!--</LinearLayout>-->
 
-    <Button
-        android:id="@+id/tackPictureButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="拍照" />
 
-    <Button
-        android:id="@+id/selectPictureButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="選擇照片" />
-
-
-    <ImageView
-        android:id="@+id/picture"
+    <LinearLayout
+        android:id="@+id/photoLinearLayout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible" />
+        android:visibility="invisible" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/tackPictureButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拍照" />
+
+            <Button
+                android:id="@+id/selectPictureButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="選擇照片" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/photoImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+    </LinearLayout>
 
 </LinearLayout>

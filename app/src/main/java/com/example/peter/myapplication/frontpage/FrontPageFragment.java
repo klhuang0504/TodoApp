@@ -2,6 +2,7 @@ package com.example.peter.myapplication.frontpage;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,11 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import static android.support.v4.content.PermissionChecker.checkSelfPermission;
@@ -57,9 +64,11 @@ public class FrontPageFragment extends BackHandledFragment {
     private Button addGoodTargetButton, addBadTargetButton, addRewardButton, tackPictureButton, selectPictureButton;
     private InputMethodManager inputMethodManager;
     private TextView userPointTextView;
-    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout;
+    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout;
     private FloatingActionsMenu menuMultipleActions;
-    private TargetEntity addRewardTargetEntity;
+//    private TargetEntity addRewardTargetEntity;
+    private FileOutputStream outputStream;
+    private TargetEntity targetEntity;
 
 
     private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisible, floatingActionsMenuIsOpen;
@@ -67,7 +76,7 @@ public class FrontPageFragment extends BackHandledFragment {
     // 檔案名稱
     private String fileName;
     // 照片
-    private ImageView picture;
+    private ImageView photoImageView;
     // 寫入外部儲存設備授權請求代碼
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 100;
 
@@ -85,13 +94,14 @@ public class FrontPageFragment extends BackHandledFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addRewardTargetEntity = new TargetEntity();
+//        addRewardTargetEntity = new TargetEntity();
         targetDAO = new TargetDAO(getActivity());
         userDAO = new UserDAO(getActivity());
 
         addTodoTaskLayoutIsVisVisible = false;
         addTargetLayoutIsVisible = false;
         floatingActionsMenuIsOpen = false;
+        targetEntity = new TargetEntity();
 
 
         Bundle bundle = getArguments();
@@ -107,14 +117,19 @@ public class FrontPageFragment extends BackHandledFragment {
         if (pointEditText == null || pointEditText.getText() == null || pointEditText.getText().toString().trim().equals("")) {
             return;
         }
-        addRewardTargetEntity.setTargetName(targetNameEditText.getText().toString());
-        addRewardTargetEntity.setPoint(Integer.parseInt(pointEditText.getText().toString()));
-        addRewardTargetEntity.setAttributes(attributes);
-        TargetEntity targetEntity = new TargetEntity();
+//        addRewardTargetEntity.setTargetName(targetNameEditText.getText().toString());
+//        addRewardTargetEntity.setPoint(Integer.parseInt(pointEditText.getText().toString()));
+//        addRewardTargetEntity.setAttributes(attributes);
+//        addRewardTargetEntity.setPhotoFileName(fileName);
+//        TargetEntity targetEntity = new TargetEntity();
         targetEntity.setTargetName(targetNameEditText.getText().toString());
         targetEntity.setPoint(Integer.parseInt(pointEditText.getText().toString()));
         targetEntity.setAttributes(attributes);
+//        if(targetEntity.getPhotoFileName() != null){
+//
+//        }
         targetDAO.insert(targetEntity);
+        targetEntity = new TargetEntity();
         addTargetLayout.setVisibility(View.INVISIBLE);
         targetNameEditText.setText("");
         pointEditText.setText("");
@@ -149,8 +164,9 @@ public class FrontPageFragment extends BackHandledFragment {
         userPointTextView = (TextView) view.findViewById(R.id.userPointTextView);
         userPointTextView.setText(String.valueOf(userEntity.getUserPoint()));
 
-        picture = (ImageView) view.findViewById(R.id.picture);
+        photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
         tackPictureButton = (Button) view.findViewById(R.id.tackPictureButton);
+        photoLinearLayout = (LinearLayout) view.findViewById(R.id.photoLinearLayout);
 
         tackPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +243,7 @@ public class FrontPageFragment extends BackHandledFragment {
                 menuMultipleActions.collapse();
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 0, 255, 0));
                 addTargetLayout.setVisibility(View.VISIBLE);
-                addRewardTargetEntity = new TargetEntity();
+//                addRewardTargetEntity = new TargetEntity();
                 addTargetLayoutIsVisible = true;
                 targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
@@ -285,6 +301,7 @@ public class FrontPageFragment extends BackHandledFragment {
             @Override
             public void onClick(View view) {
                 menuMultipleActions.collapse();
+                photoLinearLayout.setVisibility(View.VISIBLE);
                 addTargetLayout.setVisibility(View.VISIBLE);
                 addTargetLayoutIsVisible = true;
                 targetNameEditText.requestFocus();
@@ -413,6 +430,7 @@ public class FrontPageFragment extends BackHandledFragment {
             addTargetLayout.setVisibility(View.INVISIBLE);
             targetNameEditText.setText("");
             pointEditText.setText("");
+            photoLinearLayout.setVisibility(View.INVISIBLE);
         }
         addTargetLayoutIsVisible = visible;
     }
@@ -437,13 +455,13 @@ public class FrontPageFragment extends BackHandledFragment {
         // 設定檔案名稱
         intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         // 啟動相機元件
-        startActivityForResult(intentCamera, 0);
+        startActivityForResult(intentCamera, START_CAMERA);
     }
 
     private File configFileName(String prefix, String extension) {
         // 如果記事資料已經有檔案名稱
-        if (addRewardTargetEntity.getPhotoFileName() != null && addRewardTargetEntity.getPhotoFileName().length() > 0) {
-            fileName = addRewardTargetEntity.getPhotoFileName();
+        if (targetEntity.getPhotoFileName() != null && targetEntity.getPhotoFileName().length() > 0) {
+            fileName = targetEntity.getPhotoFileName();
         }
         // 產生檔案名稱
         else {
@@ -503,19 +521,11 @@ public class FrontPageFragment extends BackHandledFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        File file = configFileName("P", ".jpg");
-
-        // 如果照片檔案存在
-        if (file.exists()) {
-            // 顯示照片元件
-            picture.setVisibility(View.VISIBLE);
-            // 設定照片
-            FileUtil.fileToImageView(file.getAbsolutePath(), picture);
-        }
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -525,28 +535,49 @@ public class FrontPageFragment extends BackHandledFragment {
                 // 照像
                 case START_CAMERA:
                     // 設定照片檔案名稱
-                    addRewardTargetEntity.setPhotoFileName(fileName);
+                    targetEntity.setPhotoFileName(fileName);
+                    File file = configFileName("P", ".jpg");
 
+                    // 如果照片檔案存在
+                    if (file.exists()) {
+                        FileUtil.fileToImageView(file.getAbsolutePath(), photoImageView);
+                        photoImageView.setVisibility(View.VISIBLE);
+
+                    }
                     break;
+                //從圖庫選擇
                 case SELECT_PHOTO:
+
                     Uri pickedImage = data.getData();
-                    // Let's read picked image path using content resolver
                     String[] filePath = { MediaStore.Images.Media.DATA };
                     Cursor cursor = getActivity().getContentResolver().query(pickedImage, filePath, null, null, null);
                     cursor.moveToFirst();
                     String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                    Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
-                    picture.setImageBitmap(bitmap);
-                    picture.setVisibility(View.VISIBLE);
-
-                    // Do something with the bitmap
-
-
-                    // At the end remember to close the cursor or you will end with the RuntimeException!
+                    FileUtil.fileToImageView(imagePath, photoImageView);
+                    photoImageView.setVisibility(View.VISIBLE);
                     cursor.close();
+
+//                    BitmapFactory.Options options = new BitmapFactory.Options();
+//                    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//                    Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+//                    photoImageView.setImageBitmap(bitmap);
+
+                    targetEntity.setPhotoFileName(null);
+                    File outputFilePath = configFileName("P", ".jpg");
+                    targetEntity.setPhotoFileName(fileName);
+                    try {
+                        InputStream inputStream = new FileInputStream(imagePath);
+                        OutputStream outputStream = new FileOutputStream(outputFilePath);
+                        byte[] writeData = new byte[inputStream.available()];
+                        inputStream.read(writeData);
+                        outputStream.write(writeData);
+                        inputStream.close();
+                        outputStream.close();
+                    } catch (IOException e) {
+                        Log.w("ExternalStorage", "Error writing " + outputFilePath, e);
+                    }
+
                     break;
             }
         }

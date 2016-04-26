@@ -1,6 +1,8 @@
 package com.example.peter.myapplication.target;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +12,12 @@ import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.example.peter.myapplication.FileUtil;
 import com.example.peter.myapplication.R;
 import com.example.peter.myapplication.data.TargetDAO;
 import com.example.peter.myapplication.data.TargetEntity;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -224,6 +228,15 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         TextView swipeItemTextView = (TextView) convertView.findViewById(R.id.SwipeItemTextView);
 //        t.setText((position + 1) + ".");
         swipeItemTextView.setText(targetEntity.getTargetName() + "  (" + String.valueOf(targetEntity.getPoint()) + "分)");
+        if(targetEntity.getPhotoFileName() != null){
+            File file = new File(FileUtil.getExternalStorageDir(FileUtil.APP_DIR),
+                    "P" + targetEntity.getPhotoFileName() + ".jpg");
+            Drawable drawable = Drawable.createFromPath(file.getAbsolutePath());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                swipeItemTextView.setBackground(drawable);
+            }
+
+        }
     }
 
     @Override
@@ -241,4 +254,5 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         TargetEntity targetEntity = targetEntityList.get(position);
         return targetEntity.getId();
     }
+
 }

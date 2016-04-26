@@ -23,6 +23,7 @@ public class TargetDAO {
     public static final String TARGET_NAME = "targetName";
     public static final String POINT = "point";
     public static final String ATTRIBUTES = "attributes";
+    public static final String PHOTOFILENAME = "photoFileName";
 
     // 使用上面宣告的變數建立表格的SQL指令
     public static final String CREATE_TABLE =
@@ -30,7 +31,8 @@ public class TargetDAO {
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     TARGET_NAME + " TEXT NOT NULL, " +
                     POINT + " INTEGER NOT NULL, " +
-                    ATTRIBUTES + " TEXT NOT NULL) ";
+                    ATTRIBUTES + " TEXT NOT NULL, " +
+                    PHOTOFILENAME + " TEXT ) ";
 
     // 資料庫物件
     private SQLiteDatabase db;
@@ -55,6 +57,8 @@ public class TargetDAO {
         cv.put(TARGET_NAME, targetEntity.getTargetName());
         cv.put(POINT, targetEntity.getPoint());
         cv.put(ATTRIBUTES, targetEntity.getAttributes());
+        cv.put(PHOTOFILENAME, targetEntity.getPhotoFileName());
+
 
         // 新增一筆資料並取得編號
         // 第一個參數是表格名稱
@@ -78,6 +82,7 @@ public class TargetDAO {
         cv.put(TARGET_NAME, targetEntity.getTargetName());
         cv.put(POINT, targetEntity.getPoint());
         cv.put(ATTRIBUTES, targetEntity.getAttributes());
+        cv.put(PHOTOFILENAME, targetEntity.getPhotoFileName());
 
 
         // 設定修改資料的條件為編號
@@ -163,6 +168,8 @@ public class TargetDAO {
         result.setTargetName(cursor.getString(1));
         result.setPoint(cursor.getInt(2));
         result.setAttributes(cursor.getInt(3));
+        result.setPhotoFileName(cursor.getString(4));
+
 
         // 回傳結果
         return result;

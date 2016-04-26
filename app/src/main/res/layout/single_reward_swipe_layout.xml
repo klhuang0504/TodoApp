@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/buleLight"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/target_done_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="40dp"
+                android:src="@drawable/ic_check_white_48dp"
+                android:clickable="true"
+                android:focusable="true"/>
+            <TextView
+                android:id="@+id/target_done_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Done"
+                android:paddingRight="40dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/plusOneImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/buletobluedark"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_exposure_plus_1_white_48dp"
+            android:longClickable="true"
+            android:focusable="true"
+            android:clickable="true"/>
+
+        <ImageView
+            android:id="@+id/undoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@drawable/buledarktobluedarker"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_undo_white_48dp"
+            android:longClickable="true"
+            android:focusable="true"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper_2"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/laterImageView"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/later_button"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_schedule_white_48dp" />
+
+        <ImageView
+            android:id="@+id/editImageView"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/edit_button"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_mode_edit_white_48dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/SwipeItemTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:tag="Hover"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+
+
+</com.daimajia.swipe.SwipeLayout>
