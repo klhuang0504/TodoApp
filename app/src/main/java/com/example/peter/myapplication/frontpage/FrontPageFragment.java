@@ -69,15 +69,13 @@ public class FrontPageFragment extends BackHandledFragment {
 //    private TargetEntity addRewardTargetEntity;
     private FileOutputStream outputStream;
     private TargetEntity targetEntity;
+    private ImageView addTargetDoneActionImageView, addTargetDeleteActionImageView, addTargetCancelActionImageView, photoImageView;
 
 
     private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisible, floatingActionsMenuIsOpen;
 
     // 檔案名稱
     private String fileName;
-    // 照片
-    private ImageView photoImageView;
-    // 寫入外部儲存設備授權請求代碼
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 100;
 
     @Override
@@ -133,6 +131,7 @@ public class FrontPageFragment extends BackHandledFragment {
         addTargetLayout.setVisibility(View.INVISIBLE);
         targetNameEditText.setText("");
         pointEditText.setText("");
+        photoImageView.setImageBitmap(null);
         closeKeyBoard(pointEditText);
     }
 
@@ -155,7 +154,16 @@ public class FrontPageFragment extends BackHandledFragment {
         addTargetLayout = (LinearLayout) view.findViewById(R.id.add_target_layout);
         addTargetPointLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetPointLinearLayout);
 //        addTargetButtonLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonLinearLayout);
+        addTargetDoneActionImageView = (ImageView) view.findViewById(R.id.done_add_target_button);
+        addTargetDeleteActionImageView = (ImageView) view.findViewById(R.id.delete_add_target_button);
+        addTargetCancelActionImageView = (ImageView) view.findViewById(R.id.cancel_add_target_button);
 
+        addTargetCancelActionImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddTargetLayoutVisible(false);
+            }
+        });
 
         addTodoTaskEditText = (EditText) view.findViewById(R.id.addTodoTaskEditText);
         targetNameEditText = (EditText) view.findViewById(R.id.targetNameEditText);
@@ -273,6 +281,14 @@ public class FrontPageFragment extends BackHandledFragment {
                         return false;
                     }
                 });
+
+                addTargetDoneActionImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addTargetReward(0);
+                        setAddTargetLayoutVisible(false);
+                    }
+                });
             }
         });
 
@@ -291,6 +307,14 @@ public class FrontPageFragment extends BackHandledFragment {
                         addTargetReward(1);
                         setAddTargetLayoutVisible(false);
                         return false;
+                    }
+                });
+
+                addTargetDoneActionImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addTargetReward(1);
+                        setAddTargetLayoutVisible(false);
                     }
                 });
             }
@@ -312,6 +336,14 @@ public class FrontPageFragment extends BackHandledFragment {
                         addTargetReward(2);
                         setAddTargetLayoutVisible(false);
                         return false;
+                    }
+                });
+
+                addTargetDoneActionImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addTargetReward(2);
+                        setAddTargetLayoutVisible(false);
                     }
                 });
             }
@@ -430,6 +462,7 @@ public class FrontPageFragment extends BackHandledFragment {
             addTargetLayout.setVisibility(View.INVISIBLE);
             targetNameEditText.setText("");
             pointEditText.setText("");
+            photoImageView.setImageBitmap(null);
             photoLinearLayout.setVisibility(View.INVISIBLE);
         }
         addTargetLayoutIsVisible = visible;

@@ -97,7 +97,9 @@ public class FileUtil {
     // 讀取指定的照片檔案名稱設定給ImageView元件
     public static void fileToImageView(String fileName, ImageView imageView) {
         if (new File(fileName).exists()) {
-            Bitmap bitmap = BitmapFactory.decodeFile(fileName);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bitmap = BitmapFactory.decodeFile(fileName, options);
             imageView.setImageBitmap(bitmap);
         }
         else {

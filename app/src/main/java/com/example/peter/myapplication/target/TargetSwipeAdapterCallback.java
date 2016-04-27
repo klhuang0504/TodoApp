@@ -9,11 +9,15 @@ import com.example.peter.myapplication.data.TargetEntity;
 public interface TargetSwipeAdapterCallback {
     void onMethodCallback(TargetEntity targetEntity);
     void removeItemOnMethodCallback(TargetEntity targetEntity);
+    void onClickEditButtonCallBack(TargetEntity targetEntity);
+    void onClickDeleteActionButtonCallBack(TargetEntity targetEntity);
+
 
     void onSwipeLayoutStartOpenCallback(SwipeLayout swipeLayout);
     void onSwipeLayoutOpenCallback(SwipeLayout swipeLayout);
     void onSwipeLayoutCloseCallback(SwipeLayout swipeLayout);
     void onSwipeLayoutStartCloseCallback(SwipeLayout swipeLayout);
+
 
 
 }

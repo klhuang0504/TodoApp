@@ -1,6 +1,9 @@
 package com.example.peter.myapplication.target;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -29,6 +32,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
     private TargetDAO targetDAO;
     private TargetSwipeAdapterCallback mTargetSwipeAdapterCallback;
     private LinearLayout blankLinearLayout;
+
 
     private ImageView targetDoneImageView;
     private TextView targetDoneTextView;
@@ -176,8 +180,32 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
             @Override
             public void onClick(View v) {
 //                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
+                mTargetSwipeAdapterCallback.onClickEditButtonCallBack(selectTargetEntity);
             }
         });
+
+//        swipeLayout.findViewById(R.id.done_add_target_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        swipeLayout.findViewById(R.id.delete_add_target_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mTargetSwipeAdapterCallback.onClickDeleteActionButtonCallBack(selectTargetEntity);
+//
+////                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        swipeLayout.findViewById(R.id.cancel_add_target_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
 //
@@ -231,7 +259,11 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         if(targetEntity.getPhotoFileName() != null){
             File file = new File(FileUtil.getExternalStorageDir(FileUtil.APP_DIR),
                     "P" + targetEntity.getPhotoFileName() + ".jpg");
-            Drawable drawable = Drawable.createFromPath(file.getAbsolutePath());
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+            Drawable drawable = new BitmapDrawable(mContext.getResources(), bitmap);
+//            Drawable drawable = Drawable.createFromPath(file.getAbsolutePath());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 swipeItemTextView.setBackground(drawable);
             }
