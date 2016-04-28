@@ -136,26 +136,18 @@ public class LogDAO {
         return logEntity;
     }
 
-    // 取得指定編號的資料物件
-    public LogEntity getByEntityId(int entityId) {
-        // 準備回傳結果用的物件
-        LogEntity logEntity = null;
-        // 使用編號為查詢條件
+    public ArrayList<LogEntity> getListByEntityId(int entityId) {
+        ArrayList<LogEntity> result = new ArrayList<>();
         String where = ENTITY_ID + " = " + entityId;
-        // 執行查詢
-        Cursor result = db.query(
-                TABLE_NAME, null, where, null, null, null, null, null);
 
-        // 如果有查詢結果
-        if (result.moveToFirst()) {
-            // 讀取包裝一筆資料的物件
-            logEntity = getRecord(result);
+        Cursor cursor = db.query(TABLE_NAME, null, where, null, null, null, DATE + " DESC", null);
+
+        while (cursor.moveToNext()) {
+            result.add(getRecord(cursor));
         }
 
-        // 關閉Cursor物件
-        result.close();
-        // 回傳結果
-        return logEntity;
+        cursor.close();
+        return result;
     }
 
     // 把Cursor目前的資料包裝為物件

@@ -9,18 +9,18 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.example.peter.myapplication.FileUtil;
 import com.example.peter.myapplication.R;
-import com.example.peter.myapplication.data.TargetDAO;
 import com.example.peter.myapplication.data.TargetEntity;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -29,13 +29,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
     private Context mContext;
     private TargetEntity selectTargetEntity;
     private List<TargetEntity> targetEntityList;
-    private TargetDAO targetDAO;
     private TargetSwipeAdapterCallback mTargetSwipeAdapterCallback;
-    private LinearLayout blankLinearLayout;
-
-
-    private ImageView targetDoneImageView;
-    private TextView targetDoneTextView;
 
     public TargetSwipeAdapter(Context mContext) {
         this.mContext = mContext;
@@ -56,7 +50,6 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
     @Override
     public int getSwipeLayoutResourceId(int position) {
         return R.id.swipe;
-//        return 0;
     }
 
     @Override
@@ -88,18 +81,12 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
                 if (!smallOpen) {
                     layout.close();
                 }
-                mTargetSwipeAdapterCallback.onSwipeLayoutStartOpenCallback(layout);
-
-
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
-//                Toast.makeText(mContext, "Click on onOpen", Toast.LENGTH_SHORT).show();
-//                layout.close();
                 selectTargetEntity = targetEntityList.get(position);
-                mTargetSwipeAdapterCallback.onMethodCallback(selectTargetEntity);
-
+                mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
                 mTargetSwipeAdapterCallback.onSwipeLayoutOpenCallback(layout);
 
 //                Toast.makeText(mContext, selectTargetEntity.getTargetName(), Toast.LENGTH_SHORT).show();
@@ -108,8 +95,7 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onStartClose(SwipeLayout layout) {
-                mTargetSwipeAdapterCallback.onSwipeLayoutStartCloseCallback(layout);
-
+//                mTargetSwipeAdapterCallback.onSwipeLayoutStartCloseCallback(layout);
             }
 
             @Override
@@ -119,8 +105,6 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-//                Log.i("Swipe OnUpdate", String.valueOf(leftOffset));
-
             }
 
             @Override
@@ -153,100 +137,30 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
             @Override
             public void onClick(View v) {
                 selectTargetEntity = targetEntityList.get(position);
-                mTargetSwipeAdapterCallback.onMethodCallback(selectTargetEntity);
-//                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
+                mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
             }
         });
         swipeLayout.findViewById(R.id.undoImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 swipeLayout.close();
-//                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
+                mTargetSwipeAdapterCallback.onClickUndoButtonCallBack(selectTargetEntity);
             }
         });
         swipeLayout.findViewById(R.id.laterImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                selectTargetEntity = targetEntityList.get(position);
-//                targetEntityList.remove(selectTargetEntity);
                 selectTargetEntity = targetEntityList.get(position);
-                mTargetSwipeAdapterCallback.removeItemOnMethodCallback(selectTargetEntity);
-//                mTargetSwipeAdapterCallback.onSwipeLayoutStartCloseCallback(swipeLayout);
-//                Toast.makeText(mContext, "Star"-0, Toast.LENGTH_SHORT).show();
+                mTargetSwipeAdapterCallback.onClickLaterButtonMethodCallback(selectTargetEntity);
             }
         });
 
         swipeLayout.findViewById(R.id.editImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
                 mTargetSwipeAdapterCallback.onClickEditButtonCallBack(selectTargetEntity);
             }
         });
-
-//        swipeLayout.findViewById(R.id.done_add_target_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        swipeLayout.findViewById(R.id.delete_add_target_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mTargetSwipeAdapterCallback.onClickDeleteActionButtonCallBack(selectTargetEntity);
-//
-////                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        swipeLayout.findViewById(R.id.cancel_add_target_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-//
-//        swipeLayout.addRevealListener(R.id.starbott, new SwipeLayout.OnRevealListener() {
-//            @Override
-//            public void onReveal(View child, SwipeLayout.DragEdge edge, float fraction, int distance) {
-//                View star = child.findViewById(R.id.star);
-//                float d = child.getHeight() / 2 - star.getHeight() / 2;
-////                ViewHelper.setTranslationY(star, d * fraction);
-////                ViewHelper.setScaleX(star, fraction + 0.6f);
-////                ViewHelper.setScaleY(star, fraction + 0.6f);
-//            }
-//        });
-//        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
-//            @Override
-//            public void onOpen(SwipeLayout layout) {
-////                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
-//            }
-//        });
-//        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-//            @Override
-//            public void onDoubleClick(SwipeLayout layout, boolean surface) {
-//                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-//        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "click delete", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        View listView = LayoutInflater.from(mContext).inflate(R.layout.target_list_layout, null);
-//
-//        blankLinearLayout = (LinearLayout)listView.findViewById(R.id.blankLinearLayout);
-//        blankLinearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                swipeLayout.close();
-//            }
-//        });
         return v;
     }
 
@@ -254,21 +168,36 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
     public void fillValues(int position, View convertView) {
         TargetEntity targetEntity = targetEntityList.get(position);
         TextView swipeItemTextView = (TextView) convertView.findViewById(R.id.SwipeItemTextView);
-//        t.setText((position + 1) + ".");
         swipeItemTextView.setText(targetEntity.getTargetName() + "  (" + String.valueOf(targetEntity.getPoint()) + "分)");
         if(targetEntity.getPhotoFileName() != null){
             File file = new File(FileUtil.getExternalStorageDir(FileUtil.APP_DIR),
                     "P" + targetEntity.getPhotoFileName() + ".jpg");
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_4444;
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+
+            InputStream inputStream = null;
+            try {
+                inputStream = new FileInputStream(file.getAbsolutePath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, getBitmapOptions(2));
+
+//            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
             Drawable drawable = new BitmapDrawable(mContext.getResources(), bitmap);
 //            Drawable drawable = Drawable.createFromPath(file.getAbsolutePath());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 swipeItemTextView.setBackground(drawable);
             }
-
         }
+    }
+
+    public BitmapFactory.Options getBitmapOptions(int scale){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inPurgeable = true;
+//        options.inInputShareable = true;
+        options.inSampleSize = scale;
+        return options;
     }
 
     @Override

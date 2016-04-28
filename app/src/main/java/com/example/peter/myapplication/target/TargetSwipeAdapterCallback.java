@@ -7,17 +7,15 @@ import com.example.peter.myapplication.data.TargetEntity;
  * Created by peter on 2016/4/11.
  */
 public interface TargetSwipeAdapterCallback {
-    void onMethodCallback(TargetEntity targetEntity);
-    void removeItemOnMethodCallback(TargetEntity targetEntity);
+    void onClickLaterButtonMethodCallback(TargetEntity targetEntity);
     void onClickEditButtonCallBack(TargetEntity targetEntity);
-    void onClickDeleteActionButtonCallBack(TargetEntity targetEntity);
+    void onClickUndoButtonCallBack(TargetEntity targetEntity);
 
 
-    void onSwipeLayoutStartOpenCallback(SwipeLayout swipeLayout);
     void onSwipeLayoutOpenCallback(SwipeLayout swipeLayout);
     void onSwipeLayoutCloseCallback(SwipeLayout swipeLayout);
-    void onSwipeLayoutStartCloseCallback(SwipeLayout swipeLayout);
 
+    void doTarget(TargetEntity targetEntity);
 
 
 }
