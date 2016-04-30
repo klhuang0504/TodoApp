@@ -24,6 +24,7 @@ public class TargetDAO {
     public static final String POINT = "point";
     public static final String ATTRIBUTES = "attributes";
     public static final String PHOTOFILENAME = "photoFileName";
+    public static final String ISDONE = "isDone";
 
     // 使用上面宣告的變數建立表格的SQL指令
     public static final String CREATE_TABLE =
@@ -32,7 +33,8 @@ public class TargetDAO {
                     TARGET_NAME + " TEXT NOT NULL, " +
                     POINT + " INTEGER NOT NULL, " +
                     ATTRIBUTES + " TEXT NOT NULL, " +
-                    PHOTOFILENAME + " TEXT ) ";
+                    PHOTOFILENAME + " TEXT, +" +
+                    ISDONE + " BOOLEAN ) ";
 
     // 資料庫物件
     private SQLiteDatabase db;
@@ -58,6 +60,8 @@ public class TargetDAO {
         cv.put(POINT, targetEntity.getPoint());
         cv.put(ATTRIBUTES, targetEntity.getAttributes());
         cv.put(PHOTOFILENAME, targetEntity.getPhotoFileName());
+        cv.put(ISDONE, targetEntity.isDone());
+
 
 
         // 新增一筆資料並取得編號
@@ -83,6 +87,8 @@ public class TargetDAO {
         cv.put(POINT, targetEntity.getPoint());
         cv.put(ATTRIBUTES, targetEntity.getAttributes());
         cv.put(PHOTOFILENAME, targetEntity.getPhotoFileName());
+        cv.put(ISDONE, targetEntity.isDone());
+
 
 
         // 設定修改資料的條件為編號

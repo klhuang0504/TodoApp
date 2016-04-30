@@ -1,4 +1,4 @@
-package com.example.peter.myapplication.target;
+package com.example.peter.myapplication.todo;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,11 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +32,8 @@ import com.example.peter.myapplication.data.TargetDAO;
 import com.example.peter.myapplication.data.TargetEntity;
 import com.example.peter.myapplication.data.UserDAO;
 import com.example.peter.myapplication.data.UserEntity;
+import com.example.peter.myapplication.target.TargetSwipeAdapter;
+import com.example.peter.myapplication.target.TargetSwipeAdapterCallback;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,7 +42,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -54,17 +51,11 @@ import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 /**
  * Created by peter on 2016/3/29.
  */
-public class TargetListFragment extends Fragment implements TargetSwipeAdapterCallback {
+public class TodoListFragment extends Fragment implements TargetSwipeAdapterCallback {
 
     private static final int SELECT_PHOTO = 0;
     private static final int START_CAMERA = 1;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 100;
-    private static final int[] addPointattributes = {0, 4};
-    private static final int[] lessPointattributes = {2, 3};
-    private static final int todoAttributes = 4;
-
-
-
 
     private TargetDAO targetDAO;
     private UserDAO userDAO;
@@ -202,9 +193,9 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     @Override
     public void onClickUndoButtonCallBack(TargetEntity targetEntity) {
         int attributes = targetEntity.getAttributes();
-        if (Arrays.asList(lessPointattributes).contains(attributes)) {
+        if (attributes > 0) {
             userEntity.setUserPoint(userEntity.getUserPoint() + targetEntity.getPoint());
-        } else if (Arrays.asList(addPointattributes).contains(attributes)){
+        } else {
             userEntity.setUserPoint(userEntity.getUserPoint() - targetEntity.getPoint());
         }
         userDAO.update(userEntity);
@@ -236,13 +227,9 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     @Override
     public void doTarget(TargetEntity targetEntity) {
         int attributes = targetEntity.getAttributes();
-        if(attributes == todoAttributes){
-            targetEntityList.remove(targetEntity);
-            targetSwipeAdapter.notifyDataSetChanged();
-        }
-        if (Arrays.asList(lessPointattributes).contains(attributes)) {
+        if (attributes > 0) {
             userEntity.setUserPoint(userEntity.getUserPoint() - targetEntity.getPoint());
-        } else if(Arrays.asList(addPointattributes).contains(attributes)){
+        } else {
             userEntity.setUserPoint(userEntity.getUserPoint() + targetEntity.getPoint());
         }
         userDAO.update(userEntity);

@@ -9,6 +9,7 @@ public class TargetEntity implements java.io.Serializable {
     private int point;
     private int attributes;
     private String photoFileName;
+    private boolean isDone;
 
 
     public TargetEntity() {
@@ -67,5 +68,13 @@ public class TargetEntity implements java.io.Serializable {
 
     public void setPhotoFileName(String photoFileName) {
         this.photoFileName = photoFileName;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }
