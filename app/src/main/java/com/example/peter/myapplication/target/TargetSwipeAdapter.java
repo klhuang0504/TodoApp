@@ -26,10 +26,14 @@ import java.util.List;
 
 public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
+    private static final int todoAttributes = 3;
+
     private Context mContext;
     private TargetEntity selectTargetEntity;
     private List<TargetEntity> targetEntityList;
     private TargetSwipeAdapterCallback mTargetSwipeAdapterCallback;
+    private int targetAttributes;
+
 
     public TargetSwipeAdapter(Context mContext) {
         this.mContext = mContext;
@@ -44,6 +48,13 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         this.mContext = mContext;
         this.targetEntityList = targetEntityList;
         this.mTargetSwipeAdapterCallback = callback;
+        this.targetAttributes = targetAttributes;
+    }
+
+    public TargetSwipeAdapter(Context mContext, List<TargetEntity> targetEntityList, TargetSwipeAdapterCallback callback, int targetAttributes) {
+        this.mContext = mContext;
+        this.targetEntityList = targetEntityList;
+        this.mTargetSwipeAdapterCallback = callback;
     }
 
 
@@ -54,7 +65,12 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
     @Override
     public View generateView(final int position, ViewGroup parent) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.single_target_swipe_layout, null);
+        View v;
+        if(targetAttributes == todoAttributes){
+            v = LayoutInflater.from(mContext).inflate(R.layout.single_todo_swipe_layout, null);
+        }else{
+            v = LayoutInflater.from(mContext).inflate(R.layout.single_target_swipe_layout, null);
+        }
         final SwipeLayout swipeLayout = (SwipeLayout) v.findViewById(getSwipeLayoutResourceId(position));
         swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 
@@ -137,6 +153,9 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
             @Override
             public void onClick(View v) {
                 selectTargetEntity = targetEntityList.get(position);
+//                if(selectTargetEntity.getAttributes() == todoAttributes){
+//                    return;
+//                }
                 mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
             }
         });

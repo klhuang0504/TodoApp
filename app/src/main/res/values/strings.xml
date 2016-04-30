@@ -27,5 +27,10 @@
     <string name="facebook_app_id">1701962650066716</string>
 
     <string name="write_external_storage_denied">沒有寫入外部儲存設備授權</string>
+    <string name="add_todo_edittext_hint">請輸入待辦事項 ex:買牛奶、倒垃圾...</string>
+    <string name="add_goodtarget_edittext_hint">請輸入想養成的好習慣 ex:跑步、看書...</string>
+    <string name="add_badtarget_edittext_hint">請輸入想改掉的壞習慣 ex:賴床、消夜...</string>
+    <string name="add_reward_edittext_hint">請輸入給自己的獎勵 ex:旅遊、吃大餐...</string>
+
 
 </resources>

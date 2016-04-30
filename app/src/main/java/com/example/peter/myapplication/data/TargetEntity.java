@@ -30,6 +30,16 @@ public class TargetEntity implements java.io.Serializable {
         this.photoFileName = photoFileName;
     }
 
+
+    public TargetEntity(long id, String targetName, int point, int attributes, String photoFileName, boolean isDone) {
+        this.id = id;
+        this.targetName = targetName;
+        this.point = point;
+        this.attributes = attributes;
+        this.photoFileName = photoFileName;
+        this.isDone = isDone;
+    }
+
     public long getId() {
         return id;
     }

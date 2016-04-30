@@ -2,12 +2,9 @@ package com.example.peter.myapplication.frontpage;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,21 +55,21 @@ public class FrontPageFragment extends BackHandledFragment {
     private List<TargetEntity> goodTargetList;
     private UserDAO userDAO;
     private UserEntity userEntity;
-    private LinearLayout addTodoTaskLayout, addTargetLayout;
-    private EditText addTodoTaskEditText, targetNameEditText, pointEditText;
+    private LinearLayout addTargetLayout; //addTodoTaskLayout,
+    private EditText targetNameEditText, pointEditText; //addTodoTaskEditText,
     private RelativeLayout floatingActionsMenuLayout;
-    private Button addGoodTargetButton, addBadTargetButton, addRewardButton, tackPictureButton, selectPictureButton;
+    private Button tackPictureButton, selectPictureButton;
     private InputMethodManager inputMethodManager;
     private TextView userPointTextView;
     private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout;
     private FloatingActionsMenu menuMultipleActions;
 //    private TargetEntity addRewardTargetEntity;
-    private FileOutputStream outputStream;
+//    private FileOutputStream outputStream;
     private TargetEntity targetEntity;
     private ImageView addTargetDoneActionImageView, addTargetDeleteActionImageView, addTargetCancelActionImageView, photoImageView;
 
 
-    private boolean addTodoTaskLayoutIsVisVisible, addTargetLayoutIsVisible, floatingActionsMenuIsOpen;
+    private boolean addTargetLayoutIsVisible, floatingActionsMenuIsOpen; //addTodoTaskLayoutIsVisVisible,
 
     // 檔案名稱
     private String fileName;
@@ -96,7 +93,7 @@ public class FrontPageFragment extends BackHandledFragment {
         targetDAO = new TargetDAO(getActivity());
         userDAO = new UserDAO(getActivity());
 
-        addTodoTaskLayoutIsVisVisible = false;
+//        addTodoTaskLayoutIsVisVisible = false;
         addTargetLayoutIsVisible = false;
         floatingActionsMenuIsOpen = false;
         targetEntity = new TargetEntity();
@@ -111,6 +108,7 @@ public class FrontPageFragment extends BackHandledFragment {
     private void addTargetReward(int attributes) {
         if (targetNameEditText == null || targetNameEditText.getText() == null || targetNameEditText.getText().toString().trim().equals("")) {
             return;
+            //TODO 必填欄位處理
         }
         if (pointEditText == null || pointEditText.getText() == null || pointEditText.getText().toString().trim().equals("")) {
             return;
@@ -122,6 +120,7 @@ public class FrontPageFragment extends BackHandledFragment {
 //        TargetEntity targetEntity = new TargetEntity();
         targetEntity.setTargetName(targetNameEditText.getText().toString());
         targetEntity.setPoint(Integer.parseInt(pointEditText.getText().toString()));
+        targetEntity.setDone(false);
         targetEntity.setAttributes(attributes);
 //        if(targetEntity.getPhotoFileName() != null){
 //
@@ -150,7 +149,7 @@ public class FrontPageFragment extends BackHandledFragment {
         View view = inflater.inflate(R.layout.front_page_layout, container,
                 false);
 
-        addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
+//        addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
         addTargetLayout = (LinearLayout) view.findViewById(R.id.add_target_layout);
         addTargetPointLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetPointLinearLayout);
 //        addTargetButtonLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonLinearLayout);
@@ -165,7 +164,7 @@ public class FrontPageFragment extends BackHandledFragment {
             }
         });
 
-        addTodoTaskEditText = (EditText) view.findViewById(R.id.addTodoTaskEditText);
+//        addTodoTaskEditText = (EditText) view.findViewById(R.id.addTodoTaskEditText);
         targetNameEditText = (EditText) view.findViewById(R.id.targetNameEditText);
         pointEditText = (EditText) view.findViewById(R.id.pointEditText);
 
@@ -253,6 +252,7 @@ public class FrontPageFragment extends BackHandledFragment {
                 addTargetLayout.setVisibility(View.VISIBLE);
 //                addRewardTargetEntity = new TargetEntity();
                 addTargetLayoutIsVisible = true;
+                targetNameEditText.setHint(R.string.add_goodtarget_edittext_hint);
                 targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 //                targetNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -299,6 +299,7 @@ public class FrontPageFragment extends BackHandledFragment {
                 menuMultipleActions.collapse();
                 addTargetLayout.setVisibility(View.VISIBLE);
                 addTargetLayoutIsVisible = true;
+                targetNameEditText.setHint(R.string.add_badtarget_edittext_hint);
                 targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -328,6 +329,7 @@ public class FrontPageFragment extends BackHandledFragment {
                 photoLinearLayout.setVisibility(View.VISIBLE);
                 addTargetLayout.setVisibility(View.VISIBLE);
                 addTargetLayoutIsVisible = true;
+                targetNameEditText.setHint(R.string.add_reward_edittext_hint);
                 targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -348,23 +350,35 @@ public class FrontPageFragment extends BackHandledFragment {
                 });
             }
         });
+        final FloatingActionButton addTodoTaskButton = (FloatingActionButton) view.findViewById(R.id.add_todo_task);
 
-        final View addTodoTaskButton = view.findViewById(R.id.add_todo_task);
+//        final View addTodoTaskButton = view.findViewById(R.id.add_todo_task);
         addTodoTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 menuMultipleActions.collapse();
 //                floatingActionsMenuLayout.setBackgroundColor(Color.argb(55, 0, 255, 0));
-                addTodoTaskLayout.setVisibility(View.VISIBLE);
-                addTodoTaskLayoutIsVisVisible = true;
-                addTodoTaskEditText.requestFocus();
+                addTargetLayout.setVisibility(View.VISIBLE);
+                addTargetLayoutIsVisible = true;
+                targetNameEditText.setHint(R.string.add_todo_edittext_hint);
+                targetNameEditText.requestFocus();
                 ((InputMethodManager) getActivity().getSystemService(FrontPageFragment.this.getActivity().INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                addTodoTaskEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        setAddTodoTaskLayoutVisible(false);
-                        Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();
+                        setAddTargetLayoutVisible(false);
+                        addTargetReward(3);
+                        //TODO
+
+//                        Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();
                         return false;
+                    }
+                });
+                addTargetDoneActionImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addTargetReward(3);
+                        setAddTargetLayoutVisible(false);
                     }
                 });
             }
@@ -397,20 +411,19 @@ public class FrontPageFragment extends BackHandledFragment {
 //            }
 //        });
 
-        addTodoTaskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                //当EditText失去焦点时，隐藏软键盘
-                if (!hasFocus) {
-                    closeKeyBoard(addTodoTaskEditText);
-                }
-            }
-        });
+//        addTodoTaskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                //当EditText失去焦点时，隐藏软键盘
+//                if (!hasFocus) {
+//                    closeKeyBoard(addTodoTaskEditText);
+//                }
+//            }
+//        });
 
         targetNameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                //当EditText失去焦点时，隐藏软键盘
                 if (!hasFocus) {
                     closeKeyBoard(targetNameEditText);
                 }
@@ -420,7 +433,6 @@ public class FrontPageFragment extends BackHandledFragment {
         pointEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                //当EditText失去焦点时，隐藏软键盘
                 if (!hasFocus) {
                     closeKeyBoard(pointEditText);
                 }
@@ -431,9 +443,9 @@ public class FrontPageFragment extends BackHandledFragment {
         return view;
     }
 
-    public boolean isAddTodoTaskLayoutisVisible() {
-        return addTodoTaskLayoutIsVisVisible;
-    }
+//    public boolean isAddTodoTaskLayoutisVisible() {
+//        return addTodoTaskLayoutIsVisVisible;
+//    }
 
     public boolean isAddTargetLayoutIsVisible() {
         return addTargetLayoutIsVisible;
@@ -443,16 +455,16 @@ public class FrontPageFragment extends BackHandledFragment {
         return floatingActionsMenuIsOpen;
     }
 
-    public void setAddTodoTaskLayoutVisible(boolean visible) {
-        if (visible) {
-            addTodoTaskLayout.setVisibility(View.VISIBLE);
-
-        } else {
-            addTodoTaskLayout.setVisibility(View.INVISIBLE);
-            addTodoTaskEditText.setText("");
-        }
-        this.addTodoTaskLayoutIsVisVisible = visible;
-    }
+//    public void setAddTodoTaskLayoutVisible(boolean visible) {
+//        if (visible) {
+//            addTargetLayout.setVisibility(View.VISIBLE);
+//
+//        } else {
+//            addTargetLayout.setVisibility(View.INVISIBLE);
+//            addTodoTaskEditText.setText("");
+//        }
+//        this.addTodoTaskLayoutIsVisVisible = visible;
+//    }
 
     public void setAddTargetLayoutVisible(boolean visible) {
         if (visible) {

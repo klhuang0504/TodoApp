@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:visibility="invisible">
 
+    <include layout="@layout/add_target_button_action_linear_layout" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

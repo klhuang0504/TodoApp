@@ -3,19 +3,16 @@ package com.example.peter.myapplication;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.peter.myapplication.data.LogDAO;
 import com.example.peter.myapplication.data.TargetDAO;
 import com.example.peter.myapplication.data.UserDAO;
 import com.example.peter.myapplication.data.UserEntity;
 import com.example.peter.myapplication.frontpage.FrontPageFragment;
-import com.example.peter.myapplication.login.LoginFragment;
 import com.example.peter.myapplication.log.LogFragment;
+import com.example.peter.myapplication.login.LoginFragment;
 import com.example.peter.myapplication.target.TargetListFragment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -26,7 +23,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -43,9 +39,9 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
     private LogDAO logDAO;
     private TargetDAO targetDAO;
     private FrontPageFragment frontPageFragment;
-    private TargetListFragment goodTargetListFragment, badTargetListFragment, rewardListFragment;
+    private TargetListFragment goodTargetListFragment, badTargetListFragment, rewardListFragment, todoListFragment;
     private LogFragment logFragment;
-    private MaterialSection frontPageMaterialSection, goodTargetListSection, badTargetListSection, rewardListSection;
+    private MaterialSection frontPageMaterialSection, goodTargetListSection, badTargetListSection, rewardListSection, todoListSection;
     private String fbProfilePhotoUrl, fbCoverPhotoUrl;
 
     private BackHandledFragment selectedFragment;
@@ -91,6 +87,14 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         frontPageFragment.setArguments(frontPageFragmentBundle);
         frontPageMaterialSection = newSection("首頁", frontPageFragment);
         this.addSection(frontPageMaterialSection);
+        this.addDivisor();
+        todoListFragment = new TargetListFragment();
+        Bundle todoListFragmentBundle = new Bundle();
+        todoListFragmentBundle.putSerializable("userEntity", user);
+        todoListFragmentBundle.putInt("targetAttributes", 4);
+        todoListFragment.setArguments(todoListFragmentBundle);
+        todoListSection = newSection("待辦事項", todoListFragment);
+        this.addSection(todoListSection);
         this.addDivisor();
         goodTargetListFragment = new TargetListFragment();
         Bundle goodTargetListFragmentBundle = new Bundle();
@@ -138,8 +142,8 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
             super.onBackPressed();
         } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isFloatingActionsMenuOpen()) {
             frontPageFragment.setFloatingActionsMenuOpen(false);
-        } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isAddTodoTaskLayoutisVisible()) {
-            frontPageFragment.setAddTodoTaskLayoutVisible(false);
+//        } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isAddTodoTaskLayoutisVisible()) {
+//            frontPageFragment.setAddTodoTaskLayoutVisible(false);
         } else if (selectedFragment.equals(frontPageFragment) && frontPageFragment.isAddTargetLayoutIsVisible()) {
             frontPageFragment.setAddTargetLayoutVisible(false);
         } else {

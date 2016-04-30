@@ -6,11 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -59,9 +55,9 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     private static final int SELECT_PHOTO = 0;
     private static final int START_CAMERA = 1;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 100;
-    private static final int[] addPointattributes = {0, 4};
-    private static final int[] lessPointattributes = {2, 3};
-    private static final int todoAttributes = 4;
+    private static final int[] addPointattributes = {0, 3};
+    private static final int[] lessPointattributes = {1, 2};
+    private static final int todoAttributes = 3;
 
 
 
@@ -72,7 +68,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     private UserEntity userEntity;
     private TargetEntity selectTargetEntity;
 
-    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout, addTargetLayout, addTargetButtonActionLinearLayout;
+    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout, addTargetLayout, addTargetButtonActionLinearLayout, addTodoTaskLayout;
 
     private ListView targetlistView;
     private TextView targetDoneTextView;
@@ -98,7 +94,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
 
         userEntity = (UserEntity) getArguments().getSerializable("userEntity");
         targetEntityList = getTargetEntityList(getArguments().getInt("targetAttributes"));
-        targetSwipeAdapter = new TargetSwipeAdapter(getActivity(), targetEntityList, this);
+        targetSwipeAdapter = new TargetSwipeAdapter(getActivity(), targetEntityList, this, getArguments().getInt("targetAttributes"));
     }
 
     public ArrayList<TargetEntity> getTargetEntityList(int targetAttributes) {
@@ -111,6 +107,9 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         if (targetAttributes == 2) {
             return targetDAO.getRewardList();
         }
+        if (targetAttributes == 3) {
+            return targetDAO.getTodoList();
+        }
         return new ArrayList<TargetEntity>();
     }
 
@@ -120,6 +119,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         addTargetLayout = (LinearLayout) view.findViewById(R.id.add_target_layout);
         addTargetButtonActionLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonActionLinearLayout);
         photoLinearLayout = (LinearLayout) view.findViewById(R.id.photoLinearLayout);
+        addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
 
         photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
         addTargetDoneActionImageView = (ImageView) view.findViewById(R.id.done_add_target_button);
@@ -128,6 +128,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
 
         targetNameEditText = (EditText) view.findViewById(R.id.targetNameEditText);
         pointEditText = (EditText) view.findViewById(R.id.pointEditText);
+        addTodoTaskEditText = (EditText) view.findViewById(R.id.add_todo_task);
 
         targetlistView = (ListView) view.findViewById(R.id.goodTargetListView);
         targetSwipeAdapter.setMode(Attributes.Mode.Single);
@@ -136,11 +137,19 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         addTargetDoneActionImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectTargetEntity.setTargetName(targetNameEditText.getText().toString());
-                selectTargetEntity.setPoint(Integer.valueOf(pointEditText.getText().toString()));
+                if(targetNameEditText.getText().toString() != null){
+                    selectTargetEntity.setTargetName(targetNameEditText.getText().toString());
+                }else{
+//                    Toast.makeText(getActivity(), "請輸入標題", Toast.LENGTH_SHORT).show();
+                }
+                if(pointEditText.getText().toString() != null){
+                    selectTargetEntity.setPoint(Integer.valueOf(pointEditText.getText().toString()));
+                }
                 targetDAO.update(selectTargetEntity);
+                addTodoTaskLayout.setVisibility(View.INVISIBLE);
                 addTargetLayout.setVisibility(View.INVISIBLE);
                 photoLinearLayout.setVisibility(View.INVISIBLE);
+//                addTargetDeleteActionImageView.setVisibility(View.INVISIBLE);
                 targetNameEditText.setText("");
                 pointEditText.setText("");
             }
@@ -186,17 +195,24 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     @Override
     public void onClickEditButtonCallBack(TargetEntity targetEntity) {
         selectTargetEntity = targetEntity;
-        targetNameEditText.setText(selectTargetEntity.getTargetName());
-        pointEditText.setText(String.valueOf(selectTargetEntity.getPoint()));
-        addTargetLayout.setVisibility(View.VISIBLE);
         addTargetDeleteActionImageView.setVisibility(View.VISIBLE);
-        if(targetEntity.getPhotoFileName() != null){
-            File file = new File(FileUtil.getExternalStorageDir(FileUtil.APP_DIR),
-                    "P" + targetEntity.getPhotoFileName() + ".jpg");
-            FileUtil.fileToImageView(file.getAbsolutePath(), photoImageView);
-            photoLinearLayout.setVisibility(View.VISIBLE);
-            photoImageView.setVisibility(View.VISIBLE);
+        if(targetEntity.getAttributes() == todoAttributes){
+            addTodoTaskLayout.setVisibility(View.VISIBLE);
+            addTodoTaskEditText.setText(selectTargetEntity.getTargetName());
+        }else{
+            targetNameEditText.setText(selectTargetEntity.getTargetName());
+            pointEditText.setText(String.valueOf(selectTargetEntity.getPoint()));
+            addTargetLayout.setVisibility(View.VISIBLE);
+//            addTargetDeleteActionImageView.setVisibility(View.VISIBLE);
+            if(targetEntity.getPhotoFileName() != null){
+                File file = new File(FileUtil.getExternalStorageDir(FileUtil.APP_DIR),
+                        "P" + targetEntity.getPhotoFileName() + ".jpg");
+                FileUtil.fileToImageView(file.getAbsolutePath(), photoImageView);
+                photoLinearLayout.setVisibility(View.VISIBLE);
+                photoImageView.setVisibility(View.VISIBLE);
+            }
         }
+
     }
 
     @Override
@@ -239,6 +255,12 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         if(attributes == todoAttributes){
             targetEntityList.remove(targetEntity);
             targetSwipeAdapter.notifyDataSetChanged();
+            if(!targetEntity.isDone()){
+                targetEntity.setDone(true);
+                targetDAO.update(targetEntity);
+            }else{
+                Log.e("TodoError", "Todo targetEntity already done.");
+            }
         }
         if (Arrays.asList(lessPointattributes).contains(attributes)) {
             userEntity.setUserPoint(userEntity.getUserPoint() - targetEntity.getPoint());

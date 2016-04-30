@@ -7,6 +7,9 @@
     android:visibility="invisible"
     android:orientation="vertical">
 
+    <!--<include layout="@layout/add_target_button_action_linear_layout" />-->
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -58,7 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
-            android:hint="可輸入想養成或戒掉的習慣 ex:跑步、看書、賴床、消夜....."
             android:imeOptions="actionNext"
             android:inputType="text"
             android:paddingLeft="10dp"

@@ -33,7 +33,7 @@ public class TargetDAO {
                     TARGET_NAME + " TEXT NOT NULL, " +
                     POINT + " INTEGER NOT NULL, " +
                     ATTRIBUTES + " TEXT NOT NULL, " +
-                    PHOTOFILENAME + " TEXT, +" +
+                    PHOTOFILENAME + " TEXT, " +
                     ISDONE + " BOOLEAN ) ";
 
     // 資料庫物件
@@ -246,6 +246,62 @@ public class TargetDAO {
 
         return resultList;
     }
+
+    public ArrayList<TargetEntity> getTodoList() {
+        ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
+        String where = ATTRIBUTES + " = 3 AND " + ISDONE + " is false ";
+        // 執行查詢
+        Cursor cursor = db.query(
+                TABLE_NAME, null, where, null, null, null, null, null);
+
+        // 如果有查詢結果
+        while (cursor.moveToNext()) {
+            resultList.add(getRecord(cursor));
+        }
+
+        // 關閉Cursor物件
+        cursor.close();
+
+        return resultList;
+    }
+
+    public ArrayList<TargetEntity> getDoneTodoList() {
+        ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
+        String where = ATTRIBUTES + " = 3 AND " + ISDONE + " is true ";
+        // 執行查詢
+        Cursor cursor = db.query(
+                TABLE_NAME, null, where, null, null, null, null, null);
+
+        // 如果有查詢結果
+        while (cursor.moveToNext()) {
+            resultList.add(getRecord(cursor));
+        }
+
+        // 關閉Cursor物件
+        cursor.close();
+
+        return resultList;
+    }
+
+    public ArrayList<TargetEntity> getAllTodoList() {
+        ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
+        String where = ATTRIBUTES + " = 4 ";
+        // 執行查詢
+        Cursor cursor = db.query(
+                TABLE_NAME, null, where, null, null, null, null, null);
+
+        // 如果有查詢結果
+        while (cursor.moveToNext()) {
+            resultList.add(getRecord(cursor));
+        }
+
+        // 關閉Cursor物件
+        cursor.close();
+
+        return resultList;
+    }
+
+
 
     // 建立範例資料
     public void sample() {
