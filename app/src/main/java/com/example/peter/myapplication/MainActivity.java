@@ -91,7 +91,7 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         todoListFragment = new TargetListFragment();
         Bundle todoListFragmentBundle = new Bundle();
         todoListFragmentBundle.putSerializable("userEntity", user);
-        todoListFragmentBundle.putInt("targetAttributes", 4);
+        todoListFragmentBundle.putInt("targetAttributes", 3);
         todoListFragment.setArguments(todoListFragmentBundle);
         todoListSection = newSection("待辦事項", todoListFragment);
         this.addSection(todoListSection);

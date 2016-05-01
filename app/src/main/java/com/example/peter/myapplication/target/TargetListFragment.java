@@ -68,12 +68,12 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     private UserEntity userEntity;
     private TargetEntity selectTargetEntity;
 
-    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout, addTargetLayout, addTargetButtonActionLinearLayout, addTodoTaskLayout;
+    private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout, addTargetLayout, addTargetButtonActionLinearLayout; //addTodoTaskLayout
 
     private ListView targetlistView;
     private TextView targetDoneTextView;
     private ImageView targetDoneImageView, addTargetDoneActionImageView, addTargetDeleteActionImageView, addTargetCancelActionImageView, photoImageView;
-    private EditText addTodoTaskEditText, targetNameEditText, pointEditText;
+    private EditText targetNameEditText, pointEditText; //addTodoTaskEditText
 
 
     private List<TargetEntity> targetEntityList;
@@ -119,7 +119,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         addTargetLayout = (LinearLayout) view.findViewById(R.id.add_target_layout);
         addTargetButtonActionLinearLayout = (LinearLayout) view.findViewById(R.id.addTargetButtonActionLinearLayout);
         photoLinearLayout = (LinearLayout) view.findViewById(R.id.photoLinearLayout);
-        addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
+//        addTodoTaskLayout = (LinearLayout) view.findViewById(R.id.add_todo_task_layout);
 
         photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
         addTargetDoneActionImageView = (ImageView) view.findViewById(R.id.done_add_target_button);
@@ -128,7 +128,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
 
         targetNameEditText = (EditText) view.findViewById(R.id.targetNameEditText);
         pointEditText = (EditText) view.findViewById(R.id.pointEditText);
-        addTodoTaskEditText = (EditText) view.findViewById(R.id.add_todo_task);
+//        addTodoTaskEditText = (EditText) view.findViewById(R.id.add_todo_task);
 
         targetlistView = (ListView) view.findViewById(R.id.goodTargetListView);
         targetSwipeAdapter.setMode(Attributes.Mode.Single);
@@ -146,7 +146,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
                     selectTargetEntity.setPoint(Integer.valueOf(pointEditText.getText().toString()));
                 }
                 targetDAO.update(selectTargetEntity);
-                addTodoTaskLayout.setVisibility(View.INVISIBLE);
+//                addTodoTaskLayout.setVisibility(View.INVISIBLE);
                 addTargetLayout.setVisibility(View.INVISIBLE);
                 photoLinearLayout.setVisibility(View.INVISIBLE);
 //                addTargetDeleteActionImageView.setVisibility(View.INVISIBLE);
@@ -196,10 +196,10 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     public void onClickEditButtonCallBack(TargetEntity targetEntity) {
         selectTargetEntity = targetEntity;
         addTargetDeleteActionImageView.setVisibility(View.VISIBLE);
-        if(targetEntity.getAttributes() == todoAttributes){
-            addTodoTaskLayout.setVisibility(View.VISIBLE);
-            addTodoTaskEditText.setText(selectTargetEntity.getTargetName());
-        }else{
+//        if(targetEntity.getAttributes() == todoAttributes){
+//            addTodoTaskLayout.setVisibility(View.VISIBLE);
+//            targetNameEditText.setText(selectTargetEntity.getTargetName());
+//        }else{
             targetNameEditText.setText(selectTargetEntity.getTargetName());
             pointEditText.setText(String.valueOf(selectTargetEntity.getPoint()));
             addTargetLayout.setVisibility(View.VISIBLE);
@@ -211,7 +211,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
                 photoLinearLayout.setVisibility(View.VISIBLE);
                 photoImageView.setVisibility(View.VISIBLE);
             }
-        }
+//        }
 
     }
 
@@ -253,14 +253,18 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
     public void doTarget(TargetEntity targetEntity) {
         int attributes = targetEntity.getAttributes();
         if(attributes == todoAttributes){
-            targetEntityList.remove(targetEntity);
-            targetSwipeAdapter.notifyDataSetChanged();
             if(!targetEntity.isDone()){
                 targetEntity.setDone(true);
                 targetDAO.update(targetEntity);
+//                targetEntityList = getTargetEntityList(getArguments().getInt("targetAttributes"));
+//                targetSwipeAdapter.setTargetEntityList(targetEntityList);
+//                targetSwipeAdapter.notifyDataSetChanged();
+
             }else{
                 Log.e("TodoError", "Todo targetEntity already done.");
             }
+//            targetEntityList.remove(targetEntity);
+//            targetSwipeAdapter.notifyDataSetChanged();
         }
         if (Arrays.asList(lessPointattributes).contains(attributes)) {
             userEntity.setUserPoint(userEntity.getUserPoint() - targetEntity.getPoint());

@@ -366,8 +366,8 @@ public class FrontPageFragment extends BackHandledFragment {
                 pointEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        setAddTargetLayoutVisible(false);
                         addTargetReward(3);
+                        setAddTargetLayoutVisible(false);
                         //TODO
 
 //                        Toast.makeText(FrontPageFragment.this.getActivity(), addTodoTaskEditText.getText(), Toast.LENGTH_SHORT).show();

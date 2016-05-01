@@ -249,7 +249,7 @@ public class TargetDAO {
 
     public ArrayList<TargetEntity> getTodoList() {
         ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
-        String where = ATTRIBUTES + " = 3 AND " + ISDONE + " is false ";
+        String where = ATTRIBUTES + " = 3 AND " + ISDONE + " = 0";
         // 執行查詢
         Cursor cursor = db.query(
                 TABLE_NAME, null, where, null, null, null, null, null);
@@ -267,7 +267,7 @@ public class TargetDAO {
 
     public ArrayList<TargetEntity> getDoneTodoList() {
         ArrayList<TargetEntity> resultList = new ArrayList<TargetEntity>();
-        String where = ATTRIBUTES + " = 3 AND " + ISDONE + " is true ";
+        String where = ATTRIBUTES + " = 3 AND " + ISDONE + " = 1";
         // 執行查詢
         Cursor cursor = db.query(
                 TABLE_NAME, null, where, null, null, null, null, null);

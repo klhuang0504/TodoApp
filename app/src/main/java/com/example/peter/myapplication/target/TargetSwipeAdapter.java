@@ -48,13 +48,13 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
         this.mContext = mContext;
         this.targetEntityList = targetEntityList;
         this.mTargetSwipeAdapterCallback = callback;
-        this.targetAttributes = targetAttributes;
     }
 
     public TargetSwipeAdapter(Context mContext, List<TargetEntity> targetEntityList, TargetSwipeAdapterCallback callback, int targetAttributes) {
         this.mContext = mContext;
         this.targetEntityList = targetEntityList;
         this.mTargetSwipeAdapterCallback = callback;
+        this.targetAttributes = targetAttributes;
     }
 
 
@@ -94,16 +94,32 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                if (!smallOpen) {
-                    layout.close();
+                if(swipeLayout.getRight()>0) {
+                    if (!smallOpen) {
+                        layout.close();
+                    }
                 }
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
                 selectTargetEntity = targetEntityList.get(position);
-                mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
-                mTargetSwipeAdapterCallback.onSwipeLayoutOpenCallback(layout);
+                if(swipeLayout.getRight()>0){
+                    mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
+                    if(selectTargetEntity.getAttributes() == todoAttributes){
+//                        swipeLayout.removeViewAt(position);
+                        targetEntityList.remove(position);
+//                        targetEntityList.remove(selectTargetEntity);
+//                        selectTargetEntity =
+                        notifyDataSetChanged();
+//                        mItemManger.closeAllItems();
+                        layout.close(false);
+                    }else{
+                        mTargetSwipeAdapterCallback.onSwipeLayoutOpenCallback(layout);
+                    }
+
+                }
+
 
 //                Toast.makeText(mContext, selectTargetEntity.getTargetName(), Toast.LENGTH_SHORT).show();
 //                Log.i("",selectTargetEntity.getTargetName());
@@ -125,11 +141,14 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-                if (xvel < (layout.getWidth() / 10 * 8)) {
-                    smallOpen = false;
-                    layout.close();
-                } else {
-                    smallOpen = true;
+                if(swipeLayout.getRight()>0) {
+
+                    if (xvel < (layout.getWidth() / 10 * 8)) {
+                        smallOpen = false;
+                        layout.close();
+                    } else {
+                        smallOpen = true;
+                    }
                 }
             }
         });
@@ -149,27 +168,31 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
                 return false;
             }
         });
-        swipeLayout.findViewById(R.id.plusOneImageView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectTargetEntity = targetEntityList.get(position);
+        if(targetAttributes != todoAttributes){
+            swipeLayout.findViewById(R.id.plusOneImageView).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    selectTargetEntity = targetEntityList.get(position);
 //                if(selectTargetEntity.getAttributes() == todoAttributes){
 //                    return;
 //                }
-                mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
-            }
-        });
-        swipeLayout.findViewById(R.id.undoImageView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                swipeLayout.close();
-                mTargetSwipeAdapterCallback.onClickUndoButtonCallBack(selectTargetEntity);
-            }
-        });
+                    mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
+                }
+            });
+            swipeLayout.findViewById(R.id.undoImageView).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    swipeLayout.close();
+                    mTargetSwipeAdapterCallback.onClickUndoButtonCallBack(selectTargetEntity);
+                }
+            });
+        }
+
         swipeLayout.findViewById(R.id.laterImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectTargetEntity = targetEntityList.get(position);
+//                selectTargetEntity = targetEntityList.get(position);
+//                swipeLayout.close();
                 mTargetSwipeAdapterCallback.onClickLaterButtonMethodCallback(selectTargetEntity);
             }
         });
@@ -233,6 +256,15 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
     public long getItemId(int position) {
         TargetEntity targetEntity = targetEntityList.get(position);
         return targetEntity.getId();
+    }
+
+
+    public List<TargetEntity> getTargetEntityList() {
+        return targetEntityList;
+    }
+
+    public void setTargetEntityList(List<TargetEntity> targetEntityList) {
+        this.targetEntityList = targetEntityList;
     }
 
 }
