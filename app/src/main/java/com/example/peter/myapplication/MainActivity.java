@@ -123,6 +123,8 @@ public class MainActivity extends MaterialNavigationDrawer implements BackHandle
         logFragmentBundle.putSerializable("userEntity", user);
         logFragment.setArguments(logFragmentBundle);
         this.addSection(newSection("活動紀錄", logFragment));
+        this.addSection(newSection("Recycler", new RecyclerFragment()));
+
 
     }
 

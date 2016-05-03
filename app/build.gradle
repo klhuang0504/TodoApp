@@ -33,6 +33,7 @@ dependencies {
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
 }
 repositories {
     mavenCentral()

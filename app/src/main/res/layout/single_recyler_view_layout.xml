@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/singleRecycleLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/buleLight"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/target_done_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="40dp"
+                android:src="@drawable/ic_check_white_48dp" />
+
+            <TextView
+                android:id="@+id/target_done_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingRight="40dp"
+                android:text="Done"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/plusOneImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/buletobluedark"
+            android:clickable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_exposure_plus_1_white_48dp" />
+
+        <ImageView
+            android:id="@+id/undoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@drawable/buledarktobluedarker"
+            android:clickable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_undo_white_48dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper_2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/laterImageView"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/later_button"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_schedule_white_48dp" />
+
+        <ImageView
+            android:id="@+id/editImageView"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/edit_button"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:src="@drawable/ic_mode_edit_white_48dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/SwipeItemTextView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:tag="Hover"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+
+
+</com.daimajia.swipe.SwipeLayout>
