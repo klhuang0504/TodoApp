@@ -30,7 +30,7 @@ public class RecyclerFragment extends Fragment {
         for(int i = 0; i < 100; i++){
             myDataset.add(i + "");
         }
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(myDataset, getContext());
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(myDataset, getActivity());
         recyclerViewAdapter.setMode(Attributes.Mode.Single);
         RecyclerView mList = (RecyclerView) view.findViewById(R.id.targetRecyclerView);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());

@@ -107,13 +107,12 @@ public class TargetSwipeAdapter extends BaseSwipeAdapter {
                 if(swipeLayout.getRight()>0){
                     mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
                     if(selectTargetEntity.getAttributes() == todoAttributes){
-//                        swipeLayout.removeViewAt(position);
+                      mItemManger.removeShownLayouts(swipeLayout);
                         targetEntityList.remove(position);
-//                        targetEntityList.remove(selectTargetEntity);
-//                        selectTargetEntity =
-                        notifyDataSetChanged();
-//                        mItemManger.closeAllItems();
-                        layout.close(false);
+                        notifyAll();
+//                        notifyItemRemoved(position);
+//                        notifyItemRangeChanged(position, targetEntityList.size());
+                        mItemManger.closeAllItems();
                     }else{
                         mTargetSwipeAdapterCallback.onSwipeLayoutOpenCallback(layout);
                     }
