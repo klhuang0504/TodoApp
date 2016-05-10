@@ -8,10 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/goodTargetListView"/>
+            android:id="@+id/targetRecyclerView"/>
 
         <include layout="@layout/add_target_layout" />
         <include layout="@layout/add_todo_task_layout" />

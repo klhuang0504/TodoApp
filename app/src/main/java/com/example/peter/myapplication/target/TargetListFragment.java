@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +72,7 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
 
     private LinearLayout addTargetPointLinearLayout, addTargetButtonLinearLayout, photoLinearLayout, addTargetLayout, addTargetButtonActionLinearLayout; //addTodoTaskLayout
 
-    private ListView targetlistView;
+    private RecyclerView targetRecyclerView;
     private TextView targetDoneTextView;
     private ImageView targetDoneImageView, addTargetDoneActionImageView, addTargetDeleteActionImageView, addTargetCancelActionImageView, photoImageView;
     private EditText targetNameEditText, pointEditText; //addTodoTaskEditText
@@ -130,9 +132,12 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
         pointEditText = (EditText) view.findViewById(R.id.pointEditText);
 //        addTodoTaskEditText = (EditText) view.findViewById(R.id.add_todo_task);
 
-        targetlistView = (ListView) view.findViewById(R.id.goodTargetListView);
+        targetRecyclerView = (RecyclerView) view.findViewById(R.id.targetRecyclerView);
         targetSwipeAdapter.setMode(Attributes.Mode.Single);
-        targetlistView.setAdapter(targetSwipeAdapter);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        targetRecyclerView.setLayoutManager(layoutManager);
+        targetRecyclerView.setAdapter(targetSwipeAdapter);
 
         addTargetDoneActionImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,9 +192,8 @@ public class TargetListFragment extends Fragment implements TargetSwipeAdapterCa
 
     @Override
     public void onClickLaterButtonMethodCallback(TargetEntity targetEntity) {
-        targetEntityList.remove(targetEntity);
-        targetSwipeAdapter.notifyDataSetChanged();
-
+//        targetEntityList.remove(targetEntity);
+//        targetSwipeAdapter.notifyDataSetChanged();
     }
 
     @Override
