@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,10 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
     private List<TargetEntity> targetEntityList;
     private TargetSwipeAdapterCallback mTargetSwipeAdapterCallback;
     static private int targetAttributes;
+    Boolean swipeLayoutIsOpened = false;
+    Boolean swipeLayoutIsRelease = false;
+
+
 
 
 //    public TargetSwipeAdapter(Context mContext) {
@@ -98,12 +103,13 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
 
     @Override
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position) {
-        TargetEntity targetEntity = targetEntityList.get(position);
-        viewHolder.swipeItemTextView.setText(targetEntity.getTargetName() + "  (" + String.valueOf(targetEntity.getPoint()) + "分)");
+//        final TargetEntity targetEntity = targetEntityList.get(position);
+        selectTargetEntity = targetEntityList.get(position);
+        viewHolder.swipeItemTextView.setText(selectTargetEntity.getTargetName() + "  (" + String.valueOf(selectTargetEntity.getPoint()) + "分)");
 
-        if (targetEntity.getPhotoFileName() != null) {
+        if (selectTargetEntity.getPhotoFileName() != null) {
             File file = new File(FileUtil.getExternalStorageDir(FileUtil.APP_DIR),
-                    "P" + targetEntity.getPhotoFileName() + ".jpg");
+                    "P" + selectTargetEntity.getPhotoFileName() + ".jpg");
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_4444;
 
@@ -128,21 +134,35 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
         viewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left, viewHolder.swipeLayout.findViewById(R.id.bottom_wrapper));
         viewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, viewHolder.swipeLayout.findViewById(R.id.bottom_wrapper_2));
         viewHolder.swipeLayout.addSwipeListener(new SimpleSwipeListener() {
-            private boolean smallOpen = true;
-
+//            private boolean smallOpen = true;
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                if (viewHolder.swipeLayout.getRight() > 0) {
-                    if (!smallOpen) {
-                        layout.close();
-                    }
-                }
+//                if (viewHolder.swipeLayout.getRight() > 0) {
+//                    if (!smallOpen) {
+//                        layout.close();
+//                    }
+//                }
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                selectTargetEntity = targetEntityList.get(position);
-                if (viewHolder.swipeLayout.getLeft() > 0) {
+                int i = 0;
+//                if(layout.isFocused()){
+//                    mItemManger.closeAllItems();
+//                }
+                if(!swipeLayoutIsRelease){
+                    int ii = 0;
+                    return;
+                }
+                int iiii = 0;
+//                if(isOpen(position)){
+//
+//                }
+                if (layout.getDragEdge()== SwipeLayout.DragEdge.Left) {
+//                    selectTargetEntity = targetEntityList.get(position);
+                    if(!targetEntityList.contains(selectTargetEntity)){
+                        return;
+                    }
                     mTargetSwipeAdapterCallback.doTarget(selectTargetEntity);
                     if (selectTargetEntity.getAttributes() == todoAttributes) {
                         mItemManger.removeShownLayouts(viewHolder.swipeLayout);
@@ -159,6 +179,7 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
                     }
 
                 }
+                swipeLayoutIsRelease = false;
 
 
 
@@ -174,6 +195,7 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
             @Override
             public void onClose(SwipeLayout layout) {
                 mTargetSwipeAdapterCallback.onSwipeLayoutCloseCallback(layout);
+                swipeLayoutIsOpened = false;
             }
 
             @Override
@@ -182,15 +204,19 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-                if (viewHolder.swipeLayout.getRight() > 0) {
-
-                    if (xvel < (layout.getWidth() / 10 * 8)) {
-                        smallOpen = false;
-                        layout.close();
-                    } else {
-                        smallOpen = true;
-                    }
+                swipeLayoutIsRelease = true;
+                if(layout.getOpenStatus() == SwipeLayout.Status.Open){
+                    int iii = 0;
                 }
+//                if (viewHolder.swipeLayout.getRight() > 0) {
+//
+//                    if (xvel < (layout.getWidth() / 10 * 8)) {
+//                        smallOpen = false;
+//                        layout.close();
+//                    } else {
+//                        smallOpen = true;
+//                    }
+//                }
             }
 
 
