@@ -61,8 +61,10 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
     private List<TargetEntity> targetEntityList;
     private TargetSwipeAdapterCallback mTargetSwipeAdapterCallback;
     static private int targetAttributes;
-    Boolean swipeLayoutIsOpened = false;
-    Boolean swipeLayoutIsRelease = false;
+//    Boolean swipeLayoutIsOpened = false;
+//    Boolean swipeLayoutIsRelease = false;
+//    Boolean startSwipe = false;
+
 
 
 
@@ -137,6 +139,7 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
 //            private boolean smallOpen = true;
             @Override
             public void onStartOpen(SwipeLayout layout) {
+//                startSwipe = true;
 //                if (viewHolder.swipeLayout.getRight() > 0) {
 //                    if (!smallOpen) {
 //                        layout.close();
@@ -146,15 +149,12 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                int i = 0;
 //                if(layout.isFocused()){
 //                    mItemManger.closeAllItems();
 //                }
-                if(!swipeLayoutIsRelease){
-                    int ii = 0;
-                    return;
-                }
-                int iiii = 0;
+//                if(!startSwipe){
+//                    return;
+//                }
 //                if(isOpen(position)){
 //
 //                }
@@ -179,7 +179,7 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
                     }
 
                 }
-                swipeLayoutIsRelease = false;
+//                startSwipe = false;
 
 
 
@@ -195,7 +195,7 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
             @Override
             public void onClose(SwipeLayout layout) {
                 mTargetSwipeAdapterCallback.onSwipeLayoutCloseCallback(layout);
-                swipeLayoutIsOpened = false;
+//                swipeLayoutIsOpened = false;
             }
 
             @Override
@@ -204,10 +204,10 @@ public class TargetSwipeAdapter extends RecyclerSwipeAdapter<TargetSwipeAdapter.
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-                swipeLayoutIsRelease = true;
-                if(layout.getOpenStatus() == SwipeLayout.Status.Open){
-                    int iii = 0;
-                }
+//                swipeLayoutIsRelease = true;
+//                if(layout.getOpenStatus() == SwipeLayout.Status.Open){
+//                    int iii = 0;
+//                }
 //                if (viewHolder.swipeLayout.getRight() > 0) {
 //
 //                    if (xvel < (layout.getWidth() / 10 * 8)) {
